@@ -5,7 +5,7 @@ import com.azeroth.project.domain.CardDomain;
 public interface AdminRepository {
 
     // 카드 조회
-    CardDomain find(CardDomain card);
+    CardDomain findCard(CardDomain card);
     // 카드 결재
     int update(CardDomain card);
 
