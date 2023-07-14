@@ -1,27 +1,30 @@
 package com.azeroth.project.config;
 
 import com.azeroth.project.domain.AuthorityDomain;
+import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.service.AdminService;
 import com.azeroth.project.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PrincipalDetails {
+public class PrincipalDetails implements UserDetails {
 
-    private UserService userService;
+    private AdminService adminService;
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserService(AdminService userService) {
+        this.adminService = userService;
     }
-    private User user;
+    private UserDomain user;
 
-    public void setUser(User user) {
+    public void setUser(UserDomain user) {
         this.user = user;
     }
 
-    public PrincipalDetails(User user){
+    public PrincipalDetails(UserDomain user){
         System.out.println("UserDetails(user) 생성: " + user);
         this.user = user;
     }
@@ -34,9 +37,9 @@ public class PrincipalDetails {
 
         Collection<GrantedAuthority> collect = new ArrayList<>();
 
-        List<AuthorityDomain> list =  userService.selectAuthoritiesById(user.getId());  // DB 에서 user 의 권한(들) 읽어오기
+        List<AuthorityDomain> list =  adminService.selectAuthoritiesById(user.getId());  // DB 에서 user 의 권한(들) 읽어오기
 
-        for(Authority auth : list){
+        for(AuthorityDomain auth : list){
             collect.add(new GrantedAuthority() {
                 @Override
                 public String getAuthority() {
@@ -89,7 +92,7 @@ public class PrincipalDetails {
         return true;
     }
 
-    public User getUser() {
+    public UserDomain getUser() {
         return user;
     }
 }
