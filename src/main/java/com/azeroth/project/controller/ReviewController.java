@@ -25,7 +25,7 @@ public class ReviewController {
 
     @PostMapping
     public ReviewDomain createReview(ReviewDomain reviewDomain){
-        return reviewService.saveReview(review);
+        return reviewService.saveReview(reviewDomain);
     }
 
     @GetMapping
