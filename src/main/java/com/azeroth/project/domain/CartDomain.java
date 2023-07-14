@@ -20,13 +20,13 @@ import java.time.LocalDateTime;
 @Builder
 public class CartDomain {
 
-    Long id;
-    Long user_id;
-    Long cart_amount;
+    Long id;            // PK
+    Long user_id;       // FK
+    Long cart_amount;   // 갯수
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime regdate; // 작성일자
-    String status;
+    String status;      // 상태 ("PICK" or "BUY")
 }

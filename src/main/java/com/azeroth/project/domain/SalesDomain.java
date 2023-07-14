@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SalesDomain {
 
-    Long id;
-    String u_username;
-    Long p_id;
-    Long amount;
-    String address;
-    String address_detail;
-    String postcode;
+    Long id;                    // PK
+    String u_username;          // 로그인 id
+    Long p_id;                  // 상품 PK id
+    Long amount;                // 갯수
+    String address;             // 주소
+    String address_detail;      // 상세주소
+    String postcode;            // 우편번호
     // 배송 요청사항
     String deliveryreq;
     // 송장번호

@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddressDomain {
 
-    Long id;
-    Long user_id;
-    String address_name;
-    String address;
-    String address_detail;
-    String postcode;
+    Long id;                // PK
+    Long user_id;           // FK
+    String address_name;    // 주소명
+    String address;         // 주소
+    String address_detail;  // 상세주소
+    String postcode;        // 우편번호
 }

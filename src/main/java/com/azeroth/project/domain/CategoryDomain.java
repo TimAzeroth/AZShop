@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CategoryDomain {
-    String maincode;
-    String subcode;
-    String mainname;
-    String subname;
+    String maincode;        // 메인카테고리 코드
+    String subcode;         // 서브카테고리 코드
+    String mainname;        // 메인카테고리 이름
+    String subname;         // 서브카테고리 이름
 }

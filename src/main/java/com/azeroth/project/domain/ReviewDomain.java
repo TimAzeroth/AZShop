@@ -18,10 +18,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ReviewDomain {
-    Long id;
-    Long user_id;
-    Long product_id;
-    String content;
+    Long id;            // PK
+    Long user_id;       // FK
+    Long product_id;    // FK
+    String content;     // 내용
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

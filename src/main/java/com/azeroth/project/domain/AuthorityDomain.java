@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AuthorityDomain {
-    Long id;
-    String name;
+    Long id;            // PK
+    String name;        // 권한명
 }

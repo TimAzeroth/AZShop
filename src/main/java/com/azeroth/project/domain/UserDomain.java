@@ -20,15 +20,15 @@ import java.time.LocalDateTime;
 public class UserDomain {
 
 
-    Long id;
-    Long authority_id;
-    String username;
-    String password;
-    String nickname;
-    String email;
-    String profileimg;
-    String u_status;
-    String phone;
+    Long id;                // PK
+    Long authority_id;      // FK(권한)
+    String username;        // 로그인 id
+    String password;        // 비밀번호
+    String nickname;        // 이름
+    String email;           // 이메일
+    String profileimg;      // 프로필 이미지
+    String u_status;        // 상태
+    String phone;           // 연락처
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

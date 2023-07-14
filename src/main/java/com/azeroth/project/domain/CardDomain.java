@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CardDomain {
-    Long id;
-    String c_num;
-    String c_year;
-    String c_month;
-    String c_cvc;
-    Long balance;
+    Long id;                // PK
+    String c_num;           // 카드번호
+    String c_year;          // 카드유효기간(년)
+    String c_month;         // 카드유효기간(월)
+    String c_cvc;           // 카드 CVC
+    Long balance;           // 카드잔액
 }

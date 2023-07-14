@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProductDomain {
 
-    Long id;
-    String p_name;
-    String main_cate;
-    String sub_cate;
-    String p_img;
-    String detail;
-    Long price;
-    Long stock;
-    Long p_rank;
+    Long id;            //PK
+    String p_name;      // 상품명
+    String main_cate;   // 메인 카테고리
+    String sub_cate;    // 서브 카테고리
+    String p_img;       // 상품이미지
+    String detail;      // 상품상세설명
+    Long price;         // 가격
+    Long stock;         // 재고
+    Long p_rank;        // 판매량
 }
