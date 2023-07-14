@@ -16,7 +16,7 @@ public interface SalesRepository {
     // 송장 입력
     int inoutSalesNum(SalesDomain sales);
 
-    // 특정 상품 조회 ( 상세페이지 )
+    // 특정 판매 조회
     SalesDomain find(long id);
 
 }

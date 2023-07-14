@@ -25,10 +25,5 @@ public class SalesDomain {
     // 송장번호
     String tracknum;
 
-    String p_name;      // 상품명
-    String main_cate;   // 메인 카테고리
-    String sub_cate;    // 서브 카테고리
-    String p_img;       // 상품이미지
-    Long price;         // 가격
 
 }
