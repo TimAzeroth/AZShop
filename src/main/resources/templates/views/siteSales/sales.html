@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 
+<link href="/static/css/common.css">
+
 <head>
     <meta charset="UTF-8">
     <title>Sales</title>
@@ -14,8 +16,17 @@
    border: 5px solid #000;
   }
 
+  .header2 {
+  margin-left : 25%;
+  }
+
+  #homename {
+   margin-left : 25%;
+  }
+
   table {
-    width: 100%;
+    margin-left : 25%;
+    width: 50%;
     border: 1px solid #000;
   }
 
@@ -28,10 +39,10 @@
 
 <body>
 
-<h1>주문 / 결제</h1>
+<h1 class="header1">주문 / 결제</h1>
 <hr>
 
-<h2>구매자 정보</h2>
+<h2 class="header2">구매자 정보</h2>
 <table class="user_information">
     <tr>
         <td>이름</td>
@@ -49,8 +60,8 @@
     </tr>
 </table>
 
-<h2>배송지 정보</h2>
-<button>집 명칭</button>
+<h2 class="header2">배송지 정보</h2>
+<button id="homename">집 명칭</button>
 <table class="address_information">
     <tr>
         <td>닉네임</td>
@@ -70,7 +81,7 @@
     </tr>
 </table>
 
-<h2>결제 정보</h2>
+<h2 class="header2">결제 정보</h2>
 <table class="payment_information">
     <tr>
         <td>총 상품 가격</td>

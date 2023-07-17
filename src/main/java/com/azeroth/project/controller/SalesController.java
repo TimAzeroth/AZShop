@@ -16,14 +16,11 @@ public class SalesController {
 
     private SalesRepository salesRepository;
 
-@GetMapping("/")
+@GetMapping("/sales")
     public String sales(){
     System.out.println("실행 확인용");
     return "/siteSales/sales";
 }
-
-
-
 
 
 }
