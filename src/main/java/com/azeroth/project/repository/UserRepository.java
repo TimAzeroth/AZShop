@@ -1,7 +1,9 @@
 package com.azeroth.project.repository;
 
 import com.azeroth.project.domain.AddressDomain;
+import com.azeroth.project.domain.AuthorityDomain;
 import com.azeroth.project.domain.UserDomain;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 
 public interface UserRepository {
@@ -14,6 +16,7 @@ public interface UserRepository {
     
     // 새로운 사용자 입력
     int insert(UserDomain user);
+
 
     // 사용자 정보 수정
     int update(UserDomain user);
