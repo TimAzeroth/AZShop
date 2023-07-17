@@ -5,4 +5,25 @@
 
 <mapper namespace="com.azeroth.project.repository.ProductRepository">
 
+    <sql id="SELECT_BASE">
+        SELECT id, p_name, main_cate, sub_cate, p_img, detail, price, stock, p_rank
+        FROM Product
+    </sql>
+
+    <select id="findByAll" resultType="com.azeroth.project.domain.ProductDomain">
+        <include refid="SELECT_BASE"/>
+    </select>
+
+    <select id="findById">
+        <include refid="SELECT_BASE"/>
+        WHERE id = #{param1}
+    </select>
+
+    <insert id="addProduct" flushCache="true" parameterType="com.azeroth.project.domain.ProductDomain" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO Product
+        (p_name, main_cate, sub_cate, p_img, detail, price, stock, p_rank)
+        VALUES
+        (#{p_name}, #{main_cate}, #{sub_cate}, #{p_img}, #{detail}, #{price}, #{stock}, #{p_rank})
+    </insert>
+
 </mapper>
