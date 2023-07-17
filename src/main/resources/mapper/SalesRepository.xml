@@ -3,6 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.azeroth.project.repository.SalesRepository">
+<mapper namespace="com.azeroth.project.repository.ProductRepository">
+
+    <sql id="SELECT_BASE">
+        SELECT
+            id,
+            authority_id,
+            username,
+            password,
+            nickname,
+            email,
+            profileimg,
+            u_status,
+            phone,
+            logdate,
+            regdate
+        FROM
+            azerothdb.user
+    </sql>
+
+    <select id="findSales">
+        <include refid="SELECT_BASE"/>
+        WHERE
+            username = #{username}
+    </select>
 
 </mapper>
