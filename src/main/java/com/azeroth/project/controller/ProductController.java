@@ -12,13 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/product")
@@ -40,7 +39,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addOk(@Valid ProductDomain productDomain, BindingResult result, RedirectAttributes attr, Model model) {
+    public String addOk(@RequestParam("upfile") MultipartFile file, @Valid ProductDomain productDomain, BindingResult result, RedirectAttributes attr, Model model) {
         if (result.hasErrors()) {
 
             attr.addFlashAttribute("p_name", productDomain.getP_name());
@@ -57,7 +56,7 @@ public class ProductController {
             return "redirect:/product/add";
 
         }
-        int sqlResult = productService.addProduct(productDomain);
+        int sqlResult = productService.addProduct(productDomain, file);
         model.addAttribute("sqlResult", sqlResult);
         return "product/addOk";
     }
