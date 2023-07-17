@@ -19,8 +19,11 @@ public class SalesDomain {
     String address;             // 주소
     String address_detail;      // 상세주소
     String postcode;            // 우편번호
+
     // 배송 요청사항
     String deliveryreq;
     // 송장번호
     String tracknum;
+
+
 }
