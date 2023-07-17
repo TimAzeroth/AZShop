@@ -1,6 +1,7 @@
 body {
-            background-color: white;
-        }
+    background-color: white;
+    padding-top: 150px;
+}
 .container {
     background-color: #03f6fa;
     border-radius: 5px;
@@ -17,4 +18,9 @@ body {
 }
 #container-1 label {
     color: black;
+    font-size: 25px;
+}
+
+h1 {
+    font-size: 80px;
 }
