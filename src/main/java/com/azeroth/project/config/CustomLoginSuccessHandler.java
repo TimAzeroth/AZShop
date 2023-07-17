@@ -5,16 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
 
     public CustomLoginSuccessHandler(String defaultTargetUrl) {
