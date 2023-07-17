@@ -5,4 +5,67 @@
 
 <mapper namespace="com.azeroth.project.repository.UserRepository">
 
+    <sql id="SELECT_BASE">
+        SELECT
+            id,
+            authority_id,
+            username,
+            password,
+            nickname,
+            email,
+            profileimg,
+            u_status,
+            phone,
+            logdate,
+            regdate
+        FROM
+            User
+    </sql>
+
+    <select id="findById" resultType="com.azeroth.project.domain.UserDomain">
+        <include refid="SELECT_BASE"/>
+        WHERE
+            id=#{id}
+    </select>
+
+    <select id="findByUsername" resultType="com.azeroth.project.domain.UserDomain">
+        <include refid="SELECT_BASE"/>
+        WHERE
+            username=#{username}
+    </select>
+
+    <insert id="insert" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain"
+            keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO User(username, password, nickname, email, profileimg, u_status, phone, logdate, regdate)
+        VALUE(#{username}, #{password}, #{nickname}, #{email}, #{profileimg}, #{u_status}, #{phone}, #{logdate}, #{regdate})
+    </insert>
+
+    <update id="update" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain">
+        UPDATE User
+        SET password=#{password}, email=#{email}, profileimg=#{profileimg}, phone=#{phone}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain">
+        DELETE FROM User
+        WHERE id=#{id}
+    </delete>
+
+    <insert id="postInsert" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain">
+        INSERT INTO Address(address_name, address, address_detail, postcode)
+        VALUE(#{address_name},#{address},#{address_detail},#{postcode})
+    </insert>
+
+    <update id="postUpdate" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain">
+        UPDATE Address
+        SET address_name=#{address_name}, address=#{address}, address_detail=#{address_detail}, postcode=#{postcode}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="postDelete" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain">
+        DELETE FROM Address
+        WHERE id = #{id}
+    </delete>
+
+
 </mapper>
