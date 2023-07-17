@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sales</title>
+</head>
+
+<style>
+
+  hr{
+   border: 5px solid #000;
+  }
+
+  table {
+    width: 100%;
+    border: 1px solid #000;
+  }
+
+  th, td {
+    border: 1px solid #000;
+  }
+
+
+</style>
+
+<body>
+
+<h1>주문 / 결제</h1>
+<hr>
+
+<h2>구매자 정보</h2>
+<table class="user_information">
+    <tr>
+        <td>이름</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>이메일</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>휴대폰 번호</td>
+        <td>내용
+            <button>수정</button>
+        </td>
+    </tr>
+</table>
+
+<h2>배송지 정보</h2>
+<button>집 명칭</button>
+<table class="address_information">
+    <tr>
+        <td>닉네임</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>배송주소</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>연락처</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>배송 요청사항</td>
+        <td>내용</td>
+    </tr>
+</table>
+
+<h2>결제 정보</h2>
+<table class="payment_information">
+    <tr>
+        <td>총 상품 가격</td>
+        <td>내용</td>
+    </tr>
+    <tr>
+        <td>배송비</td>
+        <td>3000원</td>
+    </tr>
+    <tr>
+        <td>총 결제 금액</td>
+        <td>내용</td>
+    </tr>
+</table>
+
+
+</body>
+</html>
