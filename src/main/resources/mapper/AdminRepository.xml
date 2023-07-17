@@ -5,4 +5,86 @@
 
 <mapper namespace="com.azeroth.project.repository.AdminRepository">
 
+    <select id="findCard" parameterType="com.azeroth.project.domain.CardDomain">
+        SELECT
+            c_num,
+            c_year,
+            c_month,
+            c_cvc,
+            balance
+        FROM
+            card
+        where
+            c_num = #{c_num}
+            AND c_year = #{c_year}
+            AND c_month = #{c_month}
+            AND c_cvc = #{c_cvc}
+    </select>
+    
+    <update id="updateCard" flushCache="true" parameterType="com.azeroth.project.domain.CardDomain">
+        UPDATE Card set
+            balance = #{balance}
+        WHERE
+            c_num = #{c_num}
+    </update>
+    <select id="ListByUsers" parameterType="java.util.ArrayList">
+        select
+            authority_id, username, nickname, email, profileimg, u_status, phone
+        from User
+    </select>
+
+    <select id="findByUser" parameterType="com.azeroth.project.domain.UserDomain">
+        select
+            authority_id, username, nickname, email, profileimg, u_status, phone
+        from
+            user
+        where
+            username = #{username}
+    </select>
+    <select id="ListByUsers" parameterType="java.util.ArrayList">
+        select
+            p.p_name "p_name",
+            p.main_cate "main_cate",
+            p.sub_cate "sub_cate",
+            p.p_img "p_img",
+            p.detail "detail",
+            p.price "price",
+            p.stock "stock"
+        from
+            sales s, product p
+        where
+            s.p_id  = p.id
+            and s.u_username = #{username}
+    </select>
+    <select id="writeReviewByUser" parameterType="java.util.ArrayList">
+        select
+            r.id "id",
+            r.user_id "user_id",
+            r.product_id "product_id",
+            r.content "content",
+            r.reviewdate "reviewdate",
+            r.reply "reply",
+            r.replydate "replydate"
+        from
+            review r, user u
+        where
+            r.user_id = u.id
+            and u.username = #{username}
+    </select>
+    <select id="NoAnswerReview" parameterType="java.util.ArrayList">
+        select
+            id,
+            user_id,
+            product_id,
+            content,
+            reviewdate,
+            reply,
+            replydate
+        from
+            review r
+        where
+            reply is null
+            or reply =''
+    </select>
+
 </mapper>
