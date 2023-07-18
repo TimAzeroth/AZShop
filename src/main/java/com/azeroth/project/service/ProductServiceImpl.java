@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -34,10 +35,22 @@ public class ProductServiceImpl implements ProductService {
         return upload(productDomain, file);
     }
 
+    @Override
+    public List<ProductDomain> listByPriority() {
+        return productRepository.listByPriority();
+    }
+
+    @Override
+    public List<ProductDomain> listByCategory(String maincode, String subcode) {
+        return productRepository.listByCategory(maincode, subcode);
+    }
+
     private int upload(ProductDomain productDomain, MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
-        if (originalFilename == null || originalFilename.length() == 0) return 0;
-
+        if (originalFilename == null || originalFilename.length() == 0) {
+            productDomain.setP_img(null);
+            return productRepository.addProduct(productDomain);
+        }
         // 원본파일명
         String sourceName = StringUtils.cleanPath(originalFilename);
 

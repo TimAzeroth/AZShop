@@ -3,7 +3,7 @@
 <th:block th:fragment="header">
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/index">
         <img src="/image/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
         AZShop
       </a>
@@ -23,6 +23,10 @@
         </ul>
       </div>
     </div>
+    <form class="d-flex">
+      <input class="form-control" type="search" placeholder="Search.." aria-label="Search">
+      <button class="btn btn btn-outline-light my-2 my-sm-0 ms-1 me-2" type="submit">Search</button>
+    </form>
   </nav>
 </th:block>
 </html>
