@@ -22,8 +22,8 @@ ALTER TABLE Sales AUTO_INCREMENT = 1;
 
 -- 권한테이블 
 INSERT INTO Authority(name) VALUES
-('MEMBER'),
-('ADMIN')
+('ROLE_MEMBER'),
+('ROLE_ADMIN')
 ;
 
 

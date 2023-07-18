@@ -29,7 +29,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<UserDomain> findByAllUser() {
-        return null;
+        List<UserDomain> list = adminRepository.ListByUsers();
+        return list;
     }
 
     @Override
