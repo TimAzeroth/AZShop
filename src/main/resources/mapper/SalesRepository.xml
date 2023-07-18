@@ -5,27 +5,40 @@
 
 <mapper namespace="com.azeroth.project.repository.SalesRepository">
 
-    <sql id="SELECT_BASE">
-        SELECT
-            id,
-            authority_id,
-            username,
-            password,
-            nickname,
-            email,
-            profileimg,
-            u_status,
-            phone,
-            logdate,
-            regdate
-        FROM
-            azerothdb.user
-    </sql>
+    <resultMap id="mapUserImp" type="com.azeroth.project.domain.UserDomain">
+        <result column="u_username" property="username"/>
+        <result column="id" property="id"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+    </resultMap>
 
-    <select id="findSales">
-        <include refid="SELECT_BASE"/>
+    <resultMap id="mapPdImp" type="com.azeroth.project.domain.ProductDomain">
+        <result column="p_id" property="id"/>
+    </resultMap>
+
+    <!-- 주문 / 결제 사용자 정보와 배송지 정보 불러오는 쿼리문 -->
+    <select id="findSales" resultMap="mapUserImp, mapPdImp">
+        select
+            u.username "u_username",
+            u.nickname "nickname",
+            u.email "email",
+            u.phone "phone",
+            a.address_name "address_name",
+            a.address_detail "address_detail",
+            a.address "address",
+            a.postcode "postcode",
+            p.id "p_id"
+        from
+            address a,
+            `user` u,
+            product p
         WHERE
-            username = #{username}
+            u.id = a.user_id
+        AND
+            u.id = #{id}
     </select>
+
+
 
 </mapper>
