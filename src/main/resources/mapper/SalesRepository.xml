@@ -18,7 +18,7 @@
         <result column="postcode" property="postcode"/>
     </resultMap>
 
-    <resultMap id="mapPdImp" type="com.azeroth.project.domain.AddressDomain">
+    <resultMap id="mapPdImp" type="com.azeroth.project.domain.ProductDomain">
         <result column="p_id" property="id"/>
     </resultMap>
 
