@@ -4,7 +4,7 @@
 alert("가입 실패");
 history.back();
 </script>
-<script th:if="${result > 0 }">
+<script th:if="${result > 0 }" th:inline="javascript">
 alert("가입 성공");
 location.href = "/user/login";
 </script>

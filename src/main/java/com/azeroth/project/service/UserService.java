@@ -1,6 +1,7 @@
 package com.azeroth.project.service;
 
 import com.azeroth.project.domain.UserDomain;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
 
@@ -11,5 +12,5 @@ public interface UserService {
     boolean isExist(String username);
 
     // 신규 회원 등록
-    int register(UserDomain user);
+    int register(UserDomain user, MultipartFile multipartFile);
 }

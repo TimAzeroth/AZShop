@@ -39,8 +39,8 @@
     <!-- 새로운 사용자 입력-->
     <insert id="insert" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain"
             keyProperty="id" useGeneratedKeys="true" keyColumn="id">
-        INSERT INTO User(username, password, nickname, email, phone, authority_id)
-        VALUE(#{username}, #{password}, #{nickname}, #{email}, #{phone}, #{authority_id})
+        INSERT INTO User(username, password, nickname, email, phone, authority_id, profileimg, u_status, logdate, regdate)
+        VALUE(#{username}, #{password}, #{nickname}, #{email}, #{phone}, #{authority_id}, #{profileimg}, #{u_status}, #{logdate}, #{regdate})
     </insert>
 
     <!-- 사용자 정보 수정-->
