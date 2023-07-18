@@ -41,7 +41,8 @@
         where
             username = #{username}
     </select>
-    <select id="ListByUsers" parameterType="java.util.ArrayList">
+
+    <select id="userBuyProduct" parameterType="java.util.ArrayList">
         select
             p.p_name "p_name",
             p.main_cate "main_cate",
@@ -56,6 +57,7 @@
             s.p_id  = p.id
             and s.u_username = #{username}
     </select>
+
     <select id="writeReviewByUser" parameterType="java.util.ArrayList">
         select
             r.id "id",
