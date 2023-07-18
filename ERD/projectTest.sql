@@ -5,7 +5,21 @@ select username, email, phone from user
 ;
 
 
-select 
+-- select 
+-- 	u.nickname,
+-- 	a.address_detail,
+-- 	a.address,
+-- 	u.phone
+-- from 
+-- 	address a, 
+-- 	username u
+-- where u.id = a.user_id
+-- and u.username = ""
+
+
+
+
+select
 	u.username,
 	u.nickname,
 	u.email,
@@ -14,15 +28,15 @@ select
 	a.address,
 	a.postcode,
 	p.id
-from 
-	address a, 
+from
+	address a,
 	`user` u,
 	product p ;
 
 
 
-SELECT id, authority_id, username, password, 
-nickname, email, profileimg, u_status, phone, 
+SELECT id, authority_id, username, password,
+nickname, email, profileimg, u_status, phone,
 logdate, regdate
 FROM azerothdb.`user`;
 
