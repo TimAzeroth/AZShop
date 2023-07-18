@@ -23,8 +23,8 @@ public class SalesServiceImpl implements SalesService {
 
     // 주문 / 결제 화면에 정보 불러오기
     @Override
-    public SalesDomain saleslist(Long id) {
-        SalesDomain salesDomain = salesRepository.findSales(id);
+    public SalesDomain saleslist(String u_username) {
+        SalesDomain salesDomain = salesRepository.findSales(u_username);
         return salesDomain;
     }
 

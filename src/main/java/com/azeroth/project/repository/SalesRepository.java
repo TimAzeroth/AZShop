@@ -11,12 +11,12 @@ public interface SalesRepository {
     int insert(SalesDomain sales);
 
     // 판매 조회(주문 / 결제)
-    SalesDomain findSales(Long id);
+    SalesDomain findSales(String u_username);
 
     // 송장 입력
     int inoutSalesNum(SalesDomain sales);
 
     // 특정 판매 조회(결제 완료)
-    SalesDomain find(Long id);
+    SalesDomain find(String u_username);
 
 }

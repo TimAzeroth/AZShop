@@ -8,7 +8,7 @@ import java.util.List;
 public interface SalesService {
 
     // 판매 정보 리스트
-    SalesDomain saleslist(Long id);
+    SalesDomain saleslist(String u_username);
 
 
 }
