@@ -59,17 +59,19 @@ public class UserServiceImpl implements UserService{
 
     private int upload(UserDomain user, MultipartFile multipartFile) {
 
-        user.setUsername(user.getUsername());
-        user.setPassword(user.getPassword());   // password 는 암호화 해서 저장 (추후 인코딩 설정)
+//        user.setPassword(user.getPassword());   // password 는 암호화 해서 저장 (추후 인코딩 설정)
         AuthorityDomain auth = authorityRepository.findByName("ROLE_MEMBER");
         user.setAuthority_id(auth.getId());
 
-        userRepository.insert(user);  // 새로이 회원(User) 저장, id값 받아옴
-
-        System.out.println("로그1");
+//        userRepository.insert(user);  // 새로이 회원(User) 저장, id값 받아옴
 
         String originalFilename = multipartFile.getOriginalFilename();
-        if(originalFilename == null || originalFilename.length()==0) return 0;
+
+        if (originalFilename == null || originalFilename.length() == 0) {
+            user.setProfileimg(null);
+            return userRepository.insert(user);
+        }
+
 
         //원본 파일명
         String sourceName = StringUtils.cleanPath(originalFilename);

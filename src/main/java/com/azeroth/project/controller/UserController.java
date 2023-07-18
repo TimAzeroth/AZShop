@@ -37,15 +37,17 @@ public class UserController {
     public void register(){}
 
     @PostMapping("/register")
-    public  String registerOk(@Valid UserDomain user,
+    public  String registerOk(
+                              @RequestParam("upfile")MultipartFile file,
+                              @Valid UserDomain user,
                               BindingResult result,
                               Model model,
-                              RedirectAttributes redirectAttributes,
-                              @RequestParam("profileimg")MultipartFile file
+                              RedirectAttributes redirectAttributes
     ){
-
+        System.out.println("아무말");
         if(!result.hasFieldErrors("username") && userService.isExist(user.getUsername())){
             result.rejectValue("username","이미 존재하는 아이디입니다");
+            System.out.println("lpg");
         }
 
         if(result.hasErrors()){
@@ -53,7 +55,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("nickname",user.getNickname());
             redirectAttributes.addFlashAttribute("email",user.getEmail());
             redirectAttributes.addFlashAttribute("phone",user.getPhone());
-
+            System.out.println("llllll");
             List<FieldError> errorList = result.getFieldErrors();
             for(FieldError err : errorList) {
                 redirectAttributes.addFlashAttribute("error_"+err.getField(), err.getCode());
