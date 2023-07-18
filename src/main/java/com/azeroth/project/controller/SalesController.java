@@ -16,12 +16,19 @@ public class SalesController {
 
     private SalesRepository salesRepository;
 
+    // 주문 / 결제 페이지
+    @GetMapping("/sales")
+    public String sales() {
+        System.out.println("실행 확인용");
+        return "/siteSales/sales";
+    }
 
-@GetMapping("/sales")
-    public String sales(){
-    System.out.println("실행 확인용");
-    return "/siteSales/sales";
-}
+    // 결제완료 알림 페이지
+
+    @GetMapping("/salesComplete")
+    public String salesComplete(){
+        return "/siteSales/salesComplete";
+    }
 
 
 }
