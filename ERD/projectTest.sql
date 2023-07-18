@@ -14,6 +14,10 @@ select username, email, phone from user
 -- 	address a, 
 -- 	username u
 -- where u.id = a.user_id
--- and u.username = "";
+-- and u.username = ""
+
+
+
+
 
 
