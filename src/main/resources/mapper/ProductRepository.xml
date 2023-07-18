@@ -10,10 +10,6 @@
         FROM Product
     </sql>
 
-    <select id="findByAll" resultType="com.azeroth.project.domain.ProductDomain">
-        <include refid="SELECT_BASE"/>
-    </select>
-
     <select id="findById">
         <include refid="SELECT_BASE"/>
         WHERE id = #{param1}
@@ -25,5 +21,16 @@
         VALUES
         (#{p_name}, #{main_cate}, #{sub_cate}, #{p_img}, #{detail}, #{price}, #{stock}, #{p_rank})
     </insert>
+
+    <select id="listByPriority" resultType="com.azeroth.project.domain.ProductDomain">
+        <include refid="SELECT_BASE"/>
+        ORDER BY p_rank, p_name
+    </select>
+
+    <select id="listByCategory" resultType="com.azeroth.project.domain.ProductDomain">
+        <include refid="SELECT_BASE"/>
+        WHERE main_cate = #{param1} AND sub_cate = #{param2}
+        ORDER BY p_rank, p_name
+    </select>
 
 </mapper>

@@ -12,7 +12,7 @@ function showSubCategories(mainCode) {
     const listDiv = document.createElement("div");
     const listA = document.createElement("a");
     listA.textContent = category.subname;
-    listA.href = "#";
+    listA.href = "/category?maincode=" + encodeURIComponent(category.maincode) + "&subcode=" + encodeURIComponent(category.subcode);
     listA.classList.add("dropdown-item");
     listDiv.appendChild(listA);
     subCategory.appendChild(listDiv);
