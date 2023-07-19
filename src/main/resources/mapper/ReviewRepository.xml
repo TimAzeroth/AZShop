@@ -15,10 +15,10 @@
         <result column="replydate" property="replydate"/>
     </resultMap>
 
-    <select id="findByUserId" resultMap="reviewDomainResultMap">
+    <select id="findByProductId" resultType="com.azeroth.project.domain.ReviewDomain">
         SELECT
             id,
-            ser_id,
+            user_id,
             product_id,
             content,
             reviewdate,
@@ -27,7 +27,7 @@
         FROM
             review
         WHERE
-            user_id = #{userId}
+            product_id = #{paran1}
     </select>
 
     <insert id="insert" parameterType="com.azeroth.project.domain.ReviewDomain">
@@ -35,27 +35,9 @@
         VALUES (#{userId}, #{productId}, #{content}, #{reviewdate})
     </insert>
 
-    <delete id="delete" parameterType="long">
+    <delete id="deleteReviewId" parameterType="long" flushCache="true">
         DELETE FROM review WHERE id = #{id}
     </delete>
 
-    <update id="update" parameterType="com.azeroth.project.domain.ReviewDomain">
-        UPDATE review
-        SET user_id = #{userId}, product_id = #{productId}, content = #{content},
-        reviewdate = #{reviewdate}
-        WHERE id = #{id}
-    </update>
-
-    <update id="addReply" parameterType="com.azeroth.project.domain.ReviewDomain">
-        UPDATE review
-        SET reply = #{reply}, replydate = #{replydate}
-        WHERE id = #{id}
-    </update>
-
-    <update id="makeVisible" parameterType="long">
-        UPDATE review
-        SET visible = true
-        WHERE id = #{id}
-    </update>
 
 </mapper>

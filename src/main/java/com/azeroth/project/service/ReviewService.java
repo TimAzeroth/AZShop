@@ -8,5 +8,9 @@ public interface ReviewService {
 
     ReviewDomain saveReview(ReviewDomain reviewDomain);
 
-    List<ReviewDomain> getAllReviews();
+    List<ReviewDomain> findByProductId(Long productId);
+
+    int  deleteByReviewsId(Long reviewId);
+
+
 }

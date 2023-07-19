@@ -14,24 +14,23 @@
 
 <th:block th:fragment="review">
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/51772bd9bd.js"></script>
+
     <body>
         <!-- Review -->
         <div class="d-flex justify-content-start">
-            <div>
-                <form action="/submitReview" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" id="userId" name="userId">
-                    <input type="hidden" id="productId" name="productId">
-                    <label for="content">리뷰:</label><br>
-                    <textarea id="content" name="content" rows="4" cols="50">리뷰 작성해주세요.</textarea><br>
-
-                </form>
-            </div>
             <div>
                 <div id="reviewDetails"></div>
                 <div id="reviewDate"></div>
             </div>
             <div>
-                <button id="submit" value="review">리뷰</button>
+                <form th:action="@{/review/list}" method="POST">
+                    <input type="hidden" id="userId" name="userId">
+                    <input type="hidden" id="productId" name="productId">
+                    <label for="content">리뷰:</label><br>
+                    <textarea id="content" name="content" rows="4" cols="50">리뷰 작성해주세요.</textarea><br>
+
+                    <button id="submit" value="review">리뷰</button>
+                </form>
             </div>
             <div>
                 <!--내용 배열 -->
@@ -45,99 +44,32 @@
             </div>
         </div>
         <!-- Reviews -->
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-start" th:each="review : ${reviews}">
             <div class="reviews-container">
             <!-- Review 1 -->
             <div class="review">
-                <textarea id="content1" name="content" rows="4" cols="50">I appreciate your nuanced critique. Even though I enjoyed the movie overall, I agree with you about the lack of character development in the second half.</textarea><br>
+                <p id="content1" name="content" rows="4" cols="50" th:text="${review.content}"></p><br>
                     <div>
-                        <button id="deleteButton1" value="delete">삭제</button> <!-- Added a delete button -->
+                        <form th:action="@{review/delete}" method="POST">
+                            <input th:value="${review.id}" type="hidden">
+                            <button type="submit" value="delete">삭제</button>
+                        </form>
                     </div>
                     <div>
-                        <p><strong>작성자:</strong> John Doe</p>
+                        <p th:text="'작성자:'+${review.user_id}"><strong></strong></p>
                     </div>
                     <div>
-                        <p><strong>내용:</strong> </p>
-                    </div>
-                    <div>
-                        <p><strong>작성일:</strong> July 18, 2023</p>
-                    </div>
-            </div>
-            </div>
-            </div>
-            <!-- Review 2 -->
-            <div class="review">
-                <textarea id="content2" name="content" rows="4" cols="50">This is a really important issue, and I'm glad to see it getting the coverage it deserves. The level of detail in your reporting is commendable</textarea><br>
-                    <div>
-                        <button id="deleteButton2" value="delete">삭제</button> <!-- Added a delete button -->
-                    </div>
-                    <div>
-                        <p><strong>작성자:</strong> Jane Smith</p>
-                    </div>
-                    <div>
-                        <p><strong>내용:</strong> </p>
-                    </div>
-                    <div>
-                        <p><strong>작성일:</strong> July 18, 2023</p>
+                        <p th:text="'작성일'+${review.reviewdate}"><strong></strong></p>
                     </div>
             </div>
-            <!-- Review 3 -->
-            <div class="review">
-                <textarea id="content3" name="content" rows="4" cols="50">I've been following your workout routines for a few months now, and I can already see a huge difference. Your videos are motivating and easy to follow, even for a beginner like me!</textarea><br>
-                    <div>
-                        <button id="deleteButton3" value="delete">삭제</button> <!-- Added a delete button -->
-                    </div>
-                    <div>
-                        <p><strong>작성자:</strong> Robert Brown</p>
-                    </div>
-                    <div>
-                        <p><strong>내용:</strong> </p>
-                    </div>
-                    <div>
-                        <p><strong>작성일:</strong> July 18, 2023</p>
-                    </div>
             </div>
-            <!-- Review 4 -->
-            <div class="review">
-                <textarea id="content4" name="content" rows="4" cols="50">Great review! I've been on the fence about buying this gadget, and your thorough analysis has made my decision easier. Can you also cover its long-term durability in your future updates?</textarea><br>
-                <div class="flex-direction:column">
-                    <div>
-                        <button id="deleteButton4" value="delete">삭제</button> <!-- Added a delete button -->
-                    </div>
-                    <div>
-                        <p><strong>작성자:</strong> Emily Davis</p>
-                    </div>
-                    <div>
-                        <p><strong>내용:</strong> </p>
-                    </div>
-                    <div>
-                        <p><strong>작성일:</strong> July 18, 2023</p>
-                    </div>
+            </div>
 
-                </div>
-            </div>
-            <!-- Review 5 -->
-            <div class="review">
-                <textarea id="content5" name="content" rows="4" cols="50">I'm always impressed by your ability to capture light and shadow so effectively. The composition of your latest photo is simply stunning. Keep up the good work!</textarea><br>
-                    <div>
-                        <button id="deleteButton5" value="delete">삭제</button> <!-- Added a delete button -->
-                    </div>
-                    <div>
-                        <p><strong>작성자:</strong> Charlie Johnson</p>
-                    </div>
-                    <div>
-                        <p><strong>내용:</strong> </p>
-                    </div>
-                    <div>
-                        <p><strong>작성일:</strong> July 18, 2023</p>
-                    </div>
-            </div>
-            </div>
             <!-- Added pagination -->
             <div class="pagination-container">
             <div id="pagination">
                 <button class="arrow-button">&#171;</button> <!-- Left arrow -->
-                <button class="pageButton" disabled>1</button>
+                <button class="pageButton">1</button>
                 <button class="pageButton">2</button>
                 <button class="pageButton">3</button>
                 <button class="pageButton">4</button>
