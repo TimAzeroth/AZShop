@@ -59,3 +59,12 @@ TRUNCATE Cart_Product;
 SELECT * FROM Product;
 SELECT * FROM Cart_Product;
 SELECT * FROM Category;
+
+        SELECT p.id, p.p_name, p.main_cate, p.sub_cate, p.p_img, p.detail, p.price, p.stock, p.p_rank, c.mainname, c.subname
+        FROM Product p
+        LEFT JOIN Category c ON p.main_cate = c.maincode AND p.sub_cate = c.subcode
+        WHERE UPPER(p.p_name) LIKE '%고양이%'
+        OR UPPER(c.mainname) LIKE '%고양이%'
+        OR UPPER(c.subname) LIKE '%고양이%'
+        AND p.main_cate = c.maincode AND p.sub_cate = c.subcode
+        ORDER BY p_rank, p_name;

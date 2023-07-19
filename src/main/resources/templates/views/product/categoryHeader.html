@@ -23,8 +23,8 @@
         </ul>
       </div>
     </div>
-    <form class="d-flex">
-      <input class="form-control" type="search" placeholder="Search.." aria-label="Search">
+    <form class="d-flex" th:action="@{/product/search}" method="POST">
+      <input class="form-control" type="search" placeholder="Search.." aria-label="Search" name="searchedValue">
       <button class="btn btn btn-outline-light my-2 my-sm-0 ms-1 me-2" type="submit">Search</button>
     </form>
   </nav>

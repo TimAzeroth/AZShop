@@ -17,4 +17,13 @@ public interface ProductService {
     // 카테고리별 상품 가져오기
     List<ProductDomain> listByCategory(String maincode, String subcode);
 
+    // 검색으로 상품 가져오기
+    List<ProductDomain> listBySearch(String searchedValue);
+
+    // 상품 상세 정보
+    ProductDomain findById(Long id);
+
+    // 상품 삭제
+    int delete(Long id);
+
 }

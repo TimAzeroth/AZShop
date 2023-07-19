@@ -13,7 +13,12 @@
     var categories = [[${categories}]];
 </script>
 <th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
-<div class="container">
+<div th:if="${#lists.isEmpty(products)}">
+    <div class="d-flex justify-content-center mt-5">
+        <h2 th:text="'\'' + ${searchedValue} + '\'' + '에 대한 검색 결과가 없습니다.'"></h2>
+    </div>
+</div>
+<div class="container" th:unless="${#lists.isEmpty(products)}">
     <div class="row mt-5">
         <div class="col-md-4" th:each="product : ${products}">
             <div>
@@ -37,8 +42,5 @@
         </div>
     </div>
 </div>
-<!-- pagination -->
-<th:block th:insert="~{product/pagination.html::pagination}"></th:block>
-<!-- pagination -->
 </body>
 </html>

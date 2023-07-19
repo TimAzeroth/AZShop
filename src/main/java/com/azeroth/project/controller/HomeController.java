@@ -46,5 +46,4 @@ public class HomeController {
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
     }
-
 }

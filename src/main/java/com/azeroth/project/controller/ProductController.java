@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/product")
@@ -59,6 +58,45 @@ public class ProductController {
         int sqlResult = productService.addProduct(productDomain, file);
         model.addAttribute("sqlResult", sqlResult);
         return "product/addOk";
+    }
+
+    @PostMapping("/delete")
+    public String deleteOk(Long id, Model model) {
+        System.out.println(id);
+        int result = productService.delete(id);
+        model.addAttribute("result", result);
+        return "product/deleteOk";
+    }
+
+    @GetMapping("/update")
+    public void update(@Valid ProductDomain productDomain, Model model) {
+        // TODO
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable long id, Model model){
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        model.addAttribute("mainCategories", mainCategories);
+        model.addAttribute("subCategories", subCategories);
+        model.addAttribute("categories", categories);
+        model.addAttribute("product", productService.findById(id));
+        return "product/detail";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam("searchedValue") String searchedValue, Model model) {
+        List<ProductDomain> products = productService.listBySearch(searchedValue);
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        model.addAttribute("products", products);
+        model.addAttribute("mainCategories", mainCategories);
+        model.addAttribute("subCategories", subCategories);
+        model.addAttribute("categories", categories);
+        model.addAttribute("searchedValue", searchedValue);
+        return "product/search";
     }
 
     @InitBinder
