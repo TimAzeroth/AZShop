@@ -23,11 +23,11 @@ public class HomeController {
     private ProductService productService;
 
     @RequestMapping("/index")
-    public void index(Model model) {
+    public void index(Integer page, Model model) {
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
         List<CategoryDomain> subCategories = categoryService.findAllSub();
         List<CategoryDomain> categories = categoryService.findAll();
-        List<ProductDomain> products = productService.listByPriority();
+        List<ProductDomain> products = productService.listByPagination(page, model);
         model.addAttribute("products", products);
         model.addAttribute("mainCategories", mainCategories);
         model.addAttribute("subCategories", subCategories);

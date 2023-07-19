@@ -22,15 +22,20 @@
         (#{p_name}, #{main_cate}, #{sub_cate}, #{p_img}, #{detail}, #{price}, #{stock}, #{p_rank})
     </insert>
 
-    <select id="listByPriority" resultType="com.azeroth.project.domain.ProductDomain">
+    <select id="selectFromRow" resultType="com.azeroth.project.domain.ProductDomain">
         <include refid="SELECT_BASE"/>
         ORDER BY p_rank, p_name
+        LIMIT #{param1}, #{param2}
     </select>
 
     <select id="listByCategory" resultType="com.azeroth.project.domain.ProductDomain">
         <include refid="SELECT_BASE"/>
         WHERE main_cate = #{param1} AND sub_cate = #{param2}
         ORDER BY p_rank, p_name
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(id) FROM Product
     </select>
 
 </mapper>
