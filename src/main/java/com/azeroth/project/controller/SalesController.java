@@ -23,6 +23,7 @@ public class SalesController {
 //    public String sales(@PathVariable String u_username, Model model) {
 //        System.out.println("실행 확인용");
 //        model.addAttribute("sales", salesService.saleslist(u_username));
+//
 //        return "/siteSales/sales";
 //    }
 

@@ -48,4 +48,18 @@
             #{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq}, #{tracknum}
     </insert>
 
+    <select id="find" >
+        SELECT
+            amount,
+            address,
+            address_detail,
+            postcode,
+            deliveryreq,
+            tracknum
+        FROM
+            sales
+        WHERE
+            u.username = #{username}
+    </select>
+
 </mapper>

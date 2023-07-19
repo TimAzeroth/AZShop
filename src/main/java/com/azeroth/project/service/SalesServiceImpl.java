@@ -28,6 +28,12 @@ public class SalesServiceImpl implements SalesService {
         return salesDomain;
     }
 
+    // 결제 완료 정보 
+    @Override
+    public SalesDomain salesComplete(String u_username) {
+        SalesDomain salesDomain = salesRepository.findSales(u_username);
+        return salesDomain;
+    }
 
 
 }

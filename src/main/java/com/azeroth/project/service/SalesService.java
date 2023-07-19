@@ -10,5 +10,6 @@ public interface SalesService {
     // 판매 정보 리스트
     SalesDomain saleslist(String u_username);
 
+    SalesDomain salesComplete(String u_username);
 
 }
