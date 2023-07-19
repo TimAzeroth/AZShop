@@ -37,7 +37,11 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(SqlSession sqlSession){
         userRepository = sqlSession.getMapper(UserRepository.class);
         authorityRepository = sqlSession.getMapper(AuthorityRepository.class);
-        System.out.println(getClass().getName() + "() 생성");
+    }
+
+    @Override
+    public UserDomain findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override
@@ -54,6 +58,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public int register(UserDomain user, MultipartFile multipartFile) {
         return upload(user,multipartFile);
+    }
+
+    @Override
+    public int update(UserDomain user) {
+        // TODO
+        return 0;
     }
 
 
@@ -91,21 +101,18 @@ public class UserServiceImpl implements UserService{
             }
         }
 
-        System.out.println("로그2");
         user.setProfileimg(fileName);
 
         // nio
         Path copyOfLocation = Paths.get(new File(uploadDir + File.separator + fileName).getAbsolutePath());
 
         try{
-            System.out.println("로그3");
             Files.copy(
                     multipartFile.getInputStream(),
                     copyOfLocation,
                     StandardCopyOption.REPLACE_EXISTING
             );
         } catch (IOException e) {
-            System.out.println("로그exception");
             e.printStackTrace();
         }
 

@@ -5,7 +5,9 @@ import com.azeroth.project.domain.UserValidator;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
 import jakarta.validation.Valid;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,10 +46,8 @@ public class UserController {
                               Model model,
                               RedirectAttributes redirectAttributes
     ){
-        System.out.println("아무말");
         if(!result.hasFieldErrors("username") && userService.isExist(user.getUsername())){
             result.rejectValue("username","이미 존재하는 아이디입니다");
-            System.out.println("lpg");
         }
 
         if(result.hasErrors()){
@@ -55,21 +55,64 @@ public class UserController {
             redirectAttributes.addFlashAttribute("nickname",user.getNickname());
             redirectAttributes.addFlashAttribute("email",user.getEmail());
             redirectAttributes.addFlashAttribute("phone",user.getPhone());
-            System.out.println("llllll");
             List<FieldError> errorList = result.getFieldErrors();
             for(FieldError err : errorList) {
                 redirectAttributes.addFlashAttribute("error_"+err.getField(), err.getCode());
             }
             return "redirect:/user/register";
         }
-        System.out.println("로그컨트롤1");
         int cnt = userService.register(user,file);
-        System.out.println("로그컨트롤2");
         model.addAttribute("result",cnt);
 
-        System.out.println("로그컨트롤3");
         return "/user/registerOk";
     }
+
+    @GetMapping("/findPassword")
+    public void findPassword(){}
+
+    @PostMapping("/findPassword")
+    public String findPassword(@ModelAttribute("user") UserDomain userDomain,
+                               Model model
+    ){
+
+        String userName = userDomain.getUsername();
+        String userEmail = userDomain.getEmail();
+        String userPhone = userDomain.getPhone();
+
+        userDomain = userService.findByUsername(userName);
+
+        boolean cnt;
+
+        if (userDomain != null && userName.equals(userDomain.getUsername()) &&
+                userEmail.equals(userDomain.getEmail()) && userPhone.equals(userDomain.getPhone())){
+            cnt = true;
+        } else {
+            cnt = false;
+        }
+
+        model.addAttribute("result", cnt);
+
+        return "/user/findPasswordOk";
+    }
+
+    @GetMapping("/changePassword/{id}")     // 현재 작동 에러;;;;
+    public String changePassword(@PathVariable Long id, Model model){
+        UserDomain user = userService.findById(id);
+        model.addAttribute("username",user.getUsername());
+        return "user/changPassword";
+    }
+
+//    @PostMapping("/changePassword")
+//    public String changePassword(UserDomain userDomain,
+//                                 Model model
+//    ){
+//
+//
+//
+//        return "";
+//    }
+
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
