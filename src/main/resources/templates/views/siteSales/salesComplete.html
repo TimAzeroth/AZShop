@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>salesComplete</title>
+</head>
+
+
+<style>
+
+  hr{
+   border: 5px solid #000;
+  }
+
+  .header2 {
+  margin-left : 25%;
+  }
+
+  #homename {
+   margin-left : 25%;
+  }
+
+  table {
+    margin-left : 400px;
+    width: 50%;
+    border: 1px solid #000;
+  }
+
+  td {
+    border: 1px solid #000;
+    width: 150px;
+  }
+
+
+</style>
+
+
+<body>
+    <h1>결제가 완료되었습니다.</h1>
+  <div>
+
+    <div>
+      <img src="/image/complete.png" width="70" height="70" >
+    </div>
+
+    <table>
+      <tr>
+        <td>결제금액</td>
+        <td th:text="${amount}"></td>
+      </tr>
+      <tr>
+        <td>배송지</td>
+        <td th:text="${address}"></td>
+      </tr>
+      <tr>
+        <td>요청사항</td>
+        <td th:text="${deliveryreq}"></td>
+      </tr>
+      <tr>
+        <td>주문번호</td>
+        <td th:text="${tracknum}"></td>
+      </tr>
+      <tr>
+        <td>상품정보</td>
+        <td th:text="${postcode}"></td>
+      </tr>
+    </table>
+
+
+  </div>
+</body>
+</html>

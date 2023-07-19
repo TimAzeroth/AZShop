@@ -15,22 +15,20 @@ public class SalesController {
     private SalesService salesService;
 
     private SalesRepository salesRepository;
-/*
-TODO
-@GetMapping("/")
-    public String sales(){
-    System.out.println("실행 확인용");
-    return "/siteSales/sales";
-}
+
+    // 주문 / 결제 페이지
+    @GetMapping("/sales")
+    public String sales() {
+        System.out.println("실행 확인용");
+        return "/siteSales/sales";
+    }
+
+    // 결제완료 알림 페이지
+
+    @GetMapping("/salesComplete")
+    public String salesComplete(){
+        return "/siteSales/salesComplete";
+    }
 
 
-    private SalesRepository salesRepository;
-
-@GetMapping("/sales")
-    public String sales(){
-    System.out.println("실행 확인용");
-    return "/siteSales/sales";
-}
-TODO END
-*/
 }

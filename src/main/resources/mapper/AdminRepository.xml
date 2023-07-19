@@ -56,6 +56,7 @@
             s.p_id  = p.id
             and s.u_username = #{username}
     </select>
+
     <select id="writeReviewByUser" parameterType="java.util.ArrayList">
         select
             r.id "id",
