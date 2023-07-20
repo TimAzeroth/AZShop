@@ -16,7 +16,4 @@ public interface SalesRepository {
     // 송장 입력
     int inoutSalesNum(SalesDomain sales);
 
-    // 특정 판매 조회(결제 완료)
-    SalesDomain find(String u_username);
-
 }

@@ -43,23 +43,9 @@
             parameterType="com.azeroth.project.domain.SalesDomain"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO sales
-            (u_username, p_id, amount, address, address_detail, postcode, deliveryreq, tracknum)
+            (u_username, p_id, amount, address, address_detail, postcode, deliveryreq)
         VALUES
-            #{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq}, #{tracknum}
+            #{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq}
     </insert>
-
-    <select id="find" >
-        SELECT
-            amount,
-            address,
-            address_detail,
-            postcode,
-            deliveryreq,
-            tracknum
-        FROM
-            sales
-        WHERE
-            u.username = #{username}
-    </select>
 
 </mapper>
