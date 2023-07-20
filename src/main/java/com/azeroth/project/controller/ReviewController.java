@@ -4,7 +4,6 @@ package com.azeroth.project.controller;
 import com.azeroth.project.domain.ReviewDomain;
 import com.azeroth.project.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,25 +22,21 @@ public class ReviewController {
         System.out.println(getClass().getName() + "()생성");
     }
 
-
-    @PostMapping()
-    public ReviewDomain createReview(ReviewDomain reviewDomain){
-
+    @PostMapping
+    public int createReview(ReviewDomain reviewDomain){
         return reviewService.saveReview(reviewDomain);
     }
 
     @GetMapping
-    public String reviews(Long productId, Model model){
-        List<ReviewDomain> reviews=reviewService.findByProductId(productId);
+    public String reviews(Integer page, Long productId, Model model){
+        List<ReviewDomain> reviews=reviewService.findByProductId(page,productId,model);
+        model.addAttribute("productId" , productId);
         model.addAttribute("reviews",reviews);
         return "review/review";
     }
-
     @PostMapping("/List")
-    public String getReview(Long productId, Model model){
-        List<ReviewDomain> reviews = reviewService.findByProductId(productId);
-        model.addAttribute("reviews",reviews);
-        return "review/review";
+    public String getReview(Integer page, Long productId, Model model){
+        return "review";
     }
     @PostMapping("/delete")
     public String deleteByReviewId(@PathVariable  Long reviewId, Model model){
@@ -49,9 +44,9 @@ public class ReviewController {
         model.addAttribute("result", result);
         return "/deleteOk";
     }
-    @PutMapping("/review/reply")
+    @PostMapping("/reply")
     public String replyToReview(@PathVariable  long review, Model model){
-        List<ReviewDomain> result = reviewService.replyToReview(review);
+        int result = reviewService.replyToReview(review);
         model.addAttribute("result", result);
         return "/review";
     }

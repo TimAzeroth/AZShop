@@ -7,6 +7,7 @@ import java.util.List;
 public interface ReviewRepository {
 
 
+    int insert(ReviewDomain review);
     // 리뷰 수정
     int update(ReviewDomain review);
 
@@ -22,7 +23,9 @@ public interface ReviewRepository {
 
     int deleteByReviewId(long reviewId);
 
-    List<ReviewDomain> replyToReview (long reply);  // 어드민 응답
+    int replyToReview (long reply);  // 어드민 응답
+
+    int paginationPage (long start, long end); // 페이징
 
 
 }
