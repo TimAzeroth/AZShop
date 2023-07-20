@@ -62,8 +62,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int update(UserDomain user) {
-        // TODO
-        return 0;
+        return userRepository.update(user);
     }
 
 
@@ -72,8 +71,7 @@ public class UserServiceImpl implements UserService{
 //        user.setPassword(user.getPassword());   // password 는 암호화 해서 저장 (추후 인코딩 설정)
         AuthorityDomain auth = authorityRepository.findByName("ROLE_MEMBER");
         user.setAuthority_id(auth.getId());
-
-//        userRepository.insert(user);  // 새로이 회원(User) 저장, id값 받아옴
+        user.setU_status("USE");    //  상태 "USE" 로 기본 설정
 
         String originalFilename = multipartFile.getOriginalFilename();
 

@@ -71,7 +71,7 @@ public class UserController {
     public void findPassword(){}
 
     @PostMapping("/findPassword")
-    public String findPassword(@ModelAttribute("user") UserDomain userDomain,
+    public String findPassword(UserDomain userDomain,
                                Model model
     ){
 
@@ -91,26 +91,35 @@ public class UserController {
         }
 
         model.addAttribute("result", cnt);
+        model.addAttribute("user_id",userDomain.getId());
 
         return "/user/findPasswordOk";
     }
 
-    @GetMapping("/changePassword/{id}")     // 현재 작동 에러;;;;
+    @GetMapping("/changePassword/{id}")
     public String changePassword(@PathVariable Long id, Model model){
         UserDomain user = userService.findById(id);
-        model.addAttribute("username",user.getUsername());
-        return "user/changPassword";
+        String name = user.getUsername();
+        model.addAttribute("username", name);
+        return "/user/changePassword";
     }
 
-//    @PostMapping("/changePassword")
-//    public String changePassword(UserDomain userDomain,
-//                                 Model model
-//    ){
-//
-//
-//
-//        return "";
-//    }
+    @PostMapping("/changePassword")
+    public String changePassword(UserDomain userDomain,
+                                 Model model
+    ){
+        String password = userDomain.getPassword();
+        String userName = userDomain.getUsername();
+
+        userDomain = userService.findByUsername(userName);
+        userDomain.setPassword(password);
+
+        int cnt = userService.update(userDomain);
+
+        model.addAttribute("result", cnt);
+
+        return "/user/changePasswordOk";
+    }
 
 
 
