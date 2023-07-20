@@ -48,7 +48,12 @@ public class ReviewController {
         int result = reviewService.deleteByReviewsId(reviewId);
         model.addAttribute("result", result);
         return "/deleteOk";
-
+    }
+    @PutMapping("/review/reply")
+    public String replyToReview(@PathVariable  long review, Model model){
+        List<ReviewDomain> result = reviewService.replyToReview(review);
+        model.addAttribute("result", result);
+        return "/review";
     }
 
 

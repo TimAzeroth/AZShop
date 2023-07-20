@@ -32,6 +32,10 @@ public class ReviewServiceImpl implements ReviewService{
 
     }
 
+    @Override
+    public List<ReviewDomain> replyToReview(long reply) {
+        return reviewRepository.replyToReview(reply);
+    }   // 어드민 응답
 
 
 }

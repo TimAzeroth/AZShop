@@ -21,4 +21,8 @@ public interface ReviewRepository {
     // 리뷰 삭제
 
     int deleteByReviewId(long reviewId);
+
+    List<ReviewDomain> replyToReview (long reply);  // 어드민 응답
+
+
 }

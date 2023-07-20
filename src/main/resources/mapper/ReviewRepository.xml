@@ -36,8 +36,15 @@
     </insert>
 
     <delete id="deleteReviewId" parameterType="long" flushCache="true">
-        DELETE FROM review WHERE id = #{id}
+        DELETE FROM review WHERE id = #{paran1}
     </delete>
+
+<!--어드민 응답-->
+    <update id="replyToReview" parameterType="com.azeroth.project.domain.ReviewDomain">
+        UPDATE review
+        SET reply = #{adminReply}
+        WHERE id = #{paran1}
+    </update>
 
 
 </mapper>
