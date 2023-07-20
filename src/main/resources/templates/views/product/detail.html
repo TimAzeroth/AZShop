@@ -22,6 +22,7 @@
 <th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
 <form name="frmDelete" th:action="@{/product/delete}" method="post">
     <input type="hidden" name="id" th:value="${product.id}">
+    <input type="hidden" name="originalImage" th:value="${product.p_img}"/>
 </form>
 
 <div class="container mt-5" th:if="${product}">
@@ -58,7 +59,7 @@
             <div class="col-sm-8 text-muted font-weight-light mt-3">
                 <button type="button" class="btn btn-primary">장바구니 담기</button>
                 <button type="button" class="btn btn-primary">구매하기</button>
-                <button type="button" class="btn btn-secondary">상품 수정</button>
+                <a type="button" class="btn btn-secondary" th:href="@{'/product/update/' + ${product.id}}">상품 수정</a>
                 <button type="button" class="btn btn-danger" id="delete">상품 삭제</button>
             </div>
         </div>

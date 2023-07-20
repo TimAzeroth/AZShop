@@ -54,4 +54,11 @@
         WHERE id = #{param1}
     </delete>
 
+    <update id="update" flushCache="true"
+            parameterType="com.azeroth.project.domain.ProductDomain">
+        UPDATE Product
+        SET p_name = #{p_name}, main_cate = #{main_cate}, sub_cate = #{sub_cate}, detail = #{detail}, price = #{price}, p_img = #{p_img}, stock = #{stock}, p_rank = #{p_rank}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
 
@@ -24,6 +25,9 @@ public interface ProductService {
     ProductDomain findById(Long id);
 
     // 상품 삭제
-    int delete(Long id);
+    int delete(Long id, String originalImage);
+
+    // 상품 수정
+    int update(Integer isDelete, String originalImage, ProductDomain productDomain, MultipartFile file);
 
 }

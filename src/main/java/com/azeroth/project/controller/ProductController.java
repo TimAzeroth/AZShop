@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -42,10 +41,9 @@ public class ProductController {
         if (result.hasErrors()) {
 
             attr.addFlashAttribute("p_name", productDomain.getP_name());
-            attr.addFlashAttribute("detail", productDomain.getDetail());
             attr.addFlashAttribute("price", productDomain.getPrice());
-            attr.addFlashAttribute("stock", productDomain.getStock());
-            attr.addFlashAttribute("p_rank", productDomain.getP_rank());
+            attr.addFlashAttribute("main_cate", productDomain.getMain_cate());
+            attr.addFlashAttribute("sub_cate", productDomain.getSub_cate());
 
             List<FieldError> errList = result.getFieldErrors();
             for(FieldError err : errList) {
@@ -61,16 +59,45 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
-    public String deleteOk(Long id, Model model) {
+    public String deleteOk(Long id, String originalImage, Model model) {
         System.out.println(id);
-        int result = productService.delete(id);
+        int result = productService.delete(id, originalImage);
         model.addAttribute("result", result);
         return "product/deleteOk";
     }
 
-    @GetMapping("/update")
-    public void update(@Valid ProductDomain productDomain, Model model) {
-        // TODO
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable Long id, Model model) {
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        model.addAttribute("product", productService.findById(id));
+        model.addAttribute("mainCategories", mainCategories);
+        model.addAttribute("subCategories", subCategories);
+        model.addAttribute("categories", categories);
+        return "product/update";
+    }
+
+    @PostMapping("/update")
+    public String updateOk(@RequestParam("upfile") MultipartFile file, @RequestParam("originalImage") String originalImage, @Valid ProductDomain productDomain, BindingResult result, Model model, RedirectAttributes attr) {
+        System.out.println(originalImage);
+        if (result.hasErrors()) {
+            attr.addFlashAttribute("p_name", productDomain.getP_name());
+            attr.addFlashAttribute("price", productDomain.getPrice());
+            attr.addFlashAttribute("main_cate", productDomain.getMain_cate());
+            attr.addFlashAttribute("sub_cate", productDomain.getSub_cate());
+
+            List<FieldError> errList = result.getFieldErrors();
+            for(FieldError err : errList) {
+                attr.addFlashAttribute("error_" + err.getField(), err.getCode());
+            }
+            return "redirect:/product/update/" + productDomain.getId();
+        }
+        int isDelete = 0;
+        if(file == null) isDelete = 1;
+        model.addAttribute("result", productService.update(isDelete, originalImage, productDomain, file));
+
+        return "product/updateOk";
     }
 
     @GetMapping("/detail/{id}")

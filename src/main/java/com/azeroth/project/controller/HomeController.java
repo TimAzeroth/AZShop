@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class HomeController {
 
     @Autowired
@@ -22,8 +22,8 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/index")
-    public void index(Integer page, Model model) {
+    @RequestMapping("/")
+    public String index(Integer page, Model model) {
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
         List<CategoryDomain> subCategories = categoryService.findAllSub();
         List<CategoryDomain> categories = categoryService.findAll();
@@ -32,6 +32,7 @@ public class HomeController {
         model.addAttribute("mainCategories", mainCategories);
         model.addAttribute("subCategories", subCategories);
         model.addAttribute("categories", categories);
+        return "/index";
     }
 
     @RequestMapping("/category")

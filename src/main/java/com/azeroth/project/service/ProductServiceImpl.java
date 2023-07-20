@@ -99,9 +99,71 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(Long id, String originalImage) {
+        delFile(originalImage);
         return productRepository.delete(id);
     }
+
+    @Override
+    public int update(Integer isDelete, String originalImage, ProductDomain productDomain, MultipartFile file) {
+        if(isDelete == 1) {
+            delFile(originalImage);
+            productDomain.setP_img(null);
+        } else if (isDelete == 0) {
+            delFile(originalImage);
+            String originalFilename = file.getOriginalFilename();
+
+            if (originalFilename == null || originalFilename.length() == 0) {
+                productDomain.setP_img(null);
+                return productRepository.update(productDomain);
+            }
+            // 원본파일명
+            String sourceName = StringUtils.cleanPath(originalFilename);
+
+            // 저장될 파일명
+            String fileName = sourceName;
+
+            // 파일이 중복되는지 확인
+            File file1 = new File(uploadDir + File.separator + sourceName);
+            if (file1.exists()) {
+                int pos = fileName.lastIndexOf(".");
+                if (pos > -1) {
+                    String name = fileName.substring(0, pos);
+                    String ext = fileName.substring(pos + 1);
+
+                    fileName = name + "_" + System.currentTimeMillis() + "." + ext;
+                } else {
+                    fileName += "_" + System.currentTimeMillis();
+                }
+            }
+
+            productDomain.setP_img(fileName);
+
+            // java.nio.*
+            Path copyOfLocation = Paths.get(new File(uploadDir + File.separator + fileName).getAbsolutePath());
+
+            try {
+                Files.copy(
+                        file.getInputStream(),
+                        copyOfLocation,
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return productRepository.update(productDomain);
+        }
+
+        return productRepository.update(productDomain);
+    }
+
+    private void delFile(String originalImage) {
+        String saveDirectory = new File(uploadDir).getAbsolutePath();
+
+        File f = new File(saveDirectory, originalImage);
+        f.delete();
+    }
+
 
     private int upload(ProductDomain productDomain, MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
