@@ -10,10 +10,7 @@ public class MvcConfiguration {
     public static class LocalMvcConfiguration implements WebMvcConfigurer {
         @Override
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            registry
-                    .addResourceHandler("/upload/**")
-                    .addResourceLocations("file:upload/");
-
+            registry.addResourceHandler("/upload/**").addResourceLocations("file:upload/");
         }
     }
 }

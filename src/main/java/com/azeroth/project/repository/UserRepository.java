@@ -17,7 +17,6 @@ public interface UserRepository {
     // 새로운 사용자 입력
     int insert(UserDomain user);
 
-
     // 사용자 정보 수정
     int update(UserDomain user);
 
