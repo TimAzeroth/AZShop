@@ -6,7 +6,7 @@
 <mapper namespace="com.azeroth.project.repository.SalesRepository">
 
     <resultMap id="mapUserImp" type="com.azeroth.project.domain.UserDomain">
-        <result column="u_username" property="username"/>
+        <result column="username" property="username"/>
         <result column="id" property="id"/>
         <result column="nickname" property="nickname"/>
         <result column="email" property="email"/>
@@ -17,26 +17,44 @@
         <result column="p_id" property="id"/>
     </resultMap>
 
+    <resultMap id="addressImp" type="com.azeroth.project.domain.AddressDomain">
+        <result column="user_id" property="user_id"/>
+        <result column="address_name" property="address_name"/>
+        <result column="address" property="address"/>
+        <result column="address_detail" property="address_detail"/>
+        <result column="postcode" property="postcode"/>
+    </resultMap>
+
     <!-- 주문 / 결제 사용자 정보와 배송지 정보 불러오는 쿼리문 -->
     <select id="findSales" resultMap="mapUserImp, mapPdImp">
         select
-            u.username "u_username",
+            u.username "username",
             u.nickname "nickname",
             u.email "email",
             u.phone "phone",
-            a.address_name "address_name",
-            a.address_detail "address_detail",
-            a.address "address",
-            a.postcode "postcode",
             p.id "p_id"
         from
-            address a,
-            `user` u,
+            user u,
             product p
         WHERE
             u.username = a.user_id
         AND
             u.username = #{username}
+    </select>
+
+    <select id="findSales" resultMap="addressImp">
+        SELECT
+            user_id,
+            address_name,
+            address,
+            address_detail,
+            postcode
+        FROM
+            address
+        WHERE
+            user_id = #{username}
+        AND
+            address_name = #{address_name}
     </select>
 
     <insert id="insert" flushCache="true"
