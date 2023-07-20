@@ -18,7 +18,7 @@ public class ProductValidator implements Validator {
         String sub_cate = product.getSub_cate();
         Long price = product.getPrice();
 
-        // null 이거나 입력하지 않았는지 확인
+        // 입력하지 않았는지 확인
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "p_name", "상품명을 입력해주세요");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "main_cate", "대분류를 선택해주세요");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sub_cate", "소분류를 선택해주세요");

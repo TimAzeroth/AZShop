@@ -17,7 +17,7 @@
     <div class="row mt-5">
         <div class="col-md-4" th:each="product : ${products}">
             <div>
-                <a href="" target="_blank" class="text-decoration-none thumbnail">
+                <a th:href="@{'/product/detail/' + ${product.id}}" class="text-decoration-none thumbnail">
                     <!-- 등록된 이미지가 없는 경우, 디폴트 이미지로 보이게 하기 -->
                     <div th:unless="${product.p_img}" class="image">
                         <img th:src="@{/image/default.jpg}" style="width:100%" class="img img-responsive full-width img-thumbnail">
