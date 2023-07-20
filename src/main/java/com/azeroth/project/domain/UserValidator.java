@@ -47,9 +47,9 @@ public class UserValidator implements Validator {
         }
 
 
-//        if(!user.getPassword().equals(user.getRe_password())){
-//            errors.rejectValue("re_password", "비밀번호 가 일치하지 않습니다");
-//        }
+        if(!user.getPassword().equals(user.getRe_password())){
+            errors.rejectValue("re_password", "비밀번호 가 일치하지 않습니다");
+        }
 
     }
 }

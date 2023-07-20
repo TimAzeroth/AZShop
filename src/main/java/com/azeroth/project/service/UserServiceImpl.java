@@ -37,7 +37,11 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(SqlSession sqlSession){
         userRepository = sqlSession.getMapper(UserRepository.class);
         authorityRepository = sqlSession.getMapper(AuthorityRepository.class);
-        System.out.println(getClass().getName() + "() 생성");
+    }
+
+    @Override
+    public UserDomain findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override
@@ -56,14 +60,18 @@ public class UserServiceImpl implements UserService{
         return upload(user,multipartFile);
     }
 
+    @Override
+    public int update(UserDomain user) {
+        return userRepository.update(user);
+    }
+
 
     private int upload(UserDomain user, MultipartFile multipartFile) {
 
 //        user.setPassword(user.getPassword());   // password 는 암호화 해서 저장 (추후 인코딩 설정)
         AuthorityDomain auth = authorityRepository.findByName("ROLE_MEMBER");
         user.setAuthority_id(auth.getId());
-
-//        userRepository.insert(user);  // 새로이 회원(User) 저장, id값 받아옴
+        user.setU_status("USE");    //  상태 "USE" 로 기본 설정
 
         String originalFilename = multipartFile.getOriginalFilename();
 
@@ -91,21 +99,18 @@ public class UserServiceImpl implements UserService{
             }
         }
 
-        System.out.println("로그2");
         user.setProfileimg(fileName);
 
         // nio
         Path copyOfLocation = Paths.get(new File(uploadDir + File.separator + fileName).getAbsolutePath());
 
         try{
-            System.out.println("로그3");
             Files.copy(
                     multipartFile.getInputStream(),
                     copyOfLocation,
                     StandardCopyOption.REPLACE_EXISTING
             );
         } catch (IOException e) {
-            System.out.println("로그exception");
             e.printStackTrace();
         }
 
