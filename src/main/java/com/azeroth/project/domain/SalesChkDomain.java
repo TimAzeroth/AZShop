@@ -1,9 +1,5 @@
 package com.azeroth.project.domain;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> KimDoYeon
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
