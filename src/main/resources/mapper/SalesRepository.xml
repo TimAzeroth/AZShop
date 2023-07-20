@@ -26,6 +26,7 @@
     </resultMap>
 
     <!-- 주문 / 결제 사용자 정보와 배송지 정보 불러오는 쿼리문 -->
+<!--
     <select id="findSales" resultMap="mapUserImp, mapPdImp">
         select
             u.username "username",
@@ -56,7 +57,7 @@
         AND
             address_name = #{address_name}
     </select>
-
+-->
     <insert id="insert" flushCache="true"
             parameterType="com.azeroth.project.domain.SalesDomain"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
