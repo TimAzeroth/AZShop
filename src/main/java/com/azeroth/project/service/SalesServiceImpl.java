@@ -1,9 +1,12 @@
 package com.azeroth.project.service;
 
 import com.azeroth.project.domain.SalesDomain;
+import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.repository.SalesRepository;
+import com.azeroth.project.repository.UserRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,10 +17,13 @@ public class SalesServiceImpl implements SalesService {
 
     private SalesRepository salesRepository;
 
+    private UserRepository userRepository;
+
     // 서비스 연결
     @Autowired
     public SalesServiceImpl(SqlSession sqlSession) {
         salesRepository = sqlSession.getMapper(SalesRepository.class);
+        userRepository = sqlSession.getMapper(UserRepository.class);
     }
 
 
@@ -30,9 +36,13 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
     public int insert(SalesDomain salesDomain) {
-        
-        return 0;
+
+        // UserDomain userDomain = (유틸).getLoggedUser();
+
+        return salesRepository.insert(salesDomain);
     }
+
+
 
 
 }

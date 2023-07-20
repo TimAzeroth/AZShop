@@ -2,7 +2,9 @@ package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.CardDomain;
 import com.azeroth.project.domain.SalesChkDomain;
+import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.repository.SalesRepository;
+import com.azeroth.project.repository.UserRepository;
 import com.azeroth.project.service.AdminService;
 import com.azeroth.project.service.SalesService;
 import org.apache.ibatis.session.SqlSession;
@@ -18,11 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/siteSales")
 public class SalesController {
 
-    private SalesService salesService;
-
-    private SalesRepository salesRepository;
-
-    private AdminService adminService;
 
     @GetMapping("/sales")
     public String sales() {

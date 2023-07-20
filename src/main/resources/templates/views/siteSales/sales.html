@@ -3,6 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 
+<!--<script th:unless="${}">-->
+<!--  alert("로그인이 안되어있습니다.");-->
+<!--  history.back();-->
+<!--</script>-->
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -63,42 +68,44 @@
        </table>
 
        <h2 class="header2">결제 정보</h2>
-       <table>
-           <tr>
-               <td class="table_left_td3">총 상품 가격</td>
-               <td>내용</td>
-           </tr>
-           <tr>
-               <td class="table_left_td3">배송비</td>
-               <td>3000원</td>
-           </tr>
-           <tr>
-               <td class="table_left_td3">총 결제 금액</td>
-               <td>내용</td>
-           </tr>
-           <tr>
-               <td class="table_left_td3">신용/체크카드 결제</td>
-               <td id="inputCardNum">
-                   <div class="cardnum">
-                       <h6>카드번호</h6>
-                       <input style="width: 150px;" type="text"/>
-                   </div>
-                   <div class="cardnum">
-                       <h6>유효 기간</h6>
-                       <input class="period" style="width: 60px;" type="text"/>
-                       <input class="period" style="width: 60px;" type="text"/>
-                   </div>
-                   <div class="cardnum">
-                       <h6>CVC</h6>
-                       <input style="width: 150px;" type="text"/>
-                   </div>
-               </td>
-           </tr>
-       </table>
+        <form >
+            <table>
+                <tr>
+                    <td class="table_left_td3">총 상품 가격</td>
+                    <td>내용</td>
+                </tr>
+                <tr>
+                    <td class="table_left_td3">배송비</td>
+                    <td>3000원</td>
+                </tr>
+                <tr>
+                    <td class="table_left_td3">총 결제 금액</td>
+                    <td>내용</td>
+                </tr>
+                <tr>
+                    <td class="table_left_td3">신용/체크카드 결제</td>
+                    <td id="inputCardNum">
+                        <div class="cardnum">
+                            <h6>카드번호</h6>
+                            <input style="width: 150px;" type="text"/>
+                        </div>
+                        <div class="cardnum">
+                            <h6>유효 기간</h6>
+                            <input class="period" style="width: 60px;" type="text"/>
+                            <input class="period" style="width: 60px;" type="text"/>
+                        </div>
+                        <div class="cardnum">
+                            <h6>CVC</h6>
+                            <input style="width: 150px;" type="text"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
 
         <div id="salesbtn">
             <a class="btn btn-outline-dark" th:href="@{'/index'}">돌아가기</a>
-            <a class="btn btn-outline-dark" th:href="@{'/siteSales/salesComplete'}">결제하기</a>
+            <button type="submit" class="btn btn-outline-dark" th:if="${}">결제하기</button>
         </div>
 
    </form>
