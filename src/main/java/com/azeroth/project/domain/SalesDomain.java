@@ -25,5 +25,7 @@ public class SalesDomain {
     // 송장번호
     String tracknum;
 
+    UserDomain user;   // 유저(FK)
+
 
 }

@@ -1,6 +1,9 @@
 package com.azeroth.project.domain;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> KimDoYeon
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SalesChkDomain {
 
+    // 카드 확인 용
     boolean chkProcess;
+
+    // 카드확인 메세지
     String ereMag;
 
 }
