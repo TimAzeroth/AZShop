@@ -19,6 +19,8 @@ public interface AdminRepository {
 
     // 특정 회원이 구매한 상품 list
     List<ProductDomain> userBuyProduct(String username);
+    // 특정 회원이 구매한 구매 list
+    List<SalesDomain> userBuyList(String username);
 
     // 특정 회원이 작성한 후기 list
     List<ReviewDomain> writeReviewByUser(String username);

@@ -1,9 +1,6 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.AuthorityDomain;
-import com.azeroth.project.domain.ReviewDomain;
-import com.azeroth.project.domain.SalesDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
 import org.apache.catalina.User;
 
 import java.util.List;
@@ -34,6 +31,9 @@ public interface AdminService {
 
     // 사용자 권한 조회
     List<AuthorityDomain>  selectAuthoritiesById(Long id);
+
+    // 결재 chk
+    public SalesChkDomain salesCHK (CardDomain card);
 
 
 }

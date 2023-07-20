@@ -39,11 +39,14 @@ public class AdminController {
     }
 
     //selectBuyByUser 특정 회원이 구매한 구매목록
-    @GetMapping("/BuyByuser")
-    public void BuyByUser (){
+    @GetMapping("/BuyByUser/{username}")
+    public void BuyByUser (Model model, String username){
+
+        adminService.selectBuyByUser(username);
 
     }
-    
+
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
