@@ -1,4 +1,5 @@
-if(user.role === 'adminId') {
+// 어드민 리뷰
+if(user.role === '') {
     // Display form to reply to reviews
     // You may want to include the review ID or some other identifier
     // So that the server knows which review you're replying to.
