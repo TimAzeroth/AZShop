@@ -26,7 +26,7 @@ public class SalesServiceImpl implements SalesService {
     public SalesServiceImpl(SqlSession sqlSession) {
         salesRepository = sqlSession.getMapper(SalesRepository.class);
         userRepository = sqlSession.getMapper(UserRepository.class);
-        System.out.println(getClass().getName() + "생성");
+//        System.out.println(getClass().getName() + "생성");
     }
 
 
