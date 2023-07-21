@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/changeProfile.css}">
+  <title>프로필 설정</title>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 text-center">
+      <h1>프로필 설정</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center" id="container-1">
+  <form method="POST" action="" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col image" id="profile-image">
+        <!-- 등록된 이미지 있을시 -->
+        <div th:if="${profileimg}">
+          <img th:src="@{'/upload/' + ${profileimg}}">
+        </div>
+
+        <button class="btn btn-primary"><input type="file" name="upfile"></button>
+        <!--등록된 이미지 없을시-->
+        <div th:unless="${profileimg}" class="image">
+            <img th:src="@{/image/default.jpg}">
+        </div>
+        <input type="file" name="upfile">
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="phone">전화번호</label>
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="변경할 번호를 입력하세요" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="재 등록할 이메일 주소를 입력하세요" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-dark" id="addAddressBtn">주소추가하기</button>
+      </div>
+    </div>
+
+
+    <div id="addressContainer"></div>  <!-- 주소 받는 input 받는 container -->
+
+    <div>
+      <a class="btn btn-success" id="home" th:href="@{/}">HOME</a>
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>

@@ -2,6 +2,8 @@ package com.azeroth.project.config;
 
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.service.AdminService;
+import com.azeroth.project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,13 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrincipalDetailService implements UserDetailsService {
 
-    AdminService adminService;
+    @Autowired
+    private AdminService adminService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //DB조회
         UserDomain user = adminService.findByUsername(username);
-
         // 해당 username 의 user 가 DB 에 있다면
         // UserDetails 생성해서 리턴
         if( user != null){

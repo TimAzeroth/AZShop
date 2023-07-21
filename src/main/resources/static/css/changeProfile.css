@@ -1,0 +1,120 @@
+              body {
+            background-color: white;
+            padding-top: 150px;
+        }
+        .container {
+            background-color: #03f6fa;
+            border-radius: 5px;
+            padding: 20px;
+            color: white;
+        }
+        #container-1 {
+            border: 1px solid black;
+            background-color: rgb(237, 237, 237)
+        }
+
+        #container-1 label {
+            color: black;
+            font-size: 25px;
+        }
+
+        span{
+          color:black;
+          font-size: 25px;
+          margin-left: 10px;
+        }
+
+        h1 {
+            font-size: 80px;
+        }
+
+        #user-info{
+          margin-top: 15px;
+          border: 1px solid black;
+          text-align: left;
+        }
+
+        span{
+          margin-left:60px;
+        }
+
+        label{
+            margin-top: 20px;
+        }
+
+        #home{
+          margin-top:20px;
+          width: 90%;
+          height: 60px;
+          font-size: 30px;
+        }
+
+        #button1, #button2{
+          margin: 30px 10px;
+          width: 100%;
+          height: 70px;
+          font-size: 30px;
+        }
+
+        #button3{
+          margin: 0 10px;
+          margin-top: 30px;
+          width:100%;
+          height: 70px;
+          font-size: 30px;
+        }
+
+        #button1{
+          margin-top: 30px;
+        }
+
+        #user-info div {
+        display: flex;
+        align-items: baseline;
+        }
+
+        #user-info label {
+            margin-left: 30%;
+            width: 100px;
+            text-align: right;
+            font-weight: 900;
+        }
+
+        #user-info span {
+            margin-left: 50px;
+            text-align: left;
+            font-weight: 550;
+        }
+
+        #addressContainer{
+            text-align: left;
+        }
+
+        .sample6 {
+            margin: 10px 10px;
+            width: 90%;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        #sample6_btn{
+            width:auto;
+            background-color: black;
+            color:white;
+        }
+
+        #box{
+            border:1px solid black;
+            margin-top: 15px;
+            background-color: rgb(156, 153, 153);
+        }
+
+        #addAddressBtn{
+            margin-top: 20px;
+        }
+
+        .image img{
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+        }

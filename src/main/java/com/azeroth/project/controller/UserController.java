@@ -137,14 +137,40 @@ public class UserController {
                        Model model
     ){
         user = Util.getLoggedUser();
-
         user = userService.findByUsername(user.getUsername());
-        model.addAttribute("user",user);
+
+        model.addAttribute("profileimg",user.getProfileimg());
+        model.addAttribute("nickname",user.getNickname());
+        model.addAttribute("email",user.getEmail());
+        model.addAttribute("u_status",user.getU_status());
+        model.addAttribute("phone",user.getPhone());
     }
 
     @GetMapping("/accountManage")
-    public void accountM(){}
+    public void accountManage(UserDomain user,
+                              Model model
+    ){
+        user = Util.getLoggedUser();
+        user = userService.findById(user.getId());
 
+        model.addAttribute("profileimg",user.getProfileimg());
+        model.addAttribute("nickname",user.getNickname());
+        model.addAttribute("email",user.getEmail());
+        model.addAttribute("u_status",user.getU_status());
+        model.addAttribute("phone",user.getPhone());
+        model.addAttribute("username",user.getUsername());
+    }
+
+    @PostMapping("/delete")
+    public String accountManage1(String username,
+                                 Model model
+    ){
+        UserDomain user = userService.findByUsername(username);
+        int cnt = userService.delete(user.getId());
+        model.addAttribute("result",cnt);
+
+        return "user/deleteOk";
+    }
 
 
     @InitBinder

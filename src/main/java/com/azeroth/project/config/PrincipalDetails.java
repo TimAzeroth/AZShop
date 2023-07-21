@@ -46,11 +46,11 @@ public class PrincipalDetails implements UserDetails {
                     return auth.getName();
                 }
 
-                // thymeleaf 등에서 활용하려구. (학습목적)
-                @Override
-                public String toString() {
-                    return auth.getName();
-                }
+//                 thymeleaf 등에서 활용하려구. (학습목적)
+//                @Override
+//                public String toString() {
+//                    return auth.getName();
+//                }
             });
         }
 

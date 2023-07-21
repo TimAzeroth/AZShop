@@ -19,4 +19,7 @@ public interface UserService {
 
     // 회원 정보 수정
     int update(UserDomain user);
+
+    // 회원 정보 삭제
+    int delete(Long id);
 }

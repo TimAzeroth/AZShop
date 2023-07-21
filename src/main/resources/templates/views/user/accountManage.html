@@ -24,39 +24,43 @@
   <div class="row">
     <div class="col">
       <!-- 등록된 이미지 있을시 -->
-      <div th:if="${user.profileimg}">
-        <img th:src="@{'/upload/' + ${user.profileimg}}" alt="이미지">
+      <div th:if="${profileimg}">
+        <img th:src="@{'/upload/' + ${profileimg}}" alt="이미지">
       </div>
       <!-- 등록된 이미지 없을시 -->
-      <div th:unless="${user.profileimg}" class="image">
-        <img th:src="@{/image/default.jpg}" alt="이미지">
+      <div class="image" th:unless="${profileiimg}">
+        <img th:scr="@{/upload/default.jpg}" alt="이미지">
       </div>
 
+      <form name="frmDelete" th:action="@{/user/delete}" method="POST">
+        <input type="hidden" name="username" th:valuew="${username}">
+      </form>
+
       <div id="buttons">
-        <a class="btn btn-primary" id="button1" href="">프로필 편집</a> <br>
-        <button type="button" class="btn btn-outline-danger ms-2 id=btnDel">탈퇴하기</button>
+        <a class="btn btn-primary" id="button1" href="@{/user/changeProfile}">프로필 편집</a> <br>
+        <button type="button" class="btn btn-danger ms-2 id=btnDel" id="button2">탈퇴하기</button>
       </div>
     </div>
 
     <div class="col">
       <p id="data-idtitle">아이디</p>
-      <p id="data-id" th:text="">xxxxxxxxxx</p>
+      <p id="data-id" th:text="${username}">xxxxxxxxxx</p>
       <div id="user-info">
         <div>
           <label>이름:</label>
-          <span th:text="${user.nickname}">ddddd</span>
+          <span th:text="${nickname}">ddddd</span>
         </div>
         <div>
           <label>이메일:</label>
-          <span th:text="${user.email}">ddddd@dddddd</span>
+          <span th:text="${email}">ddddd@dddddd</span>
         </div>
         <div>
           <label>상태:</label>
-          <span th:text="${user.u_status}">USER</span>
+          <span th:text="${u_status}">USER</span>
         </div>
         <div>
           <label>연락처:</label>
-          <span th:text="${user.phone}">010-0000-0000</span>
+          <span th:text="${phone}">010-0000-0000</span>
         </div>
       </div>
     </div>

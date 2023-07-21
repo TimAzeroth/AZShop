@@ -21,21 +21,21 @@
 
 <div class="container text-center" id="container-1">
   <div class="row">
-    <div class="col" id="profile-image" class="image">
+    <div class="col image" id="profile-image">
       <!-- 등록된 이미지 있을시 -->
-      <div th:if="${user.profileimg}">
-        <img th:src="@{'/upload/' + ${user.profileimg}}" alt="이미지">
+      <div th:if="${profileimg}">
+        <img th:src="@{'/upload/' + ${profileimg}}" alt="이미지">
       </div>
       <!-- 등록된 이미지 없을시 -->
-      <div th:unless="${user.profileimg}" class="image">
-        <img th:src="@{/image/default.jpg}" alt="이미지">
+      <div th:unless="${profileimg}" class="image">
+        <img th:src="@{/upload/default.jpg}" alt="이미지">
       </div>
     </div>
 
     <div class="col" id="buttons">
-      <a class="btn btn-primary" id="button1" th:href="">계정관리</a> <br>
-      <a class="btn btn-primary" id="button2" th:href="">구매내역</a> <br>
-      <a class="btn btn-primary" id="button3" th:href="">장바구니</a>
+      <a class="btn btn-primary" id="button1" th:href="@{/user/accountManage}">계정관리</a> <br>
+      <a class="btn btn-primary" id="button2" >구매내역</a> <br>
+      <a class="btn btn-primary" id="button3" >장바구니</a>
     </div>
   </div>
 
@@ -43,25 +43,25 @@
     <div id="user-info" class="col">
       <div>
         <label>이름:</label>
-        <span th:text="${user.nickname}">ddddd</span>
+        <span th:text="${nickname}">ddddd</span>
       </div>
       <div>
         <label>이메일:</label>
-        <span th:text="${user.email}">ddddd@dddddd</span>
+        <span th:text="${email}">ddddd@dddddd</span>
       </div>
       <div>
         <label>상태:</label>
-        <span th:text="${user.u_status}">USER</span>
+        <span th:text="${u_status}">USER</span>
       </div>
       <div>
         <label>연락처:</label>
-        <span th:text="${user.phone}">010-0000-0000</span>
+        <span th:text="${phone}">010-0000-0000</span>
       </div>
     </div>
   </div>
 
   <div>
-    <a class="btn btn-success" id="home" href="">HOME</a>
+    <a class="btn btn-success" id="home" th:href="@{/index}">HOME</a>
   </div>
 </div>
 

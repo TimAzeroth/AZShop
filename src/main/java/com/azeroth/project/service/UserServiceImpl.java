@@ -65,6 +65,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.update(user);
     }
 
+    @Override
+    public int delete(Long id) {
+        return userRepository.delete(id);
+    }
+
 
     private int upload(UserDomain user, MultipartFile multipartFile) {
 
