@@ -8,8 +8,8 @@ public interface SalesService {
     SalesDomain saleslist(String u_username);
     
     // 결제 완료 Sales 테이블에 정보 입력
-    int insert(SalesDomain salesDomain);
-
+//    int insert(SalesDomain salesDomain);
+//
 
 
 }
