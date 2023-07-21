@@ -52,6 +52,10 @@ FROM azerothdb.product;
 SELECT id, u_username, p_id, amount, address, address_detail, postcode, deliveryreq, tracknum
 FROM azerothdb.sales;
 
+SELECT a.id, a.name
+FROM authority a, USER u
+WHERE a.id = u.authority_id AND u.id = 5;
+
 
 
 

@@ -14,12 +14,14 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
 
     private AdminRepository adminRepository;
+
     private SalesChkDomain schk;
 
     @Autowired
     public AdminServiceImpl(SqlSession sqlSession) {
 
         adminRepository = sqlSession.getMapper(AdminRepository.class);
+
     }
 
     @Override

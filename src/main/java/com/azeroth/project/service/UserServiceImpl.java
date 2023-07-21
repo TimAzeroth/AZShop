@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService{
 
     private AuthorityRepository authorityRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(SqlSession sqlSession){
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
 
     private int upload(UserDomain user, MultipartFile multipartFile) {
 
-//        user.setPassword(user.getPassword());   // password 는 암호화 해서 저장 (추후 인코딩 설정)
+        user.setPassword(passwordEncoder.encode(user.getPassword()));   // password 는 암호화 해서 저장 (추후 인코딩 설정)
         AuthorityDomain auth = authorityRepository.findByName("ROLE_MEMBER");
         user.setAuthority_id(auth.getId());
         user.setU_status("USE");    //  상태 "USE" 로 기본 설정

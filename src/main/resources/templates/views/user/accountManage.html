@@ -24,7 +24,7 @@
   <div class="row">
     <div class="col">
       <!-- 등록된 이미지 있을시 -->
-      <div th:if="">
+      <div th:if="${user.profileimg}">
         <img th:src="@{'/upload/' + ${user.profileimg}}" alt="이미지">
       </div>
       <!-- 등록된 이미지 없을시 -->
@@ -34,7 +34,7 @@
 
       <div id="buttons">
         <a class="btn btn-primary" id="button1" href="">프로필 편집</a> <br>
-        <a class="btn btn-primary" id="button2" href="">탈퇴하기</a>
+        <button type="button" class="btn btn-outline-danger ms-2 id=btnDel">탈퇴하기</button>
       </div>
     </div>
 
@@ -44,19 +44,19 @@
       <div id="user-info">
         <div>
           <label>이름:</label>
-          <span th:text="">ddddd</span>
+          <span th:text="${user.nickname}">ddddd</span>
         </div>
         <div>
           <label>이메일:</label>
-          <span th:text="">ddddd@dddddd</span>
+          <span th:text="${user.email}">ddddd@dddddd</span>
         </div>
         <div>
           <label>상태:</label>
-          <span th:text="">USER</span>
+          <span th:text="${user.u_status}">USER</span>
         </div>
         <div>
           <label>연락처:</label>
-          <span th:text="">010-0000-0000</span>
+          <span th:text="${user.phone}">010-0000-0000</span>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.domain.UserValidator;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
+import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,16 @@ public class UserController {
 
     @GetMapping("/login")
     public void login(){}
+
+    @PostMapping("/loginError")
+    public String loginError(){
+        return "user/login";
+    }
+
+    @RequestMapping("/rejectAuth")
+    public String rejectAuth(){
+        return "common/rejectAuth";
+    }
 
 
     @GetMapping("/register")
@@ -120,6 +131,19 @@ public class UserController {
 
         return "/user/changePasswordOk";
     }
+
+    @GetMapping("/myPage")
+    public void myPage(UserDomain user,
+                       Model model
+    ){
+        user = Util.getLoggedUser();
+
+        user = userService.findByUsername(user.getUsername());
+        model.addAttribute("user",user);
+    }
+
+    @GetMapping("/accountManage")
+    public void accountM(){}
 
 
 

@@ -26,8 +26,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // ↓ SecurityFilterChain 을 Bean 으로 등록해서 사용
-    // Security 설정
+//     ↓ SecurityFilterChain 을 Bean 으로 등록해서 사용
+//     Security 설정
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http

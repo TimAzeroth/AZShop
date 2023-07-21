@@ -50,10 +50,9 @@
         SELECT COUNT(id) FROM Review r WHERE Product_id = #{paran1};
     </select>
 
-    <select id="paginationPage">
-        <include refid="paginationPage"/>
-        ORDER BY reviewdate DESC
-        LIMIT #{param1}, #{param2}
-
-    </select>
+<!--    <select id="paginationPage">-->
+<!--        <include refid="paginationPage"/>-->
+<!--        ORDER BY reviewdate DESC-->
+<!--        LIMIT #{param1}, #{param2}-->
+<!--    </select>-->
 </mapper>

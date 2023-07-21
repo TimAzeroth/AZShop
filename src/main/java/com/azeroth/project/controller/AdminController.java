@@ -21,7 +21,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    
+
     // 고객 리스트 호출 페이지
     @GetMapping("/searchuser")
     public void searchUser(Model model) {
