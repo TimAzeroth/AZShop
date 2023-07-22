@@ -1,5 +1,6 @@
 package com.azeroth.project.service;
 
+import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,9 +18,16 @@ public interface UserService {
     // 신규 회원 등록
     int register(UserDomain user, MultipartFile multipartFile);
 
+
+    //비밀번호 수정
+    int updatePassword(UserDomain user);
+
     // 회원 정보 수정
-    int update(UserDomain user);
+    int update(Integer isDelete, String originalImage, UserDomain user, MultipartFile multipartFile);
 
     // 회원 정보 삭제
     int delete(Long id);
+
+    // 특정 회원 주소 등록
+    int addAddress(AddressDomain addressDomain);
 }

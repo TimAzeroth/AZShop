@@ -1,9 +1,11 @@
 package com.azeroth.project.service;
 
+import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.AuthorityDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.repository.AuthorityRepository;
 import com.azeroth.project.repository.UserRepository;
+import com.azeroth.project.util.Util;
 import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,58 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int update(UserDomain user) {
+    public int updatePassword(UserDomain user) {
+        return userRepository.update(user);
+    }
+
+    @Override
+    public int update(Integer isDelete, String originalImage, UserDomain user, MultipartFile multipartFile) {
+
+        if(isDelete == 1){
+            delFile(originalImage);
+            user.setProfileimg(null);
+        } else if(isDelete == 0){
+            delFile(originalImage);
+            String originalFilename = multipartFile.getOriginalFilename();
+
+            if(originalFilename == null || originalFilename.length()== 0){
+                user.setProfileimg(null);
+                return userRepository.update(user);
+            }
+
+            String sourceName = StringUtils.cleanPath(originalFilename);
+
+            String fileName = sourceName;
+
+            File file1 = new File(uploadDir + File.separator + sourceName);
+            if(file1.exists()) {
+                int pos = fileName.lastIndexOf(".");
+                if(pos > -1){
+                    String name = fileName.substring(0, pos);
+                    String ext = fileName.substring(pos + 1);
+
+                    fileName = name + "_" + System.currentTimeMillis() + "." + ext;
+                } else {
+                    fileName += "_" + System.currentTimeMillis();
+                }
+            }
+
+            user.setProfileimg(fileName);
+
+            Path copyOfLocation = Paths.get(new File(uploadDir + File.separator + fileName).getAbsolutePath());
+
+            try {
+                Files.copy(
+                        multipartFile.getInputStream(),
+                        copyOfLocation,
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return userRepository.update(user);
+        }
+
         return userRepository.update(user);
     }
 
@@ -70,6 +123,23 @@ public class UserServiceImpl implements UserService{
         return userRepository.delete(id);
     }
 
+    // 특정 회원 주소 추가
+    @Override
+    public int addAddress(AddressDomain addressDomain) {
+        UserDomain user = Util.getLoggedUser();
+
+        user = userRepository.findById(user.getId());
+        addressDomain.setUser_id(user.getId());
+
+        return userRepository.postInsert(addressDomain);
+    }
+
+    private void delFile(String originalImage) {
+        String saveDirectory = new File(uploadDir).getAbsolutePath();
+
+        File file = new File(saveDirectory, originalImage);
+        file.delete();
+    }
 
     private int upload(UserDomain user, MultipartFile multipartFile) {
 

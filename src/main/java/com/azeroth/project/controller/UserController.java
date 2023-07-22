@@ -1,5 +1,6 @@
 package com.azeroth.project.controller;
 
+import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.domain.UserValidator;
 import com.azeroth.project.service.UserService;
@@ -27,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserController(){
         System.out.println(getClass().getName() + "() 생성");
@@ -116,18 +120,20 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(UserDomain userDomain,
+    public String changePassword(MultipartFile multipartFile,
+                                 String originalImage,
+                                 UserDomain userDomain,
                                  Model model
     ){
         String password = userDomain.getPassword();
         String userName = userDomain.getUsername();
 
-
+        int isDelete = 0;
 
         userDomain = userService.findByUsername(userName);
-        userDomain.setPassword(password);
+        userDomain.setPassword(passwordEncoder.encode(password));
 
-        int cnt = userService.update(userDomain);
+        int cnt = userService.updatePassword(userDomain);
 
         model.addAttribute("result", cnt);
 
@@ -172,6 +178,47 @@ public class UserController {
         model.addAttribute("result",cnt);
 
         return "user/deleteOk";
+    }
+
+    @GetMapping("/changeProfile")
+    public void changeProfile(UserDomain user,
+                              Model model
+    ){
+      user = Util.getLoggedUser();
+      user = userService.findByUsername(user.getUsername());
+
+      model.addAttribute("profileimg",user.getProfileimg());
+      model.addAttribute("phone",user.getPhone());
+      model.addAttribute("email",user.getEmail());
+    }
+
+    @PostMapping("/changeProfile")
+    public String changeProfile1(@RequestParam("upfile") MultipartFile file,
+                                 @RequestParam("originalImage") String originalImage,
+                                 UserDomain user,
+                                 Model model
+    ){
+        String phone = user.getPhone();
+        String email = user.getEmail();
+
+        user = Util.getLoggedUser();
+        user = userService.findByUsername(user.getUsername());
+        user.setPhone(phone);
+        user.setEmail(email);
+
+
+        int isDelete = 0;
+        if(file == null) isDelete = 1;
+        model.addAttribute("result", userService.update(isDelete, originalImage, user, file));
+
+        return "/user/changeProfileOk";
+    }
+
+    @GetMapping("/addressManage")
+    public void addressManage(AddressDomain addressDomain,
+                              Model model
+    ){
+
     }
 
 

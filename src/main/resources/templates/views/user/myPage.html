@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col image" id="profile-image">
       <!-- 등록된 이미지 있을시 -->
-      <div th:if="${profileimg}">
+      <div th:if="${profileimg}" class="image">
         <img th:src="@{'/upload/' + ${profileimg}}" alt="이미지">
       </div>
       <!-- 등록된 이미지 없을시 -->
@@ -61,7 +61,7 @@
   </div>
 
   <div>
-    <a class="btn btn-success" id="home" th:href="@{/index}">HOME</a>
+    <a class="btn btn-success" id="home" th:href="@{/}">HOME</a>
   </div>
 </div>
 

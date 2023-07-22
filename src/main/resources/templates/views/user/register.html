@@ -57,7 +57,7 @@
 
                 <div class="form-group mt-3">
                     <label for="phone">전화번호</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호" th:value="${phone}">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호"  maxlength="11" th:value="${phone}">
                     <span class="text-danger" th:if="${error_phone}" th:text="${error_phone}"></span>
                 </div>
 
