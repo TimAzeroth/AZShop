@@ -24,6 +24,10 @@ public class PrincipalDetails implements UserDetails {
         this.user = user;
     }
 
+    public UserDomain getUserDomain(){
+        return user;
+    }
+
     public PrincipalDetails(UserDomain user){
         System.out.println("UserDetails(user) 생성: " + user);
         this.user = user;

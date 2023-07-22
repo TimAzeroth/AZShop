@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
 
     public UserController(){
         System.out.println(getClass().getName() + "() 생성");
@@ -121,6 +121,8 @@ public class UserController {
     ){
         String password = userDomain.getPassword();
         String userName = userDomain.getUsername();
+
+
 
         userDomain = userService.findByUsername(userName);
         userDomain.setPassword(password);
