@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <title>AZShop - 상품등록</title>
     <script th:src="@{/js/categoryAdd.js}"></script>
+    <script th:src="@{/js/summernote.js}"></script>
 </head>
 <body>
 <script th:inline="javascript">
@@ -35,7 +39,7 @@
         </div>
         <div class="my-3">
             <label for="detail">상품설명:</label>
-            <textarea rows="5" type="text" class="form-control" id="detail" placeholder="상품설명을 작성하세요" name="detail" th:text="${detail}"></textarea>
+            <textarea rows="5" type="text" class="form-control" id="detail" placeholder="상품설명을 작성하세요" name="detail" th:utext="${detail}"></textarea>
         </div>
         <div class="my-3">
             <label for="price">가격:</label>

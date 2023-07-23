@@ -36,23 +36,24 @@
     </insert>
 
     <delete id="deleteReviewId" parameterType="long" flushCache="true">
-        DELETE FROM review WHERE id = #{paran1}
+        DELETE FROM review WHERE id = #{param1}
     </delete>
 
 <!--관리자 답변-->
     <update id="replyToReview" parameterType="com.azeroth.project.domain.ReviewDomain">
         UPDATE review
         SET reply = #{adminReply}
-        WHERE id = #{paran1}
+        WHERE id = #{param1}
     </update>
 
     <select id="paginationPage" resultType="com.azeroth.project.domain.ReviewDomain">
-        SELECT COUNT(id) FROM Review r WHERE Product_id = #{paran1};
+        SELECT COUNT(id) FROM Review r WHERE Product_id = #{param1};
     </select>
 
 <!--    <select id="paginationPage">-->
 <!--        <include refid="paginationPage"/>-->
 <!--        ORDER BY reviewdate DESC-->
 <!--        LIMIT #{param1}, #{param2}-->
+
 <!--    </select>-->
 </mapper>
