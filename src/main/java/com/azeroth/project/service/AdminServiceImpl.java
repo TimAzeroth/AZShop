@@ -3,6 +3,8 @@ package com.azeroth.project.service;
 import com.azeroth.project.domain.*;
 import com.azeroth.project.repository.AdminRepository;
 import com.azeroth.project.domain.SalesChkDomain;
+import com.azeroth.project.repository.AuthorityRepository;
+import com.azeroth.project.repository.UserRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,20 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
 
     private AdminRepository adminRepository;
+
+    private UserRepository userRepository;  // 박승기 추가
+
+    private AuthorityRepository authorityRepository;    // 박승기 추가
+
     private SalesChkDomain schk;
 
     @Autowired
     public AdminServiceImpl(SqlSession sqlSession) {
 
         adminRepository = sqlSession.getMapper(AdminRepository.class);
+        userRepository = sqlSession.getMapper(UserRepository.class);    // 박승기 추가
+        authorityRepository = sqlSession.getMapper(AuthorityRepository.class);  // 박승기 추가
+
     }
 
     @Override
@@ -57,7 +67,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<AuthorityDomain> selectAuthoritiesById(Long id) {
-        return null;
+        UserDomain user = userRepository.findById(id);  // 박승기 수정
+
+        return authorityRepository.findByUser(user);    // 박승기 수정
     }
 
     public SalesChkDomain salesCHK (CardDomain card){

@@ -54,6 +54,5 @@
 <!--        <include refid="paginationPage"/>-->
 <!--        ORDER BY reviewdate DESC-->
 <!--        LIMIT #{param1}, #{param2}-->
-
 <!--    </select>-->
 </mapper>

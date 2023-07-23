@@ -1,13 +1,16 @@
 package com.azeroth.project.controller;
 
+import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.domain.UserValidator;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
+import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserController(){
         System.out.println(getClass().getName() + "() 생성");
@@ -33,6 +38,16 @@ public class UserController {
 
     @GetMapping("/login")
     public void login(){}
+
+    @PostMapping("/loginError")
+    public String loginError(){
+        return "user/login";
+    }
+
+    @RequestMapping("/rejectAuth")
+    public String rejectAuth(){
+        return "common/rejectAuth";
+    }
 
 
     @GetMapping("/register")
@@ -105,22 +120,106 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(UserDomain userDomain,
+    public String changePassword(MultipartFile multipartFile,
+                                 String originalImage,
+                                 UserDomain userDomain,
                                  Model model
     ){
         String password = userDomain.getPassword();
         String userName = userDomain.getUsername();
 
-        userDomain = userService.findByUsername(userName);
-        userDomain.setPassword(password);
+        int isDelete = 0;
 
-        int cnt = userService.update(userDomain);
+        userDomain = userService.findByUsername(userName);
+        userDomain.setPassword(passwordEncoder.encode(password));
+
+        int cnt = userService.updatePassword(userDomain);
 
         model.addAttribute("result", cnt);
 
         return "/user/changePasswordOk";
     }
 
+    @GetMapping("/myPage")
+    public void myPage(UserDomain user,
+                       Model model
+    ){
+        user = Util.getLoggedUser();
+        user = userService.findByUsername(user.getUsername());
+
+        model.addAttribute("profileimg",user.getProfileimg());
+        model.addAttribute("nickname",user.getNickname());
+        model.addAttribute("email",user.getEmail());
+        model.addAttribute("u_status",user.getU_status());
+        model.addAttribute("phone",user.getPhone());
+    }
+
+    @GetMapping("/accountManage")
+    public void accountManage(UserDomain user,
+                              Model model
+    ){
+        user = Util.getLoggedUser();
+        user = userService.findById(user.getId());
+
+        model.addAttribute("profileimg",user.getProfileimg());
+        model.addAttribute("nickname",user.getNickname());
+        model.addAttribute("email",user.getEmail());
+        model.addAttribute("u_status",user.getU_status());
+        model.addAttribute("phone",user.getPhone());
+        model.addAttribute("username",user.getUsername());
+    }
+
+    @PostMapping("/delete")
+    public String accountManage1(String username,
+                                 Model model
+    ){
+        UserDomain user = userService.findByUsername(username);
+        int cnt = userService.delete(user.getId());
+        model.addAttribute("result",cnt);
+
+        return "user/deleteOk";
+    }
+
+    @GetMapping("/changeProfile")
+    public void changeProfile(UserDomain user,
+                              Model model
+    ){
+      user = Util.getLoggedUser();
+      user = userService.findByUsername(user.getUsername());
+
+      model.addAttribute("profileimg",user.getProfileimg());
+      model.addAttribute("phone",user.getPhone());
+      model.addAttribute("email",user.getEmail());
+    }
+
+    @PostMapping("/changeProfile")
+    public String changeProfile1(@RequestParam("upfile") MultipartFile file,
+                                 @RequestParam("originalImage") String originalImage,
+                                 UserDomain user,
+                                 Model model
+    ){
+        String phone = user.getPhone();
+        String email = user.getEmail();
+
+        user = Util.getLoggedUser();
+        user = userService.findByUsername(user.getUsername());
+        user.setPhone(phone);
+        user.setEmail(email);
+
+
+        int isDelete = 0;
+        if(file == null) isDelete = 1;
+        model.addAttribute("result", userService.update(isDelete, originalImage, user, file));
+
+        return "/user/changeProfileOk";
+    }
+
+    @GetMapping("/addressManage")
+    public void addressManage(AddressDomain addressDomain,
+                              Model model
+    ){
+
+    }
 
 
     @InitBinder

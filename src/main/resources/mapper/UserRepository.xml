@@ -40,7 +40,7 @@
     <insert id="insert" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain"
             keyProperty="id" useGeneratedKeys="true" keyColumn="id">
         INSERT INTO User(username, password, nickname, email, phone, authority_id, profileimg, u_status, logdate)
-        VALUE(#{username}, #{password}, #{nickname}, #{email}, #{phone}, #{authority_id}, #{profileimg}, #{u_status}, #{logdate})
+        VALUES(#{username}, #{password}, #{nickname}, #{email}, #{phone}, #{authority_id}, #{profileimg}, #{u_status}, #{logdate})
     </insert>
 
     <!-- 사용자 정보 수정-->
@@ -57,7 +57,8 @@
     </delete>
 
     <!-- 배송주소 추가-->
-    <insert id="postInsert" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain">
+    <insert id="postInsert" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain"
+        keyProperty="id" useGeneratedKeys="true" keyColumn="id">
         INSERT INTO Address(address_name, address, address_detail, postcode)
         VALUE(#{address_name},#{address},#{address_detail},#{postcode})
     </insert>

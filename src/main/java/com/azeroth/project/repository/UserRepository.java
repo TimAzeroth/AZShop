@@ -5,6 +5,8 @@ import com.azeroth.project.domain.AuthorityDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
+import java.util.List;
+
 
 public interface UserRepository {
 
@@ -31,5 +33,8 @@ public interface UserRepository {
 
     // 배송주소 삭제
     int postDelete(Long id);
+
+    // 특정유저의 주소(들) 불러오기
+    List<AddressDomain> selectByUserId(UserDomain user);
 
 }

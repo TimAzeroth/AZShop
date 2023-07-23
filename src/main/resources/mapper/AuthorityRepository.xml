@@ -12,4 +12,11 @@
         WHERE name = #{name}
     </select>
 
+    <select id="findByUser" resultType="com.azeroth.project.domain.AuthorityDomain"
+                parameterType="com.azeroth.project.domain.UserDomain">
+        SELECT a.id, a.name
+        FROM Authority a, User u
+        WHERE a.id = u.authority_id AND u.id = #{id}
+    </select>
+
 </mapper>

@@ -126,7 +126,7 @@ CREATE TABLE User
 	id int NOT NULL AUTO_INCREMENT,
 	authority_id int NOT NULL,
 	username varchar(50) NOT NULL,
-	password varchar(50) NOT NULL,
+	password varchar(200) NOT NULL,
 	nickname varchar(30) NOT NULL,
 	email varchar(50),
 	profileimg varchar(100),

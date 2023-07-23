@@ -28,7 +28,7 @@ public class Util {// 현재 request 구하기
     // 현재 로그인 한 사용자 UserDetail 구하기
     public static UserDomain getLoggedUser(){
         // 현재 로그인 한 사용자
-        PrincipalDetails userDetails = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDetails userDetails = (PrincipalDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDomain user = userDetails.getUser();
         return user;
     }

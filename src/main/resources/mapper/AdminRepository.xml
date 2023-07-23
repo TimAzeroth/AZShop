@@ -33,14 +33,13 @@
         from User
     </select>
 
-
     <select id="findByUser" parameterType="com.azeroth.project.domain.UserDomain">
         select
-        id, authority_id, password, username, nickname, email, profileimg, u_status, phone
+            id, authority_id, password, username, nickname, email, profileimg, u_status, phone
         from
-        user
+            user
         where
-        username = #{username}
+            username = #{username}
     </select>
 
 
