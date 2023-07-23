@@ -4,6 +4,8 @@ import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface UserService {
 
     // id 값으로 회원정보 가져오기
@@ -30,4 +32,13 @@ public interface UserService {
 
     // 특정 회원 주소 등록
     int addAddress(AddressDomain addressDomain);
+
+    // 특정 회원 주소 정보 읽어오기
+    List<AddressDomain> findAddressByUserId(Long user_id);
+
+    // 특정 회원 주소 추가
+    int saveAddress(AddressDomain addressDomain);
+
+    // 특정 주소 삭제
+    int deleteAddress(AddressDomain addressDomain);
 }

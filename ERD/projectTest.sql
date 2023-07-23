@@ -56,7 +56,11 @@ SELECT a.id, a.name
 FROM authority a, USER u
 WHERE a.id = u.authority_id AND u.id = 5;
 
+SELECT * FROM address 
+WHERE user_id = 12;
 
+INSERT INTO Address (user_id, address_name, address, address_detail, postcode)
+VALUES  (12, '우리집', '서울시 강동구 아리수로 97길 20', '강일리버파크5단지 505동 806호', '50920') ;
 
 
 
