@@ -9,13 +9,6 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/addressManage.css}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script th:src="@{/js/addressManage.js}"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
-    let addressCount = 0;
-    let num = 0;
-  </script>
-  <script th:src="@{/js/address.js}"></script>
-  <script th:src="@{/js/deleteAddress.js}"></script>
   <title>주소 관리</title>
 </head>
 
@@ -30,7 +23,8 @@
 </div>
 
 <div class="container text-center" id="container-1">
-  <form method="POST" action="" enctype="multipart/form-data">
+    <form name="frmDelete" th:action="@{/user/deleteAddress}" method="post">
+
     <table class="table table-hover">
       <thead>
       <tr>
@@ -41,38 +35,25 @@
         <th scope="col">상세주소</th>
       </tr>
       </thead>
-      <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>우리집</td>
-        <td>05209</td>
-        <td>서울 강동구 아리수로97길 20</td>
-        <td>강일리버파크 5단지 505동 806호</td>
+      <tbody id="tbody">
+      <tr id="address_info" th:each="address : ${list}">
+        <th scope="row">#</th>
+        <td th:text="${address.address_name}"></td>
+        <td th:text="${address.postcode}"></td>
+        <td th:text="${address.address}"></td>
+        <td th:text="${address.address_detail}"></td>
+        <td><button class="btn btn-danger" id="'detbtn' + ${address.id}">삭제</button></td>
+        <input type="hidden" name="id" th:value="${address.id}">
       </tr>
       </tbody>
     </table>
-
-
-    <div class="row">
-      <div class="col">
-        <div class="d-flex justify-content-center align-items-center" style="height:100;">
-          <button type="button" class="btn btn-dark" id="addAddressBtn">주소추가하기</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="addressContainer">
-
-    </div>
-
+    </form>
 
 
     <div id="footbtn">
-      <button type="submit" class="btn btn-success">수정완료</button>
-      <a class="btn btn-warning" href="testAzaccountmanage.html">뒤로가기</a>
+      <a class="btn btn-success" th:href="changeAddress">주소추가</a>
+      <a class="btn btn-warning" th:href="accountManage">뒤로가기</a>
     </div>
-
-  </form>
 </div>
 
 </body>

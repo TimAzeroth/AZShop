@@ -1,38 +1,35 @@
 $(function(){
-    const addAddressBtn = document.getElementById("addAddressBtn");
-    const addressFields = document.getElementById("addressContainer");
+    $(document).ready(function() {
+          // 주소 정보가 3개인지 확인하는 함수
+          function checkAddressCount() {
+            var addressCount = $("#tbody tr").length;
+            return addressCount;
+          }
 
-        addAddressBtn.addEventListener("click", () => {
-
-            if(addressCount < 3){
-
-                const newAddressFields = createAddressFields();
-
-                addressContainer.appendChild(newAddressFields);
-
-                addressCount ++;
-                num ++;
+          // 주소추가 버튼을 숨기거나 보이게 하는 함수
+          function toggleAddButton() {
+            if (checkAddressCount() >= 3) {
+              $("#footbtn .btn-success").css("display", "none");
+            } else {
+              $("#footbtn .btn-success").css("display", "block");
             }
+          }
 
-            if(addressCount >= 3){
-                addAddressBtn.style.display= "none";
-            }
+          // 페이지 로딩 시 주소추가 버튼 상태 설정
+          toggleAddButton();
+
+          // 주소 정보가 변경될 때마다 주소추가 버튼 상태 업데이트
+          $("#tbody").on("DOMSubtreeModified", function() {
+            toggleAddButton();
+          });
         });
 
-        function createAddressFields(){
-            const addressFields = document.createElement('div');
-            addressFields.classList.add('box');
-            addressFields.innerHTML = `
-            <br>
-            <input type="text" class="sample6" id="sample6_postcode" placeholder="우편번호" name="addresses[${num}].postcode" required>
-            <input type="button" class="sample6" id="sample6_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" class="sample6" id="sample6_address" placeholder="주소" name="addresses[${num}].address" required><br>
-            <input type="text" class="sample6" id="sample6_detailAddress" placeholder="상세주소" name="addresses[${num}].address_detail" required>
-            <input type="text" class="sample6" id="sample6_extraAddress" placeholder="주소명" name="addresses[${num}].address_name"> <br>
-            <input type="button" class="sample6" id="delbtn" onclick="deleteAddressContainer(this)" value="삭제"> <br>
-            `;
-            return addressFields;
-        }
 
-
+        // 탈퇴하기 버튼
+                $("#detbtn").click(function(){
+                    const answer = confirm("삭제하시겠습니까?");
+                    if(answer){
+                        $("form[name='frmDelete']").submit();
+                    }
+                });
 })

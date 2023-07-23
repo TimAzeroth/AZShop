@@ -214,13 +214,6 @@ public class UserController {
         return "/user/changeProfileOk";
     }
 
-    @GetMapping("/addressManage")
-    public void addressManage(AddressDomain addressDomain,
-                              Model model
-    ){
-
-    }
-
 
     @InitBinder
     public void initBinder(WebDataBinder binder){

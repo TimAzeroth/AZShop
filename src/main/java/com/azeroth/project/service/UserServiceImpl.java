@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -132,6 +133,23 @@ public class UserServiceImpl implements UserService{
         addressDomain.setUser_id(user.getId());
 
         return userRepository.postInsert(addressDomain);
+    }
+
+    @Override
+    public List<AddressDomain> findAddressByUserId(Long user_id) {
+        return userRepository.selectByUserId(user_id);
+    }
+
+    // 주소 추가
+    @Override
+    public int saveAddress(AddressDomain addressDomain) {
+        return userRepository.postInsert(addressDomain);
+    }
+
+    @Override
+    public int deleteAddress(AddressDomain addressDomain) {
+        Long id = addressDomain.getId();
+        return userRepository.postDelete(id);
     }
 
     private void delFile(String originalImage) {

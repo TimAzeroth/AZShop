@@ -35,6 +35,6 @@ public interface UserRepository {
     int postDelete(Long id);
 
     // 특정유저의 주소(들) 불러오기
-    List<AddressDomain> selectByUserId(UserDomain user);
+    List<AddressDomain> selectByUserId(Long user_id);
 
 }

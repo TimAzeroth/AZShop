@@ -59,15 +59,15 @@
     <!-- 배송주소 추가-->
     <insert id="postInsert" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain"
         keyProperty="id" useGeneratedKeys="true" keyColumn="id">
-        INSERT INTO Address(address_name, address, address_detail, postcode)
-        VALUE(#{address_name},#{address},#{address_detail},#{postcode})
+        INSERT INTO Address(user_id, address_name, address, address_detail, postcode)
+        VALUE(#{user_id},#{address_name},#{address},#{address_detail},#{postcode})
     </insert>
 
     <!-- 배송주소 수정-->
     <update id="postUpdate" flushCache="true" parameterType="com.azeroth.project.domain.AddressDomain">
         UPDATE Address
         SET address_name=#{address_name}, address=#{address}, address_detail=#{address_detail}, postcode=#{postcode}
-        WHERE id = #{id}
+        WHERE user_id = #{user_id}
     </update>
 
     <!-- 배송주소 삭제-->
@@ -75,6 +75,13 @@
         DELETE FROM Address
         WHERE id = #{id}
     </delete>
+
+    <!-- 특정 유저의 주소(둘) 불러오기-->
+    <select id="selectByUserId" resultType="com.azeroth.project.domain.AddressDomain">
+        SELECT id, user_id, address_name, postcode, address, address_detail
+        FROM Address
+        WHERE user_id = #{user_id}
+    </select>
 
 
 </mapper>
