@@ -41,6 +41,8 @@
         where
             username = #{username}
     </select>
+
+
     <select id="userBuyProduct" parameterType="java.util.ArrayList">
         select
             p.p_name "p_name",

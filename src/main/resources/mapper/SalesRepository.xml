@@ -6,7 +6,7 @@
 <mapper namespace="com.azeroth.project.repository.SalesRepository">
 
     <resultMap id="mapUserImp" type="com.azeroth.project.domain.UserDomain">
-        <result column="username" property="username"/>
+        <result column="u_username" property="username"/>
         <result column="id" property="id"/>
         <result column="nickname" property="nickname"/>
         <result column="email" property="email"/>
@@ -25,11 +25,10 @@
         <result column="postcode" property="postcode"/>
     </resultMap>
 
-    <!-- 주문 / 결제 사용자 정보와 배송지 정보 불러오는 쿼리문 -->
-<!--
+    <!-- 주문 / 결제 사용자 정보를 불러오는 쿼리문 -->
     <select id="findSales" resultMap="mapUserImp, mapPdImp">
         select
-            u.username "username",
+            u.username "u_username",
             u.nickname "nickname",
             u.email "email",
             u.phone "phone",
@@ -38,12 +37,10 @@
             user u,
             product p
         WHERE
-            u.username = a.user_id
-        AND
-            u.username = #{username}
+            u.username = #{u_username}
     </select>
 
-    <select id="findSales" resultMap="addressImp">
+    <select id="findSalesAdd" resultMap="addressImp">
         SELECT
             user_id,
             address_name,
@@ -53,18 +50,19 @@
         FROM
             address
         WHERE
-            user_id = #{username}
+            user_id = #{u_username}
         AND
             address_name = #{address_name}
     </select>
--->
+
+
     <insert id="insert" flushCache="true"
             parameterType="com.azeroth.project.domain.SalesDomain"
     useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO sales
             (u_username, p_id, amount, address, address_detail, postcode, deliveryreq)
         VALUES
-            #{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq}
+           (#{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq})
     </insert>
 
 </mapper>
