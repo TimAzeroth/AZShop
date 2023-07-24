@@ -26,42 +26,45 @@
     <h1 class="header1">주문 / 결제</h1>
     <hr>
     <form id="salesForm">
-<!--        <div th:with="user=${#authentication.getPrincipal().getUser()}"></div>-->
        <h2 class="header2">구매자 정보</h2>
        <table>
-           <div ></div>
            <tr>
-               <td class="table_left_td1">이름</td>
-               <td></td>
+               <td class="table_left_td1">ID</td>
+               <td th:text="${u_username}">
+               </td>
            </tr>
            <tr>
                <td class="table_left_td1">이메일</td>
-               <td>내용</td>
+               <td th:text="${email}">내용</td>
            </tr>
            <tr>
                <td  class="table_left_td1">휴대폰 번호</td>
-               <td>내용
-                   <a class="btn btn-outline-dark" id="phonenum">수정</a>
-               </td>
+               <td th:text="${phone}">내용</td>
            </tr>
        </table>
 
        <h2 class="header2">배송지 정보</h2>
        <div id="addressbtn">
-           <a class="btn btn-outline-dark" id="homename" th:text="${address}">집 명칭</a>
+           <a class="btn btn-outline-dark" id="homename" th:text="${address_name}">집 명칭</a>
        </div>
        <table>
            <tr>
                <td  class="table_left_td2">닉네임</td>
-               <td th:text="${nickname}">내용</td>
+               <td th:text="${nickname}">내용
+               <input type="hidden" th:value="${nickname}">
+               </td>
            </tr>
            <tr>
                <td  class="table_left_td2">배송주소</td>
-               <td th:text="${address_detail}">내용</td>
+               <td th:text="${address_detail}">내용
+                   <input type="hidden" th:value="${address_detail}">
+               </td>
            </tr>
            <tr>
                <td  class="table_left_td2">연락처</td>
-               <td th:text="${phone}">내용</td>
+               <td th:text="${phone}">내용
+                   <input type="hidden" th:value="${phone}">
+               </td>
            </tr>
            <tr>
                <td  class="table_left_td2">배송 요청사항</td>
@@ -110,7 +113,7 @@
             <div id="salesbtn">
                 <a class="btn btn-outline-dark"  id="backBtn">돌아가기</a>
                 <!--  <button type="submit" class="btn btn-outline-dark" th:if="${}">결제하기</button> -->
-                <a class="btn btn-outline-dark" >결제하기</a>
+                <a class="btn btn-outline-dark">결제하기</a>
             </div>
         </form>
 
