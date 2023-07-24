@@ -58,7 +58,7 @@ $(function(){
 
 });
 
-// 특정 글 (user_id) 의 댓글 목록 읽어오기
+// 특정 글 (post_id) 의 댓글 목록 읽어오기
 function loadComment(user_id){
     $.ajax({
         url: "/review/list?id=" + post_id,
@@ -94,23 +94,14 @@ function buildReview(result){
         let content = review.content;
         let regdate = review.regdate;
 
-        let user_id = review.user.id;
-        let product_id = review.product_id.id;
-        let addReply = review.addReply;
-        if (isAdmin{
-            addReply = `
-                        <div class="admin-response">
-                            <textarea id="adminResponse${id}" placeholder="Admin response..."></textarea>
-                            <button onclick="submitAdminResponse(${id})">Submit Response</button>
-                        </div>
-                        `;
-        }
+        let user_id = comment.user.id;
+        let username = comment.user.username;
+        let name = comment.user.name;
 
         // 삭제버튼 여부
         review delBtn = (user_id !== product_id) ? '' : `
             <i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip"
                 data-reviewdel-id="${id}" title="삭제"></i>
-
         `;
 
         const row = `
@@ -120,9 +111,7 @@ function buildReview(result){
                   <span>${content}</span>
                    ${delBtn}
                 </td>
-                <td><span><small class="text-secondary">${regdate}</small></span>
-                ${adminId}
-                </td>
+                <td><span><small class="text-secondary">${regdate}</small></span></td>
               </tr>
                 `;
 
@@ -130,13 +119,8 @@ function buildReview(result){
     });
 
 
-    $("#review_list").html(out.join("\n"));
+    $("#cmt_list").html(out.join("\n"));
 }
-function submitAdminResponse(reviewId) {
-    content adminResponse = document.getElementById('adminResponse${reviewId}').value;
-}
-
-
 
 function addDelete(){
     // 현재글
@@ -149,10 +133,10 @@ function addDelete(){
         const comment_id = $(this).attr("data-cmtdel-id");
 
         $.ajax({
-            url: "/review/delete",
+            url: "/comment/delete",
             type: "POST",
             cache: false,
-            data: {"id": user_id},
+            data: {"id": comment_id},
             success: function(data, status, xhr){
                 if(data.status !== "OK"){
                     alert(data.status);
@@ -168,23 +152,15 @@ function addDelete(){
     });
 }
 
+function a
 
 
 
 
-// 어드민 리뷰
-if(user.role === '') {
-    // 검토에 회신할 양식 표시
-    // 검토 ID 또는 다른 식별자를 포함할 수 있습니다.
-    // 그래서 서버가 어떤 답변을 검토 중인 서버가 무엇인지 알고 있습니다.
-    response.write('<form action="/replyToReview" method="POST">');
-    response.write('<input type="hidden" name="reviewId" value="' + review.id + '" />');
-    response.write('<textarea name="replyContent"></textarea><br />');
-    response.write('<input type="submit" value="Submit Reply" />');
-    response.write('</form>');
-}
-else {
-    // 양식 표시 안함
-    // 이유를 설명하는 메시지를 포함할 수 있습니다.
-    response.write('<p>리뷰에 회신하려면 adminId여야 합니다.</p>');
-}
+
+
+
+
+
+
+

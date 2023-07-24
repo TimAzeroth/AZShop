@@ -21,12 +21,12 @@ public class ReviewController {
     public ReviewController() {
         System.out.println(getClass().getName() + "()생성");
     }
-
+    // 리뷰저장
     @PostMapping
     public int createReview(ReviewDomain reviewDomain){
         return reviewService.saveReview(reviewDomain);
     }
-
+    // 리뷰
     @GetMapping
     public String reviews(Integer page, Long productId, Model model){
         List<ReviewDomain> reviews=reviewService.findByProductId(page,productId,model);
@@ -34,22 +34,26 @@ public class ReviewController {
         model.addAttribute("reviews",reviews);
         return "review/review";
     }
+
     @PostMapping("/List")
     public String getReview(Integer page, Long productId, Model model){
         return "review";
     }
+
     @PostMapping("/delete")
     public String deleteByReviewId(@PathVariable  Long reviewId, Model model){
         int result = reviewService.deleteByReviewsId(reviewId);
         model.addAttribute("result", result);
         return "/deleteOk";
     }
+
     @PostMapping("/reply")
     public String replyToReview(@PathVariable  long review, Model model){
         int result = reviewService.replyToReview(review);
         model.addAttribute("result", result);
         return "/review";
     }
+
 
 
 }
