@@ -37,4 +37,7 @@ public interface UserRepository {
     // 특정유저의 주소(들) 불러오기
     List<AddressDomain> selectByUserId(Long user_id);
 
+    // 특정id의 주소 불러오기
+    AddressDomain selectById(Long id);
+
 }

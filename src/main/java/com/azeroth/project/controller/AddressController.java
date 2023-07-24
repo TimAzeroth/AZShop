@@ -29,6 +29,7 @@ public class AddressController {
         UserDomain user = Util.getLoggedUser();
 
         List<AddressDomain> list = userService.findAddressByUserId(user.getId());
+
         model.addAttribute("list",list);
     }
 
@@ -55,11 +56,15 @@ public class AddressController {
     public String deleteAddress(AddressDomain addressDomain,
                                 Model model
     ){
-        Long id = addressDomain.getId();
-        addressDomain.setId(id);
+        System.out.println(addressDomain);
+        addressDomain = userService.findAddressById(addressDomain.getId());
+        System.out.println(addressDomain.getId());
+        System.out.println(addressDomain.getAddress());
         int cnt = userService.deleteAddress(addressDomain);
 
         model.addAttribute("result",cnt);
+
+        System.out.println(cnt);
 
         return "/user/deleteAddressOk";
     }
