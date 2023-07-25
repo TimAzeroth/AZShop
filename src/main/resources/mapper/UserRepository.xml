@@ -83,5 +83,12 @@
         WHERE user_id = #{user_id}
     </select>
 
+    <!-- 특정 id 의 주소 불러오기-->
+    <select id="selectById" resultType="com.azeroth.project.domain.AddressDomain">
+        SELECT id, user_id, address_name, postcode, address, address_detail
+        FROM Address
+        WHERE id = #{id}
+    </select>
+
 
 </mapper>

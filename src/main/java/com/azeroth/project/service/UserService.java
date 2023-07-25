@@ -33,7 +33,7 @@ public interface UserService {
     // 특정 회원 주소 등록
     int addAddress(AddressDomain addressDomain);
 
-    // 특정 회원 주소 정보 읽어오기
+    // 특정 회원 주소정보(들) 읽어오기
     List<AddressDomain> findAddressByUserId(Long user_id);
 
     // 특정 회원 주소 추가
@@ -41,4 +41,7 @@ public interface UserService {
 
     // 특정 주소 삭제
     int deleteAddress(AddressDomain addressDomain);
+
+    // 특정 주소 불러오기
+    AddressDomain findAddressById(Long id);
 }

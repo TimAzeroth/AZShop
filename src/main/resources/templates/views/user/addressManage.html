@@ -23,32 +23,36 @@
 </div>
 
 <div class="container text-center" id="container-1">
-    <form name="frmDelete" th:action="@{/user/deleteAddress}" method="post">
+    <form id="deleteForm" name="frmDelete" th:action="@{/user/deleteAddress}" method="post">
+      <input type="hidden" name="id" id="deleteAddressId" value="">
+    </form>
 
     <table class="table table-hover">
       <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">주소명</th>
-        <th scope="col">우편번호</th>
-        <th scope="col">주소</th>
-        <th scope="col">상세주소</th>
-      </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">주소명</th>
+          <th scope="col">우편번호</th>
+          <th scope="col">주소</th>
+          <th scope="col">상세주소</th>
+          <th scope="col"> </th>
+        </tr>
       </thead>
       <tbody id="tbody">
-      <tr id="address_info" th:each="address : ${list}">
-        <th scope="row">#</th>
-        <td th:text="${address.address_name}"></td>
-        <td th:text="${address.postcode}"></td>
-        <td th:text="${address.address}"></td>
-        <td th:text="${address.address_detail}"></td>
-        <td><button class="btn btn-danger" id="'detbtn' + ${address.id}">삭제</button></td>
-        <input type="hidden" name="id" th:value="${address.id}">
-      </tr>
+        <tr th:if="${list}" id="address_info" th:each="address : ${list}">
+          <th scope="row">#</th>
+          <td th:text="${address.address_name}"></td>
+          <td th:text="${address.postcode}"></td>
+          <td th:text="${address.address}"></td>
+          <td th:text="${address.address_detail}"></td>
+          <td>
+            <button class="btn btn-danger delbtn" th:data-address-id="${address.id}">삭제</button>
+          </td>
+        </tr>
       </tbody>
     </table>
-    </form>
 
+    <p th:unless="${list}" id="noAddress">현재 설정하신 주소가 없습니다. 주소를 추가해주세요</p>
 
     <div id="footbtn">
       <a class="btn btn-success" th:href="changeAddress">주소추가</a>

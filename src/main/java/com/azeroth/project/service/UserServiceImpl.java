@@ -152,6 +152,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.postDelete(id);
     }
 
+    @Override
+    public AddressDomain findAddressById(Long id) {
+        return userRepository.selectById(id);
+    }
+
     private void delFile(String originalImage) {
         String saveDirectory = new File(uploadDir).getAbsolutePath();
 

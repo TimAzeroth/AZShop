@@ -28,39 +28,9 @@ font-size: 30px;
   font-weight: 550;
 }
 
-#footbtn button{
-  font-weight: 550;
+#noAddress{
+  color:black;
+  font-size: 30px;
+  margin: 0, 50px;
 }
 
-#addressContainer{
-  text-align: left;
-}
-
-.sample6 {
-  margin: 10px 10px;
-  width: 90%;
-  padding: 5px;
-  font-size: 16px;
-}
-
-#sample6_btn{
-  width:auto;
-  background-color: black;
-  color:white;
-}
-
-#delbtn{
-  background-color: brown;
-  color:white;
-  width: 10%;
-}
-
-.box{
-  border:1px solid black;
-  margin-top: 15px;
-  background-color: rgb(156, 153, 153);
-}
-
-#addAddressBtn{
-  margin-top: 20px;
-}
