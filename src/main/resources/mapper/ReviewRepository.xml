@@ -51,7 +51,6 @@
         SELECT COUNT(id) FROM Review  WHERE Product_id = #{param1};
     </select>
 
-
     <select id="pagination" resultType="com.azeroth.project.domain.ReviewDomain">
         ORDER BY reviewdatere DESC
         LIMIT #{fromRow}, #{pageRow}
