@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.azeroth.project.repository.AddressRepository">
+
+<select id="findByAdd" resultType="com.azeroth.project.domain.AddressDomain">
+    SELECT
+        address_name "address_name",
+        address "address",
+        address_detail "address_detail",
+        postcode "postcode"
+    FROM
+        address
+    WHERE
+        user_id = #{id}
+</select>
+
+</mapper>

@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 
-<!--<script th:unless="${}">-->
+<!--<script th:unless="${id}">-->
 <!--  alert("로그인이 안되어있습니다.");-->
 <!--  history.back();-->
 <!--</script>-->
@@ -34,6 +34,10 @@
                </td>
            </tr>
            <tr>
+               <td  class="table_left_td1">닉네임</td>
+               <td th:text="${nickname}"></td>
+           </tr>
+           <tr>
                <td class="table_left_td1">이메일</td>
                <td th:text="${email}">내용</td>
            </tr>
@@ -44,26 +48,17 @@
        </table>
 
        <h2 class="header2">배송지 정보</h2>
-       <div id="addressbtn">
-           <a class="btn btn-outline-dark" id="homename" th:text="${address_name}">집 명칭</a>
-       </div>
-       <table>
-           <tr>
-               <td  class="table_left_td2">닉네임</td>
-               <td th:text="${nickname}">내용
-               <input type="hidden" th:value="${nickname}">
-               </td>
-           </tr>
+       <table th:each="post : ${add}">
+           <div id="addressbtn">
+               <a class="btn btn-outline-dark" id="homename" th:text="${post.address_name}">집 명칭</a>
+           </div>
            <tr>
                <td  class="table_left_td2">배송주소</td>
-               <td th:text="${address_detail}">내용
-                   <input type="hidden" th:value="${address_detail}">
-               </td>
-           </tr>
-           <tr>
-               <td  class="table_left_td2">연락처</td>
-               <td th:text="${phone}">내용
-                   <input type="hidden" th:value="${phone}">
+               <td>
+                   [[${post.address}]]
+                   <p th:text="${post.address_detail}"></p>
+                   <input type="hidden" th:value="${post.address}">
+                   <input type="hidden" th:value="${post.address_detail}">
                </td>
            </tr>
            <tr>

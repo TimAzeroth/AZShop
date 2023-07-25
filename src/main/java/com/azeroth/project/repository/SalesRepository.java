@@ -13,8 +13,6 @@ public interface SalesRepository {
     // 판매 조회(주문 / 결제)
     SalesDomain findSales(String u_username);
 
-    SalesDomain findSalesAdd(String u_username);
-
     // 송장 입력
     int inputSalesNum(SalesDomain sales);
 
