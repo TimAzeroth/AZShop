@@ -13,6 +13,7 @@
     var categories = [[${categories}]];
 </script>
 <th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
+<th:block th:insert="~{product/searchHeader.html::header}"></th:block>
 <div th:if="${#lists.isEmpty(products)}">
     <div class="d-flex justify-content-center mt-5">
         <h2 th:text="'\'' + ${searchedValue} + '\'' + '에 대한 검색 결과가 없습니다.'"></h2>

@@ -58,8 +58,8 @@
             <div class="col-sm-8 text-muted font-weight-light mt-3">
                 <button type="button" class="btn btn-primary">장바구니 담기</button>
                 <button type="button" class="btn btn-primary">구매하기</button>
-                <a type="button" class="btn btn-secondary" th:href="@{'/product/update/' + ${product.id}}">상품 수정</a>
-                <button type="button" class="btn btn-danger" id="delete">상품 삭제</button>
+                <a type="button" class="btn btn-secondary" th:href="@{'/product/update/' + ${product.id}}" sec:authorize="hasRole('ADMIN')">상품 수정</a>
+                <button type="button" class="btn btn-danger" id="delete" sec:authorize="hasRole('ADMIN')">상품 삭제</button>
             </div>
         </div>
     </div>
@@ -68,9 +68,9 @@
     <div class="d-flex justify-content-center mt-3">
         <div>
             <h2>상품 상세설명</h2>
-            <div id="productDetail" th:utext="${product.detail}"></div>
         </div>
     </div>
+    <div id="productDetail" th:utext="${product.detail}"></div>
 
     <hr>
     <div class="d-flex justify-content-center mt-3">

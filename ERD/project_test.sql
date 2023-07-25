@@ -51,7 +51,7 @@ VALUES(6, 5, '반려동물용품', '장난감');
 INSERT INTO Category 
 VALUES(1, 5, '패션의류', '아동');
 
-DELETE FROM Product 
+DELETE FROM User 
 WHERE id = 1;
 
 TRUNCATE Category;
@@ -59,6 +59,9 @@ TRUNCATE Cart_Product;
 SELECT * FROM Product;
 SELECT * FROM Cart_Product;
 SELECT * FROM Category;
+SELECT * FROM Authority;
+
+SELECT * FROM User;
 
         SELECT p.id, p.p_name, p.main_cate, p.sub_cate, p.p_img, p.detail, p.price, p.stock, p.p_rank, c.mainname, c.subname
         FROM Product p
