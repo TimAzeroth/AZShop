@@ -145,6 +145,7 @@ insert into Review (user_id , product_id,  content, reply) values
 -- 판매등록. 송장번호 입력완료
 insert into Sales(u_username, p_id, amount,address,address_detail,postcode,deliveryreq,tracknum) values
 ('user1', 12, 5,'서울시 종로구 테헤란로 56길', '234-5번지', '12345', '빠른배달부탁드립니다', '123456789101112'),
+('user1', 13, 5,'서울시 종로구 테헤란로 56길', '234-5번지', '12345', '빠른배달부탁드립니다', '123456789101112'),
 ('user3', 6, 1,'서울시 종로구 테헤란로 58길', '234-7번지', '34567', '부모님선물용입니다. 파손주의해주세요.', '123456789101112')
 ;
 -- 판매등록. 송장번호 미입력

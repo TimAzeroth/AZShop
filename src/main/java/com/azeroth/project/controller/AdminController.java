@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -40,10 +41,11 @@ public class AdminController {
 
     //selectBuyByUser 특정 회원이 구매한 구매목록
     @GetMapping("/BuyByUser/{username}")
-    public void BuyByUser (Model model, String username){
-
-        adminService.selectBuyByUser(username);
-
+    public String BuyByUser (Model model, @PathVariable String username){
+        System.out.println("입장성공?");
+        System.out.println(username);
+        model.addAttribute("productList", adminService.selectBuyByUser(username));
+        return "/admin/BuyByUser";
     }
 
 
