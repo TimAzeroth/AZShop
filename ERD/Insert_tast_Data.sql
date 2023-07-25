@@ -1,7 +1,5 @@
 DELETE FROM Address;
 ALTER TABLE Address AUTO_INCREMENT = 1;
-DELETE FROM Cart_Product;
-ALTER TABLE Cart_Product AUTO_INCREMENT = 1;
 DELETE FROM Cart;
 ALTER TABLE Cart AUTO_INCREMENT = 1;
 DELETE FROM Review;
@@ -153,38 +151,6 @@ insert into Sales(u_username, p_id, amount,address,address_detail,postcode,deliv
 ('user4', 6, 1,'서울시 종로구 테헤란로 56길', '234-5번지', '12345', '몰래배달해주세요.')
 ;
 
--- 장바구니 데이터 입력 
-insert into Cart(user_id, cart_amount, status) values
-(1, 5, 'BUY'),
-(3, 1, 'BUY'),
-(2, 5, 'BUY'),
-(4, 1, 'BUY'),
-(1, 4, 'PICK'),
-(1, 3, 'PICK'),
-(1, 2, 'PICK'),
-(1, 1, 'PICK'),
-(2, 4, 'PICK'),
-(2, 3, 'PICK'),
-(2, 2, 'PICK'),
-(2, 1, 'PICK')
-;
-
-
--- 연결데이터 입력
-INSERT INTO Cart_Product(cart_id, product_id) VALUES
-(1,12),
-(2,6),
-(3,12),
-(4,6),
-(5,4),
-(6,3),
-(7,2),
-(8,1),
-(9,4),
-(10,3),
-(11,2),
-(12,1)
-;
 
 -- 임시 카드정보 입력
 INSERT INTO Card (c_num, c_year, c_month, c_cvc, balance) VALUES

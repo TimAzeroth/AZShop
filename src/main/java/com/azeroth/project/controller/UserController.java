@@ -82,15 +82,6 @@ public class UserController {
 
         model.addAttribute("result",cnt);
 
-        CartDomain cartDomain = new CartDomain();
-        user = userService.findByUsername(user.getUsername());
-        Long id = user.getId();
-        System.out.println(id);
-        cartDomain.setUser_id(id);
-        cartDomain.setCart_amount(1L);
-        cartDomain.setStatus("PICK");
-        userService.saveCart(cartDomain);
-
         return "/user/registerOk";
     }
 

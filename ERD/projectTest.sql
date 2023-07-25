@@ -40,9 +40,6 @@ nickname, email, profileimg, u_status, phone,
 logdate, regdate
 FROM azerothdb.`user`;
 
-SELECT *
-FROM cart
-WHERE user_id = 6;
 
 SELECT id, user_id, address_name, address, address_detail, postcode
 FROM azerothdb.address;
