@@ -27,8 +27,11 @@ $(function(){
 
       // 탈퇴하기 버튼
       $(".delbtn").click(function() {
-          var addressId = $(this).data("address-id"); // 클릭한 버튼의 주소 ID 값 가져오기
-          $("#deleteAddressId").val(addressId); // form의 숨겨진 input 요소의 값을 변경하여 문자열로 설정
-          $("#deleteForm").submit(); // form 제출
+          var answer = confirm("삭제하시겠습니까?")
+          if(answer){
+            var addressId = $(this).data("address-id"); // 클릭한 버튼의 주소 ID 값 가져오기
+                      $("#deleteAddressId").val(addressId); // form의 숨겨진 input 요소의 값을 변경하여 문자열로 설정
+                      $("#deleteForm").submit(); // form 제출
+          }
       });
 });

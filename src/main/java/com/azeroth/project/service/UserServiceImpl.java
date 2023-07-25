@@ -2,11 +2,12 @@ package com.azeroth.project.service;
 
 import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.AuthorityDomain;
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.repository.AuthorityRepository;
+import com.azeroth.project.repository.CartRepository;
 import com.azeroth.project.repository.UserRepository;
 import com.azeroth.project.util.Util;
-import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,8 @@ public class UserServiceImpl implements UserService{
 
     private AuthorityRepository authorityRepository;
 
+    private CartRepository cartRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(SqlSession sqlSession){
         userRepository = sqlSession.getMapper(UserRepository.class);
         authorityRepository = sqlSession.getMapper(AuthorityRepository.class);
+        cartRepository = sqlSession.getMapper(CartRepository.class);
     }
 
     @Override
@@ -155,6 +159,21 @@ public class UserServiceImpl implements UserService{
     @Override
     public AddressDomain findAddressById(Long id) {
         return userRepository.selectById(id);
+    }
+
+    @Override
+    public int saveCart(CartDomain cartDomain) {
+        return cartRepository.insert(cartDomain);
+    }
+
+    @Override
+    public CartDomain selectCartByUserId(Long id) {
+        return cartRepository.findByUserId(id);
+    }
+
+    @Override
+    public CartDomain selectCartById(Long id) {
+        return cartRepository.findById(id);
     }
 
     private void delFile(String originalImage) {

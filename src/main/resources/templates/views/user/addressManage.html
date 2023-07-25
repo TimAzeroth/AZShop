@@ -52,7 +52,7 @@
       </tbody>
     </table>
 
-    <p th:unless="${list}" id="noAddress">현재 설정하신 주소가 없습니다. 주소를 추가해주세요</p>
+    <div id="noAddress" th:if="${list == null or list.size() == 0}">현재 설정하신 주소가 없습니다. 주소를 추가해주세요</div>
 
     <div id="footbtn">
       <a class="btn btn-success" th:href="changeAddress">주소추가</a>

@@ -1,6 +1,7 @@
 package com.azeroth.project.service;
 
 import com.azeroth.project.domain.AddressDomain;
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,4 +45,13 @@ public interface UserService {
 
     // 특정 주소 불러오기
     AddressDomain findAddressById(Long id);
+
+    // 유저에게 장바구니 할당
+    int saveCart(CartDomain cartDomain);
+
+    // 유저 id 로 cart 불러오기
+    CartDomain selectCartByUserId(Long id);
+
+    // 장바구니 id 로 장바구니 불러오기
+    CartDomain selectCartById(Long id);
 }

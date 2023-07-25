@@ -14,7 +14,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Util {// 현재 request 구하기
+public class Util {
+    // 현재 request 구하기
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         return attrs.getRequest();

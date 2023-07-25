@@ -54,7 +54,7 @@ CREATE TABLE Cart
 (
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
-	cart_amount int NOT NULL,
+	cart_amount int NOT NULL DEFAULT 1,
 	regdate datetime DEFAULT now(),
 	status varchar(4) CHECK(status IN ('PICK', 'BUY')),
 	PRIMARY KEY (id)

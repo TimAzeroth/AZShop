@@ -1,11 +1,13 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.AddressDomain;
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.domain.UserValidator;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
 import com.azeroth.project.util.Util;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +79,17 @@ public class UserController {
             return "redirect:/user/register";
         }
         int cnt = userService.register(user,file);
+
         model.addAttribute("result",cnt);
+
+        CartDomain cartDomain = new CartDomain();
+        user = userService.findByUsername(user.getUsername());
+        Long id = user.getId();
+        System.out.println(id);
+        cartDomain.setUser_id(id);
+        cartDomain.setCart_amount(1L);
+        cartDomain.setStatus("PICK");
+        userService.saveCart(cartDomain);
 
         return "/user/registerOk";
     }
