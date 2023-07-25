@@ -26,7 +26,7 @@ public class SalesServiceImpl implements SalesService {
     public SalesServiceImpl(SqlSession sqlSession) {
         salesRepository = sqlSession.getMapper(SalesRepository.class);
         userRepository = sqlSession.getMapper(UserRepository.class);
-//        System.out.println(getClass().getName() + "생성");
+        System.out.println(getClass().getName() + "() 생성");
     }
 
 
@@ -38,30 +38,29 @@ public class SalesServiceImpl implements SalesService {
         return salesDomain;
     }
 
-//    @Override
-//    public int insert(SalesDomain salesDomain) {
-//        // session정보 땜빵
-//        UserDomain user = null;
-//
-//        user.setId(1L);
-//        user.setAuthority_id(1L);
-//        user.setUsername("user1");
-//        user.setNickname("사용자1");
-//        user.setEmail("user1@gmail.com");
-//        user.setProfileimg("face01.png");
-//        user.setU_status("USE");
-//        user.setPhone("01012341234");
-//
-//        // 위 정보는 session 의 정보,  DB 에서 다시 읽어온다
-//        user = userRepository.findByUsername(user.getUsername());
-//        salesDomain.setUser(user);
-//
-//        int cnt = salesRepository.insert(salesDomain);
-//
-//        // UserDomain userDomain = (유틸).getLoggedUser();
-//
-//        return salesRepository.insert(salesDomain);
-//    }
+    @Override
+    public SalesDomain salesAddlist(String u_username) {
+        userRepository.findByUsername(u_username);
+        SalesDomain salesDomain = salesRepository.findSalesAdd(u_username);
+        return salesDomain;
+    }
+
+
+    @Override
+    public int insert(SalesDomain salesDomain) {
+        // session정보 땜빵
+        UserDomain user = Util.getLoggedUser();
+
+        // 위 정보는 session 의 정보,  DB 에서 다시 읽어온다
+        user = userRepository.findByUsername(user.getUsername());
+        salesDomain.setUser(user);
+
+        int cnt = salesRepository.insert(salesDomain);
+
+        // UserDomain userDomain = (유틸).getLoggedUser();
+
+        return cnt;
+    }
 
 
 

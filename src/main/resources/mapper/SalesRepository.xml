@@ -13,44 +13,31 @@
         <result column="phone" property="phone"/>
     </resultMap>
 
-    <resultMap id="mapPdImp" type="com.azeroth.project.domain.ProductDomain">
-        <result column="p_id" property="id"/>
-    </resultMap>
-
-    <resultMap id="addressImp" type="com.azeroth.project.domain.AddressDomain">
-        <result column="user_id" property="user_id"/>
-        <result column="address_name" property="address_name"/>
-        <result column="address" property="address"/>
-        <result column="address_detail" property="address_detail"/>
-        <result column="postcode" property="postcode"/>
-    </resultMap>
-
     <!-- 주문 / 결제 사용자 정보를 불러오는 쿼리문 -->
-    <select id="findSales" resultMap="mapUserImp, mapPdImp">
-        select
+    <select id="findSales" resultMap="mapUserImp">
+        SELECT
             u.username "u_username",
-            u.nickname "nickname",
             u.email "email",
             u.phone "phone",
             p.id "p_id"
-        from
+        FROM
             user u,
             product p
         WHERE
-            u.username = #{u_username}
+            u.username = #{username}
     </select>
 
-    <select id="findSalesAdd" resultMap="addressImp">
+    <select id="findSalesAdd" >
         SELECT
-            user_id,
-            address_name,
-            address,
-            address_detail,
-            postcode
+            user_id "user_id",
+            address_name "address_name",
+            address "address",
+            address_detail "address_detail",
+            postcode "postcode"
         FROM
             address
         WHERE
-            user_id = #{u_username}
+            user_id = #{id}
         AND
             address_name = #{address_name}
     </select>
