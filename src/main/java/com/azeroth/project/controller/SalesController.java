@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -59,22 +60,23 @@ public class SalesController {
 
 
     @PostMapping("/sales")
-    public String salesPosting(
-            @ModelAttribute("salesdomain")
+    public String salesOk(
+            @RequestParam
+            @ModelAttribute("sales")
             @Valid
             SalesDomain salesDomain,
             Model model
     ){
-//         SalesChkDomain chk = adminService.salesCHK();  // 카드 도메인 넘기기
-        if (true) {
-            int insert = salesService.insert(salesDomain);
-            model.addAttribute("result", insert);
+
+        CartData data = new CartData();
+        data.setAmount(1l);
+        salesDomain.setP_id(1l);
 
 
-            return "redirect:/siteSales/sales";
-        }
+        int insert = salesService.insert(salesDomain);
+        model.addAttribute("result", insert);
 
-        return "siteSales/salesOk";
+        return "/siteSales/salesOk";
     }
 
 

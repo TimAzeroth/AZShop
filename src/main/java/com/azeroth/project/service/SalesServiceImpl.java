@@ -41,7 +41,7 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
     public int insert(SalesDomain salesDomain) {
-        // session정보 땜빵
+        // 현재 로그인한 작성자 정보
         UserDomain user = Util.getLoggedUser();
 
         // 위 정보는 session 의 정보,  DB 에서 다시 읽어온다
@@ -49,8 +49,6 @@ public class SalesServiceImpl implements SalesService {
         salesDomain.setUser(user);
 
         int cnt = salesRepository.insert(salesDomain);
-
-        // UserDomain userDomain = (유틸).getLoggedUser();
 
         return cnt;
     }

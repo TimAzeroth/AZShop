@@ -65,16 +65,15 @@
         </div>
 
         <h2 class="header2">결제 정보</h2>
-        <form method="post" th:action="@{/siteSales/sales}" enctype="Multipart/form-data">
-            <input type="hidden" id="userId" th:text="${u_username}">
-            <input type="hidden" id="addressNameImp"/>
-            <input type="hidden" id="addressValue"/>
+        <form method="post" th:action="@{/siteSales/sales}" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" id="userId" th:value="${u_username}">
+            <input type="hidden" id="addressValue" />
             <input type="hidden" id="addressDeValue"/>
             <input type="hidden" id="addPostcode"/>
             <table>
                 <tr>
                     <td class="table_left_td3">총 상품 가격</td>
-                    <td>내용</td>
+                    <td id="amount" th:value="${amount}">내용</td>
                 </tr>
                 <tr>
                     <td class="table_left_td3">배송비</td>
@@ -87,7 +86,7 @@
                 <tr>
                     <td class="table_left_td3">배송 요청사항</td>
                     <td>
-                        <input type="text">
+                        <input id="deliveryreq" type="text" th:value="${deliveryreq}"/>
                     </td>
                 </tr>
                 <tr>
@@ -95,16 +94,16 @@
                     <td id="inputCardNum">
                         <div class="cardnum">
                             <h6>카드번호</h6>
-                            <input id="cardnum" style="width: 150px;" type="text"/>
+                            <input id="cardnum" style="width: 150px;" type="text" th:value="${cardnum}"/>
                         </div>
                         <div class="cardnum">
                             <h6>유효 기간</h6>
-                            <input id="c_year" class="period" style="width: 60px;" type="text"/>
-                            <input id="c_month" class="period" style="width: 60px;" type="text"/>
+                            <input id="c_year" class="period" style="width: 60px;" type="text" th:value="${c_year}"/>
+                            <input id="c_month" class="period" style="width: 60px;" type="text" th:value="${c_month}"/>
                         </div>
                         <div class="cardnum">
                             <h6>CVC</h6>
-                            <input id="c_cvc" style="width: 150px;" type="text"/>
+                            <input id="c_cvc" style="width: 150px;" type="text" th:value="${c_cvc}"/>
                         </div>
                     </td>
                 </tr>
@@ -112,7 +111,7 @@
 
             <div id="salesbtn">
                 <a class="btn btn-outline-dark" id="backBtn">돌아가기</a>
-                <a class="btn btn-outline-dark">결제하기</a>
+                <button type="submit" class="btn btn-outline-dark">결제하기</button>
             </div>
         </form>
 
