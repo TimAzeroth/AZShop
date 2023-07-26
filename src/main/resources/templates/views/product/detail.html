@@ -56,8 +56,12 @@
             </div>
             <div class="d-none mb-0" id="error"><p class="text-danger">주문 가능한 수량을 넘었습니다.</p></div>
             <div class="col-sm-8 text-muted font-weight-light mt-3">
-                <button type="button" class="btn btn-primary">장바구니 담기</button>
-                <button type="button" class="btn btn-primary">구매하기</button>
+                <form name="cartAdd" th:action="@{/product/addcart}" method="post">
+                    <input type="hidden" th:value="${product.id}" name="product_id">
+                    <input id="amount" type="hidden" name="amount">
+                    <button id="cartbutton" type="button" class="btn btn-primary">장바구니 담기</button>
+                </form>
+                <button id="buybutton" type="button" class="btn btn-primary">구매하기</button>
                 <a type="button" class="btn btn-secondary" th:href="@{'/product/update/' + ${product.id}}" sec:authorize="hasRole('ADMIN')">상품 수정</a>
                 <button type="button" class="btn btn-danger" id="delete" sec:authorize="hasRole('ADMIN')">상품 삭제</button>
             </div>

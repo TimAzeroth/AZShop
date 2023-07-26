@@ -1,5 +1,6 @@
 package com.azeroth.project.service;
 
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.ProductDomain;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,5 +30,7 @@ public interface ProductService {
 
     // 상품 수정
     int update(Integer isDelete, String originalImage, ProductDomain productDomain, MultipartFile file);
+
+
 
 }

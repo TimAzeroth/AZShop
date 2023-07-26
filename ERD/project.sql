@@ -3,7 +3,6 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS Address;
-DROP TABLE IF EXISTS Cart_Product;
 DROP TABLE IF EXISTS Cart;
 DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS User;
@@ -54,18 +53,10 @@ CREATE TABLE Cart
 (
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
-	cart_amount int NOT NULL,
-	regdate datetime DEFAULT now(),
-	status varchar(4) CHECK(status IN ('PICK', 'BUY')),
-	PRIMARY KEY (id)
-);
-
-
-CREATE TABLE Cart_Product
-(
-	cart_id int NOT NULL,
 	product_id int NOT NULL,
-	PRIMARY KEY (cart_id, product_id)
+	amount int,
+	regdate datetime DEFAULT now(),
+	PRIMARY KEY (id)
 );
 
 
@@ -151,15 +142,7 @@ ALTER TABLE User
 ;
 
 
-ALTER TABLE Cart_Product
-	ADD FOREIGN KEY (cart_id)
-	REFERENCES Cart (id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Cart_Product
+ALTER TABLE Cart
 	ADD FOREIGN KEY (product_id)
 	REFERENCES Product (id)
 	ON UPDATE RESTRICT

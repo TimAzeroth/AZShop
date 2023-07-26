@@ -1,10 +1,9 @@
 package com.azeroth.project.controller;
 
-import com.azeroth.project.domain.CategoryDomain;
-import com.azeroth.project.domain.ProductDomain;
-import com.azeroth.project.domain.ProductValidator;
+import com.azeroth.project.domain.*;
 import com.azeroth.project.service.CategoryService;
 import com.azeroth.project.service.ProductService;
+import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,7 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+
 
     @GetMapping("/add")
     public void add(Model model) {

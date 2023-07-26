@@ -2,8 +2,6 @@ package com.azeroth.project.service;
 
 import com.azeroth.project.domain.ReviewDomain;
 import com.azeroth.project.repository.ReviewRepository;
-import com.azeroth.project.util.U;
-import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

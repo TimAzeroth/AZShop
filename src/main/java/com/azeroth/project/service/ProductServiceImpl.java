@@ -1,6 +1,8 @@
 package com.azeroth.project.service;
 
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.ProductDomain;
+import com.azeroth.project.repository.CartRepository;
 import com.azeroth.project.repository.ProductRepository;
 import com.azeroth.project.util.U;
 import jakarta.servlet.http.HttpSession;
@@ -156,6 +158,7 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.update(productDomain);
     }
+
 
     private void delFile(String originalImage) {
         String saveDirectory = new File(uploadDir).getAbsolutePath();
