@@ -10,12 +10,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/sales.css}">
+    <link rel="stylesheet" th:href="@{/css/sales.css}" type="text/css">
     <script th:src="@{/js/sales.js}"></script>
     <title>Sales</title>
 </head>
@@ -26,52 +26,51 @@
     <h1 class="header1">주문 / 결제</h1>
     <hr>
     <form id="salesForm">
-       <h2 class="header2">구매자 정보</h2>
-       <table>
-           <tr>
-               <td class="table_left_td1">ID</td>
-               <td th:text="${u_username}">
-               </td>
-           </tr>
-           <tr>
-               <td  class="table_left_td1">닉네임</td>
-               <td th:text="${nickname}"></td>
-           </tr>
-           <tr>
-               <td class="table_left_td1">이메일</td>
-               <td th:text="${email}">내용</td>
-           </tr>
-           <tr>
-               <td  class="table_left_td1">휴대폰 번호</td>
-               <td th:text="${phone}">내용</td>
-           </tr>
-       </table>
+        <h2 class="header2">구매자 정보</h2>
+        <table>
+            <tr>
+                <td class="table_left_td1">ID</td>
+                <td th:text="${u_username}">
+                </td>
+            </tr>
+            <tr>
+                <td class="table_left_td1">닉네임</td>
+                <td th:text="${nickname}"></td>
+            </tr>
+            <tr>
+                <td class="table_left_td1">이메일</td>
+                <td th:text="${email}">내용</td>
+            </tr>
+            <tr>
+                <td class="table_left_td1">휴대폰 번호</td>
+                <td th:text="${phone}">내용</td>
+            </tr>
+        </table>
 
-       <h2 class="header2">배송지 정보</h2>
-       <table th:each="post : ${add}">
-           <div id="addressbtn">
-               <a class="btn btn-outline-dark" id="homename" th:text="${post.address_name}">집 명칭</a>
-           </div>
-           <tr>
-               <td  class="table_left_td2">배송주소</td>
-               <td>
-                   [[${post.address}]]
-                   <p th:text="${post.address_detail}"></p>
-                   <input type="hidden" th:value="${post.address}">
-                   <input type="hidden" th:value="${post.address_detail}">
-               </td>
-           </tr>
-           <tr>
-               <td  class="table_left_td2">배송 요청사항</td>
-               <td>
-                   <input type="text">
-               </td>
-           </tr>
-       </table>
+        <h2 class="header2">배송지 정보</h2>
+        <div id="addressImp" th:each="post, i : ${add}">
 
-       <h2 class="header2">결제 정보</h2>
-<!--        <form th:action="@{/siteSales/sales}" enctype="multipart/form-data" method="post">-->
-        <form method="post">
+               <a th:id="'addressbtn'+${i.count}" class="btn btn-outline-dark" th:text="${post.address_name}">집 명칭</a>
+
+            <table class="addressImpTb" th:id="'addresstable' + ${i.count}">
+                <tr>
+                    <td class="table_left_td2">배송주소</td>
+                    <td>
+                        <p th:text="${post.address}" th:id="'postAddressImp'+ ${i.count}"></p>
+                        <p th:text="${post.address_detail}" th:id="'postAddressDeValue' + ${i.count}"></p>
+                        <p th:text="${post.postcode}" th:id="'postCode' + ${i.count}"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 class="header2">결제 정보</h2>
+        <form method="post" th:action="@{/siteSales/sales}" enctype="Multipart/form-data">
+            <input type="hidden" id="userId" th:text="${u_username}">
+            <input type="hidden" id="addressNameImp"/>
+            <input type="hidden" id="addressValue"/>
+            <input type="hidden" id="addressDeValue"/>
+            <input type="hidden" id="addPostcode"/>
             <table>
                 <tr>
                     <td class="table_left_td3">총 상품 가격</td>
@@ -86,33 +85,38 @@
                     <td>내용</td>
                 </tr>
                 <tr>
+                    <td class="table_left_td3">배송 요청사항</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
                     <td class="table_left_td3">신용/체크카드 결제</td>
                     <td id="inputCardNum">
                         <div class="cardnum">
                             <h6>카드번호</h6>
-                            <input style="width: 150px;" type="text"/>
+                            <input id="cardnum" style="width: 150px;" type="text"/>
                         </div>
                         <div class="cardnum">
                             <h6>유효 기간</h6>
-                            <input class="period" style="width: 60px;" type="text"/>
-                            <input class="period" style="width: 60px;" type="text"/>
+                            <input id="c_year" class="period" style="width: 60px;" type="text"/>
+                            <input id="c_month" class="period" style="width: 60px;" type="text"/>
                         </div>
                         <div class="cardnum">
                             <h6>CVC</h6>
-                            <input style="width: 150px;" type="text"/>
+                            <input id="c_cvc" style="width: 150px;" type="text"/>
                         </div>
                     </td>
                 </tr>
             </table>
 
             <div id="salesbtn">
-                <a class="btn btn-outline-dark"  id="backBtn">돌아가기</a>
-                <!--  <button type="submit" class="btn btn-outline-dark" th:if="${}">결제하기</button> -->
+                <a class="btn btn-outline-dark" id="backBtn">돌아가기</a>
                 <a class="btn btn-outline-dark">결제하기</a>
             </div>
         </form>
 
-   </form>
+    </form>
 
 </div>
 
