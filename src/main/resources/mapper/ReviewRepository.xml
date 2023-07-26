@@ -51,7 +51,4 @@
         SELECT COUNT(id) FROM Review  WHERE Product_id = #{param1};
     </select>
 
-ㅈ
-
-    </select>
 </mapper>

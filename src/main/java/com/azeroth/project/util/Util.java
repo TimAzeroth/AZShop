@@ -17,9 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Util {
-    @Autowired
-    static
-    UserService userService;
+
     // 현재 request 구하기
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -68,7 +66,5 @@ public class Util {
         }
     }
 
-    public static void updateLogDate(UserDomain user){
-        userService.updateLogTime(user);
-    }
+
 }
