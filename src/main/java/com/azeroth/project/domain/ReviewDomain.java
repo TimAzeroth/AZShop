@@ -22,11 +22,12 @@ public class ReviewDomain {
     Long user_id;       // FK
     Long product_id;    // FK
     String content;     // 내용
-
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime reviewdate; // 작성일자
+
+    
     String reply;       // 어드민 관리 답변
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

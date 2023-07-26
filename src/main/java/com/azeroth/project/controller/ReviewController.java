@@ -34,7 +34,10 @@ public class ReviewController {
         model.addAttribute("reviews",reviews);
         return "review/review";
     }
+    @GetMapping("/list")
+    public void list (){
 
+    }
     @PostMapping("/List")
     public String getReview(Integer page, Long productId, Model model){
         return "review";

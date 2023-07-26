@@ -12,13 +12,13 @@
 
   <script src="https://kit.fontawesome.com/51772bd9bd.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script th:src="@{/js/list.js}"></script>
+  <script th:src="@{/js/review.js}"></script>
 
   <title>목록</title>
 </head>
 <body style="margin-bottom:200px">
-<!--/* 인증 헤더 */-->
-<th:black th:insert="~{list/header::header}"></th:black>
+<!-- * 인증 헤더 * -->
+<!--<th:block th:insert="~{list/header::header}"></th:block>-->
 
 <div class="container mt-3">
   <h2>목록</h2>
@@ -27,15 +27,16 @@
 <!-- 페이징 헤더 -->
   <div class="mb-3 mt-3 clearfix">
     <span class="float-start me-2">총[[${cnt}]]개</span>
-    <span class="float-start">page [[${paga}]]/[[${totalPage}]]</span>
+    <span class="float-start">페이지[[${paga}]]/[[${totalPage}]]</span>
     <span class="float-end">
       <form name="frmPageRows">
         <input name="page" th:value="${page}" type="hidden">
-        <select class="from-select" name="pagaRows">
+        <select class="page-list" name="pageRows">
             <option th:selected="${pageRows==10}" value="10">10</option>
             <option th:selected="${pageRows==15}" value="15">15</option>
             <option th:selected="${pageRows==20}" value="20">20</option>
-            <option th:selected="${pageRows==50}" value="50">50</option>
+            <option th:selected="${pageRows==20}" value="25">25</option>
+            <option th:selected="${pageRows==50}" value="30">30</option>
         </select>
       </form>
     </span>
@@ -45,24 +46,27 @@
 
   <!--목록-->
   <table class="table table-hover">
+    <button type="button" value="delete" sec:authorize="hasAnyRole('MEMBER')">삭제</button>
     <thead class="table-success">
     <tr>
-      <th>#</th>
+      <th>User</th>
       <th>제목</th>
       <th>작성자</th>
       <th>작성일</th>
       <th>관리자 답변</th>
+      <th>관리자 작성일</th>
     </tr>
     </thead>
     <thbody>
       <tr th:each="review : ${list}">
-        <td th:if="@{review != null}" th:text="{ReviewDomain.id}">1</td>
-        <td><a href="@{'/review/detail/' + ${ReviewDomain.id}}" th:text="$reviews.subject}"></a></td>
+        <td th:if="@{review != null}" th:text="{review.id}"></td>
+        <td><a href="@{'/review/list/' + ${review.id}}" th:text="$review.subject}"></a></td>
         <td th:text="${review.user.user_id}"></td>
         <td th:text="${review.content}"></td>
         <td th:text="${#temporals.format(review.reviewdate 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${review.reply.admin_id}"></td>
-        <td th:text="${#temporals.format(review.reviewdate 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#review.user.admin_Id}"></td>
+        <td th:text="${#review.content.admin_Id}"></td>
+        <td th:text="${#temporals.format(review.replydate 'yyyy-MM-dd HH:mm:ss')}"></td>
       </tr>
     </thbody>
   </table>
@@ -76,8 +80,8 @@
 </div>
 
 <!--pagination-->
-<th:block th:insert="~{review/paginationPage::paginationPage}"></th:block>
-<!--paginatiion-->
+<!--<th:block th:insert="~{review/paginationPage::paginationPage}"></th:block>-->
+<!--pagination-->
 
 </body>
 </html>
