@@ -10,7 +10,13 @@
   <title>마이페이지</title>
 </head>
 <body>
-
+<div class="container3 text-center">
+  <div class="row">
+    <div class="col-12">
+      <span id="logoName"><img id="logo" th:src="@{/image/logo.jpg}">AZ.<span class="blue">S</span><span class="black">H</span><span class="red">O</span><span class="black">P</span></span>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row mt-5">
     <div class="col-12 text-center">
@@ -34,8 +40,8 @@
 
     <div class="col" id="buttons">
       <a class="btn btn-primary" id="button1" th:href="@{/user/accountManage}">계정관리</a> <br>
-      <a class="btn btn-primary" id="button2" >구매내역</a> <br>
-      <a class="btn btn-primary" id="button3" th:href="@{/user/cartList}">장바구니</a>
+      <a class="btn btn-info" id="button2" >구매내역</a> <br>
+      <a class="btn btn-success" id="button3" th:href="@{/user/cartList}">장바구니</a>
     </div>
   </div>
 
@@ -61,7 +67,7 @@
   </div>
 
   <div>
-    <a class="btn btn-success" id="home" th:href="@{/}">HOME</a>
+    <a class="btn btn-warning" id="home" th:href="@{/}">HOME</a>
   </div>
 </div>
 

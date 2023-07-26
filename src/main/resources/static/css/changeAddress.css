@@ -60,3 +60,32 @@ font-size: 30px;
   background-color: rgb(248, 208, 208);
   padding: 10px
 }
+
+#logoName{
+    font-size: 180px;
+    font-weight: 550;
+}
+
+#logo{
+    width:200px;
+    height:200px;
+    margin-right:20px;
+}
+
+.blue{
+    color:blue;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.red{
+    color:red;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.black{
+    color:black;
+    font-size: 180px;
+    font-weight: 550;
+}

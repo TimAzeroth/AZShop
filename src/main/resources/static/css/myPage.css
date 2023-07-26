@@ -1,96 +1,126 @@
-      body {
-            background-color: white;
-            padding-top: 150px;
-        }
-        .container {
-            background-color: #03f6fa;
-            border-radius: 5px;
-            padding: 20px;
-            color: white;
-        }
-        #container-1 {
-            border: 1px solid black;
-            background-color: rgb(237, 237, 237)
-        }
+body {
+    background-color: white;
+    padding-top: 150px;
+}
+.container {
+    background-color: #03f6fa;
+    border-radius: 5px;
+    padding: 20px;
+    color: white;
+}
+#container-1 {
+    border: 1px solid black;
+    background-color: rgb(237, 237, 237)
+}
 
-        #container-1 label {
-            color: black;
-            font-size: 25px;
-        }
+#container-1 label {
+    color: black;
+    font-size: 25px;
+}
 
-        span{
-          color:black;
-          font-size: 25px;
-          margin-left: 10px;
-        }
+#logoName{
+    font-size: 180px;
+    font-weight: 550;
+}
 
-        h1 {
-            font-size: 80px;
-        }
+span{
+    color:black;
+    font-size: 25px;
+    margin-left: 10px;
+}
 
-        #user-info{
-          margin-top: 15px;
-          border: 1px solid black;
-          text-align: left;
-        }
+h1 {
+    font-size: 80px;
+}
 
-        label{
-          margin-left: 30%;
-        }
+#user-info{
+    background-color:white;
+    margin-top: 15px;
+    border: 1px solid black;
+    text-align: left;
+}
 
-        span{
-          margin-left:60px;
-        }
+label{
+    margin-left: 30%;
+}
 
-        #home{
-          margin-top:20px;
-          width: 90%;
-          height: 60px;
-          font-size: 30px;
-        }
+span{
+    margin-left:60px;
+}
 
-        #button1, #button2{
-          margin: 30px 10px;
-          width: 100%;
-          height: 70px;
-          font-size: 30px;
-        }
+#home{
+    margin-top:20px;
+    width: 90%;
+    height: 60px;
+    font-size: 30px;
+}
 
-        #button3{
-          margin: 0 10px;
-          margin-top: 30px;
-          width:100%;
-          height: 70px;
-          font-size: 30px;
-        }
+#button1, #button2{
+    margin: 30px 10px;
+    width: 100%;
+    height: 70px;
+    font-size: 30px;
+}
 
-        #button1{
-          margin-top: 30px;
-        }
+#button3{
+    margin: 0 10px;
+    margin-top: 30px;
+    width:100%;
+    height: 70px;
+    font-size: 30px;
+}
 
-        #user-info div {
-        display: flex;
-        align-items: baseline;
-        }
+#button1{
+    margin-top: 30px;
+}
 
-        #user-info label {
-            margin-left: 30%;
-            width: 100px;
-            text-align: right;
-            font-weight: 900;
-        }
+#user-info div {
+    display: flex;
+    align-items: baseline;
+}
 
-        #user-info span {
-            margin-left: 50px;
-            text-align: left;
-            font-weight: 550;
-        }
+#user-info label {
+    margin-left: 30%;
+    width: 100px;
+    text-align: right;
+    font-weight: 900;
+}
 
-        .image img{
-            margin-top: 15px;
-            width: 300px;
-            height: 300px;
-            object-fit:cover;
-            border-radius: 50%;
-            border: 1px solid black;
-        }
+#user-info span {
+    margin-left: 50px;
+    text-align: left;
+    font-weight: 550;
+}
+
+.image img{
+    margin-top: 15px;
+    width: 300px;
+    height: 300px;
+    object-fit:cover;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+#logo{
+    width:200px;
+    height:200px;
+    margin-right:20px;
+}
+
+.blue{
+    color:blue;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.red{
+    color:red;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.black{
+    color:black;
+    font-size: 180px;
+    font-weight: 550;
+}

@@ -39,6 +39,7 @@ public class CartController {
         List<CartData> cartList = cartService.getCartData(user.getId());
         System.out.println(cartList);
         model.addAttribute("cartList", cartList);
+        model.addAttribute("user",user);
         return "/user/cartList";
     }
 

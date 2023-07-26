@@ -46,7 +46,5 @@ public interface UserService {
     // 특정 주소 불러오기
     AddressDomain findAddressById(Long id);
 
-    // 로그인 시간 등록
-    int updateLogTime(UserDomain userDomain);
 
 }

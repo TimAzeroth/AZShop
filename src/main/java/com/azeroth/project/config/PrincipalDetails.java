@@ -7,6 +7,7 @@ import com.azeroth.project.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,8 +16,8 @@ public class PrincipalDetails implements UserDetails {
 
     private AdminService adminService;
 
-    public void setUserService(AdminService userService) {
-        this.adminService = userService;
+    public void setUserService(AdminService adminService) {
+        this.adminService = adminService;
     }
     private UserDomain user;
 
@@ -99,4 +100,9 @@ public class PrincipalDetails implements UserDetails {
     public UserDomain getUser() {
         return user;
     }
+
+    public void updateLogDate(UserDomain userDomain){
+        adminService.updateLogDate(userDomain);
+    }
+
 }

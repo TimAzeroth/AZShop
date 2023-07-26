@@ -106,3 +106,32 @@ label{
     border-radius: 50%;
     border: 1px solid black;
 }
+
+#logoName{
+    font-size: 180px;
+    font-weight: 550;
+}
+
+#logo{
+    width:200px;
+    height:200px;
+    margin-right:20px;
+}
+
+.blue{
+    color:blue;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.red{
+    color:red;
+    font-size: 180px;
+    font-weight: 550;
+}
+
+.black{
+    color:black;
+    font-size: 180px;
+    font-weight: 550;
+}

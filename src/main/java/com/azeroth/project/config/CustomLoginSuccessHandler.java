@@ -1,5 +1,6 @@
 package com.azeroth.project.config;
 
+import com.azeroth.project.domain.UserDomain;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-
 
     public CustomLoginSuccessHandler(String defaultTargetUrl) {
         // SavedRequestAwareAuthenticationSuccessHandler#setDefaultTargetUrl()
@@ -41,8 +41,12 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         System.out.println("로그인 시간: " + loginTime);
         request.getSession().setAttribute("loginTime", loginTime);
 
+        userDetails.getUser().setLogdate(loginTime);
+        userDetails.updateLogDate(userDetails.getUser());
+
         // 로그인 직전 url 로 redirect하기
         super.onAuthenticationSuccess(request , response, authentication);
+
 
     }
 

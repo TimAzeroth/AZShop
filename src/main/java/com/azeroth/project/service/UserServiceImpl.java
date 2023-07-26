@@ -156,11 +156,6 @@ public class UserServiceImpl implements UserService{
         return userRepository.selectById(id);
     }
 
-    @Override
-    public int updateLogTime(UserDomain userDomain) {
-        return userRepository.updateLogTime(userDomain);
-    }
-
     private void delFile(String originalImage) {
         String saveDirectory = new File(uploadDir).getAbsolutePath();
 

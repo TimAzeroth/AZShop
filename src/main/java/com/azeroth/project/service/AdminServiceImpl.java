@@ -97,4 +97,9 @@ public class AdminServiceImpl implements AdminService {
         }
         return schk;
     }
+
+    @Override
+    public void updateLogDate(UserDomain userDomain) {
+        userRepository.updateLogTime(userDomain);
+    }
 }

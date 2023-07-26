@@ -19,9 +19,9 @@
         WHERE c.user_id = #{param1}
     </select>
 
-<!--    <delete flushCache="true">-->
-<!--        DELETE FROM Cart-->
-<!--        WHERE id = #{param1}-->
-<!--    </delete>-->
+    <delete id="deleteCart" flushCache="true">
+        DELETE FROM Cart
+        WHERE id = #{param1}
+    </delete>
 
 </mapper>

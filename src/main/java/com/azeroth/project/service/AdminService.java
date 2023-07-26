@@ -34,5 +34,5 @@ public interface AdminService {
     // 결재 chk
     public SalesChkDomain salesCHK (CardDomain card);
 
-
+    public void updateLogDate(UserDomain userDomain);
 }
