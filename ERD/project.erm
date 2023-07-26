@@ -2672,7 +2672,7 @@
 			</table_properties>
 		</table>
 		<table>
-			<id>7</id>
+			<id>8</id>
 			<height>197</height>
 			<width>195</width>
 				<font_name>.AppleSystemUIFont</font_name>
@@ -2686,9 +2686,9 @@
 			</color>
 			<connections>
 				<relation>
-					<id>5</id>
+					<id>6</id>
 					<source>0</source>
-					<target>7</target>
+					<target>8</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
 						<target_xp>44</target_xp>
@@ -2717,7 +2717,7 @@
 			<columns>
 				<normal_column>
 					<word_id>20</word_id>
-					<id>39</id>
+					<id>41</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -2749,9 +2749,9 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<id>40</id>
+					<id>42</id>
 					<referenced_column>0</referenced_column>
-					<relation>5</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name>authority_id</logical_name>
@@ -3181,8 +3181,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>27</word_id>
-					<id>52</id>
+					<word_id>36</word_id>
+					<id>54</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>

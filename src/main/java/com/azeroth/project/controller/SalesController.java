@@ -1,21 +1,16 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.*;
-import com.azeroth.project.repository.SalesRepository;
-import com.azeroth.project.repository.UserRepository;
-import com.azeroth.project.service.AdminService;
+import com.azeroth.project.service.AddressService;
 import com.azeroth.project.service.SalesService;
 import com.azeroth.project.service.UserService;
+import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import java.util.List;
 
@@ -29,40 +24,31 @@ public class SalesController {
     @Autowired
     private SalesService salesService;
 
+    @Autowired
+    private AddressService addressService;
+
+
     @GetMapping("/sales")
     public String sales(
             String u_username, Model model)
     {
 
-        // 세션 정보 땜빵용
-        UserDomain user = new UserDomain();
-        user.setId(1L);
-        user.setAuthority_id(1L);
-        user.setUsername("user1");
-        user.setNickname("사용자1");
-        user.setEmail("user1@gmail.com");
-        user.setProfileimg("face01.png");
-        user.setU_status("USE");
-        user.setPhone("01012341234");
+        // 세션에 저장된 사용자의 정보
+        UserDomain user = Util.getLoggedUser();
 
         model.addAttribute("u_username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("phone", user.getPhone());
         model.addAttribute("nickname", user.getNickname());
+        model.addAttribute("id", user.getId());
+        System.out.println("-------------------------------------------------");
 
-        AddressDomain add = new AddressDomain();
-        add.setId(1L);
-        add.setUser_id(1L);
-        add.setAddress("서울시 종로구 테헤란로 56길");
-        add.setAddress_detail("234-5번지");
-        add.setAddress_name("유저1집");
-        add.setPostcode("12345");
+        System.out.println( addressService.addfind(user.getId()));
 
-        model.addAttribute("address_name", add.getAddress_name());
-        model.addAttribute("address_detail",add.getAddress_detail());
-        model.addAttribute("email",user.getEmail());
-        model.addAttribute("phone",user.getPhone());
-
+        List<AddressDomain> add =  addressService.addfind(user.getId());
+        if (add != null ){
+            model.addAttribute("add", add);
+        }
 
         System.out.println("실행 확인용");
         return "/siteSales/sales";

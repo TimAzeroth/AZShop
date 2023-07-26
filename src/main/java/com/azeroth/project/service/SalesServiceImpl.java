@@ -38,13 +38,6 @@ public class SalesServiceImpl implements SalesService {
         return salesDomain;
     }
 
-    @Override
-    public SalesDomain salesAddlist(String u_username) {
-        userRepository.findByUsername(u_username);
-        SalesDomain salesDomain = salesRepository.findSalesAdd(u_username);
-        return salesDomain;
-    }
-
 
     @Override
     public int insert(SalesDomain salesDomain) {
