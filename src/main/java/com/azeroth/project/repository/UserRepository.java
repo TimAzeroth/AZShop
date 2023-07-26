@@ -5,6 +5,7 @@ import com.azeroth.project.domain.AuthorityDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -39,5 +40,8 @@ public interface UserRepository {
 
     // 특정id의 주소 불러오기
     AddressDomain selectById(Long id);
+
+    // user 로그인 시간 등록하기
+    int updateLogTime(UserDomain userDomain);
 
 }

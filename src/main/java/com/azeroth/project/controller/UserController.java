@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping("/loginError")
     public String loginError(){
-        return "user/login";
+        return "user/loginError";
     }
 
     @RequestMapping("/rejectAuth")

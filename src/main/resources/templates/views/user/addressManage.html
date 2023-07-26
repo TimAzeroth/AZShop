@@ -29,7 +29,7 @@
 
     <table class="table table-hover">
       <thead>
-        <div class="text-danger">주소는 3개까지 추가가능합니다.</div>
+        <tr th:if="${list.size() == 3}"><th scope="row" class="text-danger">주소는 3개까지 추가가능합니다.</th></tr>
         <tr>
           <th scope="col">#</th>
           <th scope="col">주소명</th>
