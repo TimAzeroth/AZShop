@@ -26,10 +26,10 @@ body {
     width: 100%;
 }
 
-/* Review box styles */
-.review {
+/* container box styles */
+.container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #f8f9fa; /* Light grey color */
     border: 1px solid #ddd; /* Darker grey border */
     padding: 15px;
@@ -39,13 +39,32 @@ body {
     max-width: 800px; /* To keep the review boxes from becoming too wide on large screens */
 }
 
-/* Review content styles */
-.review p {
+/* container content styles */
+.container p {
     margin-bottom: 10px;
 }
 
+/* list box styles */
+.list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 10px 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+}
+/* list content styles */
+.list p {
+       margin-right: 10px;
+ }
+
+/* addReply auto */
+.addReply {
+       margin-left: auto;
+}
+
 /* Review button styles */
-.review button {
+.btn {
     align-self: flex-start;
     background-color: #f44336; /* Red color */
     color: white;

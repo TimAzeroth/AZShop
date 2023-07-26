@@ -132,7 +132,7 @@ function addDelete(){
             url: "/review/delete",
             type: "POST",
             cache: false,
-            data: {"id":review_id},
+            data: {"id":review_id },
             success: function(data, status, xhr){
                 if(data.status !== "OK"){
                     alert(data.status);
@@ -148,7 +148,13 @@ function addDelete(){
     });
 }
 
-function a
+function container(){
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+}
 
 
 
