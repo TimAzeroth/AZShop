@@ -14,6 +14,8 @@ public class PrincipalDetailService implements UserDetailsService {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -23,7 +25,7 @@ public class PrincipalDetailService implements UserDetailsService {
         // UserDetails 생성해서 리턴
         if( user != null){
             PrincipalDetails userDetails = new PrincipalDetails(user);
-            userDetails.setUserService( adminService );
+            userDetails.setUserService( adminService, userService );
             return userDetails;
         }
 

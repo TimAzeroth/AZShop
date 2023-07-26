@@ -1,0 +1,37 @@
+.contitle{
+    width:100%
+}
+.cont{
+    float: left;
+    border: 1px solid #333;
+}
+.userid{
+    float: left;
+        border: 1px solid #333;
+    width:20%
+}
+.username{
+    float: left;
+    border: 1px solid #333;
+    width:10%
+}
+.useremail{
+    float: left;
+    border: 1px solid #333;
+    width:30%
+}
+.userphon{
+    float: left;
+    border: 1px solid #333;
+    width:20%
+}
+.userstat{
+    float: left;
+    border: 1px solid #333;
+    width:10%
+}
+.userauth{
+    float: left;
+    border: 1px solid #333;
+    width:10%
+}
