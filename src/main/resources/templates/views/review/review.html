@@ -7,51 +7,47 @@
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/51772bd9bd.js"></script>
 
         <!-- Review -->
-        <div class="contatiner my-3 border rounded">
+        <div class="container my-3 border rounded">
             <div class="mb-3 mt-3">
-                <div id="reviewDetails"></div>
-                <div id="reviewDate"></div>
+                <label >리뷰:<span id="review"></span> 개</label>
+            <div class="input-group my-2" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')">
+                <input class="form-control" id="input_comment" type="text">
+                <button class="btn btn-outline-primary" id="btn_comment" type="button">리뷰작성:</button>
             </div>
-            <div>
-                <form th:action="@{/review/list}" method="POST">
-                    <input type="hidden" id="userId" name="userId">
-                    <input type="hidden" id="productId" name="productId">
-                    <label >리뷰:<span id="review"></span> 개</label>
-                    <button id="submit" name="id" value="review">리뷰</button>
-                </form>
-            </div>
-            <div>
-                <!--내용 배열 -->
-                <p><strong>작성자:</strong> <span id="author"></span></p>
-            </div>
-            <div>
-                <p><strong>내용:</strong> <span id="reviewContent"></span></p>
-            </div>
-            <div>
-                <p><strong>작성일:</strong> <span id="creationDate"></span></p>
-            </div>
+                <div>
+                    <table class="table table-hover mt-3" id="reveiws_table">
+                        <!--내용 배열 -->
+                        <p><strong>작성자:</strong> <span id="author"></span></p>
+                        <p><strong>내용:</strong> <span id="reviewContent"></span></p>
+                        <p><strong>작성일:</strong> <span id="creationDate"></span></p>
+                    </table>
+                </div>
+             </div>
         </div>
+
         <!-- Reviews -->
-        <div class="d-flex" th:each="review : ${reviews}">
-            <div class="reviewslist">
+        <div class="d-flex" th:each="review : ${review}">
+            <div class="list">
             <!-- Review 1 -->
                 <p id="id" name="delete" rows="4" cols="50" th:text="${review.content}"></p><br>
                     <div>
-                        <form th:action="@{review/delete}" method="POST">
-                            <input th:value="${review.id}" type="hidden">
-                            <button type="submit" value="delete">삭제</button>
+                        <form th:action="@{review/list}" method="POST">
+                            <input th:value="${review.product_id}" type="hidden">
+                            <button type="button" value="delete">삭제</button>
                         </form>
                     </div>
                     <div>
                         <p th:text="'작성자:'+${review.user_id}"><strong></strong></p>
                     </div>
-
+                     <div>
+                         <p th:text="'내용:'+${review.content}"><strong></strong></p>
+                     </div>
                     <div>
                         <p th:text="'작성일'+${review.reviewdate}"><strong></strong></p>
                     </div>
                 <!-- ROLE_ADMIN -->
                 <div class="addReply">
-                    <p id="adminId" name="adminreply" sec:th="ROLE_ADMIN">
+                    <p id="adminId" name="adminReply" sec:th="ROLE_ADMIN">
                     <form action="/reply" method="POST">
                         <input type="hidden" name="adminId" th:value="${review.id}">
                         <button type="submit" value="reply">답변</button>

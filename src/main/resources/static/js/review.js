@@ -3,7 +3,7 @@ $(function(){
     $("#btnDel").click(function(){
         let answer = confirm("삭제하시겠습니까?");
         if(answer){
-            $("p[name='delete']").content();
+            $("p[name='delete']").remove();
         }
     });
 
@@ -11,12 +11,9 @@ $(function(){
     const id = $("input[name='id']").val().trim();
 
     // 현재 글의 댓글을 불러온다.
-    loadComment(id);
+    loadReview_list(id);
 
-    // 댓글 작성 버튼 누르면 댓글 등록 하기.
-    // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
-    // 2. 어느 사용자가 작성한 댓글인지? --> user_id 값
-    // 3. 리뷰 내용은 무엇인지?  --> 아래 reviews
+
     $("#btn_review").click(function(){
         // 입력한 댓글
         const review = $("#input_review").val().trim();
@@ -36,7 +33,7 @@ $(function(){
         };
 
         $.ajax({
-            url: "/review/write",
+            url: "/review",
             type: "POST",
             data: data,
             cache: false,
@@ -47,7 +44,7 @@ $(function(){
                         return;
                     }
                     loadComment(id);   // 댓글 목록 다시 업데이트
-                    $("#input_reviews").val('');   // 입력 input 은 비우기
+                    $("#input_review").val('');   // 입력 input 은 비우기
                 }
             },
         });
@@ -58,10 +55,10 @@ $(function(){
 
 });
 
-// 특정 글 (post_id) 의 댓글 목록 읽어오기
+// 특정 글 (user_id) 의 댓글 목록 읽어오기
 function loadComment(user_id){
     $.ajax({
-        url: "/review/list?id=" + post_id,
+        url: "/review/list?id=" + user_id,
         type: "GET",
         cache: false,
         success: function(data, status, xhr){
@@ -85,7 +82,7 @@ function loadComment(user_id){
 }
 
 function buildReview(result){
-    $("#review_cnt").text(result.counat);   // 댓글 총 개수
+    $("#review_cnt").text(result.content);   // 댓글 총 개수
 
     const out = [];
 
@@ -94,9 +91,8 @@ function buildReview(result){
         let content = review.content;
         let regdate = review.regdate;
 
-        let user_id = comment.user.id;
-        let username = comment.user.username;
-        let name = comment.user.name;
+        let user_id = review.user.id;
+        let product_id =  review.product_id;
 
         // 삭제버튼 여부
         review delBtn = (user_id !== product_id) ? '' : `
@@ -130,13 +126,13 @@ function addDelete(){
         if(!confirm("댓글을 삭제하시겠습니까?")) return;
 
         // 삭제할 댓글의 comment id
-        const comment_id = $(this).attr("data-cmtdel-id");
+        const review_id = $(this).attr("data-cmtdel-id");
 
         $.ajax({
             url: "/review/delete",
             type: "POST",
             cache: false,
-            data: {"id": comment_id},
+            data: {"id":review_id},
             success: function(data, status, xhr){
                 if(data.status !== "OK"){
                     alert(data.status);
