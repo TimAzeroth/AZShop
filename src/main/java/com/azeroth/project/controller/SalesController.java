@@ -1,9 +1,7 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.*;
-import com.azeroth.project.service.AddressService;
-import com.azeroth.project.service.SalesService;
-import com.azeroth.project.service.UserService;
+import com.azeroth.project.service.*;
 import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,11 @@ public class SalesController {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping("/sales")
     public String sales(
@@ -62,7 +65,7 @@ public class SalesController {
             SalesDomain salesDomain,
             Model model
     ){
-        // SalesChkDomain chk = adminService.salesCHK();  // 카드 도메인 넘기기
+//         SalesChkDomain chk = adminService.salesCHK();  // 카드 도메인 넘기기
         if (true) {
             int insert = salesService.insert(salesDomain);
             model.addAttribute("result", insert);

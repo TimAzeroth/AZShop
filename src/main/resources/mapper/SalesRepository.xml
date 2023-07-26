@@ -27,11 +27,9 @@
             u.username "u_username",
             u.email "email",
             u.phone "phone",
-            u.id "id",
-            p.id "p_id"
+            u.id "id"
         FROM
-            user u,
-            product p
+            user u
         WHERE
             u.username = #{username}
     </select>
