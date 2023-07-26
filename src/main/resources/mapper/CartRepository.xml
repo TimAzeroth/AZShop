@@ -11,8 +11,8 @@
         VALUES(#{user_id}, #{product_id}, #{amount})
     </insert>
 
-    <select id="getCartData" resultType="com.azeroth.project.domain.CartData">
-        SELECT c.product_id, c.amount, p.p_img, p.p_name, p.price
+    <select id="getCart" resultType="com.azeroth.project.domain.CartData">
+        SELECT c.id, c.product_id, c.amount, p.p_img, p.p_name, p.price
         FROM Cart c
         LEFT JOIN Product p
         ON c.product_id = p.id
@@ -23,5 +23,17 @@
         DELETE FROM Cart
         WHERE id = #{param1}
     </delete>
+
+    <select id="getAmount" resultType="Long">
+        SELECT amount
+        FROM Cart
+        WHERE user_id = #{param1} AND product_id = #{param2}
+    </select>
+
+    <update id="modifyAmount" flushCache="true">
+        UPDATE Cart
+        SET amount = #{param3}
+        WHERE user_id = #{param1} AND product_id = #{param2}
+    </update>
 
 </mapper>

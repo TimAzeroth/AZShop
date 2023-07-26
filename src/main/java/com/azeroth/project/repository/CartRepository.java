@@ -8,9 +8,12 @@ import java.util.List;
 public interface CartRepository {
     int addCart(CartDomain cart);
 
-    // user_id로 장바구니 상품들 불러오기
-    List<CartData> getCartData(Long user_id);
+    List<CartData> getCart(Long user_id);
 
-    // 삭제
     int deleteCart(Long id);
+
+    // 카트에 담긴 상품 수량 가져오기
+    Long getAmount(Long user_id, Long product_id);
+
+    int modifyAmount(Long user_id, Long product_id, Long amount);
 }

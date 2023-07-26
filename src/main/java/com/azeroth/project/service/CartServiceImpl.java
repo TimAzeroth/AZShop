@@ -26,9 +26,22 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public List<CartData> getCartData(Long user_id) {
-        return cartRepository.getCartData(user_id);
+    public List<CartData> getCart(Long user_id) {
+        return cartRepository.getCart(user_id);
     }
 
+    @Override
+    public int deleteCart(Long id) {
+        return cartRepository.deleteCart(id);
+    }
 
+    @Override
+    public Long getAmount(Long user_id, Long product_id) {
+        return cartRepository.getAmount(user_id, product_id);
+    }
+
+    @Override
+    public int modifyAmount(Long user_id, Long product_id, Long amount) {
+        return cartRepository.modifyAmount(user_id, product_id, amount);
+    }
 }

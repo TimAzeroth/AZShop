@@ -8,6 +8,17 @@ $(function() {
     const amount = document.getElementById('amount');
 
     let count = 1;
+    amount.value = count;
+
+    // 로그인을 안 하고 장바구니 또는 구매를 클릭하면 로그인 페이지로 이동
+    if (logged_id == null) {
+        $("#buybutton").click(function() {
+            window.location.href = "/user/login";
+        });
+        $("#cartbutton").click(function() {
+            window.location.href = "/user/login";
+        });
+    }
 
     if(count > stock) {
         error.classList.remove("d-none");
@@ -38,10 +49,14 @@ $(function() {
       }
     });
 
-    $('#cartbutton').click(function(){
-        parseInt(amount.value);
-        $("form[name='cartAdd']").submit();
-    });
+    if (logged_id != null) {
+        $("#buybutton").click(function() {
+            // TODO
+        });
+        $("#cartbutton").click(function() {
+            $("form[name='cartform']").submit();
+        });
+    }
 
     // 삭제 버튼
     $('#delete').click(function(){

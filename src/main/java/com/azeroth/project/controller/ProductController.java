@@ -1,8 +1,10 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.*;
+import com.azeroth.project.service.CartService;
 import com.azeroth.project.service.CategoryService;
 import com.azeroth.project.service.ProductService;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 @Controller
 @RequestMapping("/product")
@@ -24,6 +27,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
 
 
     @GetMapping("/add")
@@ -102,6 +107,12 @@ public class ProductController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable long id, Model model){
+        UserDomain user = U.getLoggedUser();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (user != null) {
+            cartProducts = cartService.getCart(user.getId());
+        }
+        model.addAttribute("cartProducts", cartProducts);
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
         List<CategoryDomain> subCategories = categoryService.findAllSub();
         List<CategoryDomain> categories = categoryService.findAll();
@@ -114,6 +125,12 @@ public class ProductController {
 
     @PostMapping("/search")
     public String search(@RequestParam("searchedValue") String searchedValue, Model model) {
+        UserDomain user = U.getLoggedUser();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (user != null) {
+            cartProducts = cartService.getCart(user.getId());
+        }
+        model.addAttribute("cartProducts", cartProducts);
         List<ProductDomain> products = productService.listBySearch(searchedValue);
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
         List<CategoryDomain> subCategories = categoryService.findAllSub();

@@ -2,9 +2,11 @@ package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.CartData;
 import com.azeroth.project.domain.CartDomain;
+import com.azeroth.project.domain.ProductDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.service.CartService;
 import com.azeroth.project.service.ProductService;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,32 +21,40 @@ import java.util.List;
 public class CartController {
 
     @Autowired
-    private CartService cartService;
+    CartService cartService;
+    @Autowired
+    ProductService productService;
 
-    @PostMapping("/product/addcart")
-    public String addCartOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model) {
-        UserDomain user = Util.getLoggedUser();
-        cart.setProduct_id(product_id);
-        cart.setAmount(amount);
-        cart.setUser_id(user.getId());
-        int result = cartService.addCart(cart);
-        System.out.println(result);
+    @PostMapping("/cart/add")
+    public String addOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model) {
+        UserDomain user = U.getLoggedUser();
+        ProductDomain productDomain = productService.findById(product_id);
+        int result = 0;
+        Long inCart = 0L;
+        Long max = productDomain.getStock();
+        if(cartService.getAmount(user.getId(), product_id) != null) {
+            inCart = cartService.getAmount(user.getId(), product_id);
+        }
+        if (inCart != 0) {
+            if ((amount + inCart) > max) {
+                amount = max;
+            } else {
+                amount = amount + inCart;
+            }
+            result = cartService.modifyAmount(user.getId(), product_id, amount);
+        } else {
+            cart.setProduct_id(product_id);
+            cart.setUser_id(user.getId());
+            cart.setAmount(amount);
+            result = cartService.addCart(cart);
+        }
         model.addAttribute("result", result);
-        return "product/addcartOk";
+        return "cart/addOk";
     }
 
-    @GetMapping("/user/cartList")
-    public String getList(Model model) {
-        UserDomain user = Util.getLoggedUser();
-        List<CartData> cartList = cartService.getCartData(user.getId());
-        System.out.println(cartList);
-        model.addAttribute("cartList", cartList);
-        model.addAttribute("user",user);
-        return "/user/cartList";
+    @PostMapping("/cart/delete")
+    public String deleteOk(Long id, Model model) {
+        cartService.deleteCart(id);
+        return "redirect:/user/cart";
     }
-
-//    @PostMapping("/user/cartDelete")
-//    public String deleteOk(Long id, Model model) {
-//        model.addAttribute("result", TODO);
-//    }
 }
