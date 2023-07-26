@@ -38,10 +38,14 @@ $(function() {
       }
     });
 
-    $('#cartbutton').click(function(){
-        parseInt(amount.value);
-        $("form[name='cartAdd']").submit();
-    });
+    if (logged_id != null) {
+        $("#buybutton").click(function() {
+            // TODO
+        });
+        $("#cartbutton").click(function() {
+            $("form[name='cartform']").submit();
+        });
+    }
 
     // 삭제 버튼
     $('#delete').click(function(){

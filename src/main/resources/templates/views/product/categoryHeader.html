@@ -33,6 +33,9 @@
               <span class="text-dark">[[${user.nickname}]] 님 환영합니다</span>
             </div>
             <div class="ms-2">
+              <a class="link-dark" th:href="@{/user/cart}">장바구니([[${#lists.size(cartProducts)}]])</a>
+            </div>
+            <div class="ms-2">
               <a class="link-dark" th:href="@{/user/logout}">로그아웃</a>
             </div>
           </span>

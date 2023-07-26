@@ -1,13 +1,14 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.CartDomain;
+import com.azeroth.project.domain.CartData;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.domain.UserValidator;
+import com.azeroth.project.service.CartService;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CartService cartService;
 
     public UserController(){
         System.out.println(getClass().getName() + "() 생성");
@@ -43,7 +46,7 @@ public class UserController {
 
     @PostMapping("/loginError")
     public String loginError(){
-        return "user/loginError";
+        return "user/login";
     }
 
     @RequestMapping("/rejectAuth")
@@ -79,7 +82,6 @@ public class UserController {
             return "redirect:/user/register";
         }
         int cnt = userService.register(user,file);
-
         model.addAttribute("result",cnt);
 
         return "/user/registerOk";
@@ -215,6 +217,13 @@ public class UserController {
         model.addAttribute("result", userService.update(isDelete, originalImage, user, file));
 
         return "/user/changeProfileOk";
+    }
+
+    @GetMapping("/cart")
+    public void viewCart(Model model) {
+        UserDomain user = U.getLoggedUser();
+        List<CartData> cartProducts = cartService.getCart(user.getId());
+        model.addAttribute("cartProducts", cartProducts);
     }
 
 

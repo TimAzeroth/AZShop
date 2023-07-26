@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script th:unless="${result > 0}">
+        alert("상품 추가 실패")
+        history.back();
+</script>
+<script th:if="${result > 0}" th:inline="javascript">
+        let answer = confirm("상품을 추가했습니다. 장바구니로 이동하시겠습니까?");
+        if(answer) {
+            location.href = "/user/cart";
+        } else {
+            location.href = "/";
+        }
+</script>
+</html>
