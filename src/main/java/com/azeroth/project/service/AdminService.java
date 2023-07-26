@@ -1,7 +1,6 @@
 package com.azeroth.project.service;
 
 import com.azeroth.project.domain.*;
-import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public interface AdminService {
     UserDomain findByUsername(String username);
 
     // 특정 회원이 구매한 상품 LIST
-    List<SalesDomain> selectBuyByUser(String username);
+    List<ProductDomain> selectBuyByUser(String username);
 
     // 특정 회원이 작성한 후기 LIST
     List<ReviewDomain> selectAnswerByUser(String username);

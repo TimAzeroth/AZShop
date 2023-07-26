@@ -51,8 +51,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<SalesDomain> selectBuyByUser(String username) {
-        return null;
+    public List<ProductDomain> selectBuyByUser(String username) {
+        List<ProductDomain> list = adminRepository.userBuyProduct(username);
+        System.out.println("list = " + list);
+        return list;
     }
 
     @Override
