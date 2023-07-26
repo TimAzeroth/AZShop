@@ -29,7 +29,13 @@
     <script th:inline="javascript">
                 const logged_id = [[${logged_user.id}]];
                 const logged_username = [[${logged_user.username}]];
-            </script>
+    </script>
+</th:block>
+<th:block sec:authorize="isAnonymous()">
+    <script th:inline="javascript">
+                const logged_id = null;
+                const logged_username = null;
+    </script>
 </th:block>
 <div class="container mt-5" th:if="${product}">
     <div class="row">
