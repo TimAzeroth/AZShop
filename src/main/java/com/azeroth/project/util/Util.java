@@ -2,8 +2,10 @@ package com.azeroth.project.util;
 
 import com.azeroth.project.config.PrincipalDetails;
 import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -15,6 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Util {
+    @Autowired
+    static
+    UserService userService;
     // 현재 request 구하기
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -61,5 +66,9 @@ public class Util {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void updateLogDate(UserDomain user){
+        userService.updateLogTime(user);
     }
 }

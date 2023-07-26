@@ -4,9 +4,13 @@ import com.azeroth.project.domain.AuthorityDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.service.AdminService;
 import com.azeroth.project.service.UserService;
+import com.azeroth.project.service.UserServiceImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,9 +18,11 @@ import java.util.List;
 public class PrincipalDetails implements UserDetails {
 
     private AdminService adminService;
+    private UserService userService;
 
-    public void setUserService(AdminService userService) {
-        this.adminService = userService;
+    public void setUserService(AdminService adminService , UserService userService) {
+        this.adminService = adminService;
+        this.userService = userService;
     }
     private UserDomain user;
 
@@ -99,4 +105,11 @@ public class PrincipalDetails implements UserDetails {
     public UserDomain getUser() {
         return user;
     }
+
+    public void updateLogDate(UserDomain user){
+
+        userService.updateLogTime(user);
+    }
+
+
 }
