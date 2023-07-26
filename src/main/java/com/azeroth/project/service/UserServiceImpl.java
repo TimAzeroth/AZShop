@@ -2,11 +2,11 @@ package com.azeroth.project.service;
 
 import com.azeroth.project.domain.AddressDomain;
 import com.azeroth.project.domain.AuthorityDomain;
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.UserDomain;
 import com.azeroth.project.repository.AuthorityRepository;
 import com.azeroth.project.repository.UserRepository;
 import com.azeroth.project.util.Util;
-import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -155,6 +154,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public AddressDomain findAddressById(Long id) {
         return userRepository.selectById(id);
+    }
+
+    @Override
+    public int updateLogTime(UserDomain userDomain) {
+        return userRepository.updateLogTime(userDomain);
     }
 
     private void delFile(String originalImage) {

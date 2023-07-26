@@ -1,6 +1,7 @@
 package com.azeroth.project.service;
 
 import com.azeroth.project.domain.AddressDomain;
+import com.azeroth.project.domain.CartDomain;
 import com.azeroth.project.domain.UserDomain;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,4 +45,8 @@ public interface UserService {
 
     // 특정 주소 불러오기
     AddressDomain findAddressById(Long id);
+
+    // 로그인 시간 등록
+    int updateLogTime(UserDomain userDomain);
+
 }

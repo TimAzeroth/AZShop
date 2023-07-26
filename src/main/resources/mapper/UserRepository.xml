@@ -90,5 +90,12 @@
         WHERE id = #{id}
     </select>
 
+    <!-- 유저 로그인 시간 등록 -->
+    <update id="updateLogTime" flushCache="true" parameterType="com.azeroth.project.domain.UserDomain">
+        UPDATE User
+        SET logdate=#{logdate}
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>

@@ -29,6 +29,7 @@
 
     <table class="table table-hover">
       <thead>
+        <tr th:if="${list.size() == 3}"><th scope="row" class="text-danger">주소는 3개까지 추가가능합니다.</th></tr>
         <tr>
           <th scope="col">#</th>
           <th scope="col">주소명</th>
@@ -52,7 +53,7 @@
       </tbody>
     </table>
 
-    <p th:unless="${list}" id="noAddress">현재 설정하신 주소가 없습니다. 주소를 추가해주세요</p>
+    <div id="noAddress" th:if="${list == null or list.size() == 0}">현재 설정하신 주소가 없습니다. 주소를 추가해주세요</div>
 
     <div id="footbtn">
       <a class="btn btn-success" th:href="changeAddress">주소추가</a>
