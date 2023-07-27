@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -33,14 +36,13 @@ public class SalesController {
     private AdminService adminService;
 
     @GetMapping("/sales")
-    public String sales(
-            String u_username, Model model)
+    public String sales(String u_username, Model model)
     {
-
         // 세션에 저장된 사용자의 정보
         UserDomain user = Util.getLoggedUser();
+        u_username = user.getUsername();
 
-        model.addAttribute("u_username", user.getUsername());
+        model.addAttribute("u_username", u_username);
         model.addAttribute("email", user.getEmail());
         model.addAttribute("phone", user.getPhone());
         model.addAttribute("nickname", user.getNickname());
@@ -55,29 +57,28 @@ public class SalesController {
         }
 
         System.out.println("실행 확인용");
-        return "/siteSales/sales";
+        return "siteSales/sales";
     }
 
 
     @PostMapping("/sales")
     public String salesOk(
-            @RequestParam
             @ModelAttribute("sales")
-            @Valid
             SalesDomain salesDomain,
             Model model
     ){
+        System.out.println("ㅇ--------------------------------------------------------ㅇ");
+        UserDomain user = Util.getLoggedUser();
+        salesDomain.setId(user.getId());
 
-        CartData data = new CartData();
-        data.setAmount(1l);
-        salesDomain.setP_id(1l);
+        int sales = salesService.insert(salesDomain);
 
-
-        int insert = salesService.insert(salesDomain);
-        model.addAttribute("result", insert);
-
-        return "/siteSales/salesOk";
+        model.addAttribute("sales", sales);
+        return "siteSales/salesOk";
     }
+
+
+
 
 
     // 결제완료 알림 페이지

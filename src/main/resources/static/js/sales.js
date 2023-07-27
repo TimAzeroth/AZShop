@@ -10,9 +10,11 @@ $(function(){
     var addtext1 = $("#postAddressImp1").text();
     var adddetail1 = $("#postAddressDeValue1").text();
     var addpost1 = $("#postCode1").text();
-    $('#addressValue').val(addtext1);
-    $('#addressDeValue').val(adddetail1);
-    $('#addPostcode').val(addpost1);
+    $('#address').val(addtext1);
+    $('#address_detail').val(adddetail1);
+    $('#postcode').val(addpost1);
+    $('#p_id').val(2);
+    $('#amount').val(2);
 
 
     $("#addressbtn2").click(function() {
@@ -23,9 +25,9 @@ $(function(){
         var addtext2 = $("#postAddressImp2").text();
         var adddetail2 = $("#postAddressDeValue2").text();
         var addpost2 = $("#postCode2").text();
-        $('#addressValue').val(addtext2);
-        $('#addressDeValue').val(adddetail2);
-        $('#addPostcode').val(addpost2);
+        $('#address').val(addtext2);
+        $('#address_detail').val(adddetail2);
+        $('#postcode').val(addpost2);
     });
 
      $("#addressbtn3").click(function() {
@@ -36,9 +38,9 @@ $(function(){
          var addtext3 = $("#postAddressImp3").text();
          var adddetail3 = $("#postAddressDeValue3").text();
          var addpost3 = $("#postCode2").text();
-         $('#addressValue').val(addtext3);
-         $('#addressDeValue').val(adddetail3);
-         $('#addPostcode').val(addpost3);
+         $('#address').val(addtext3);
+         $('#address_detail').val(adddetail3);
+         $('#postcode').val(addpost3);
       });
 
      $("#addressbtn1").click(function() {
@@ -49,9 +51,9 @@ $(function(){
         var addtext1 = $("#postAddressImp1").text();
         var adddetail1 = $("#postAddressDeValue1").text();
         var addpost1 = $("#postCode1").text();
-        $('#addressValue').val(addtext1);
-        $('#addressDeValue').val(adddetail1);
-        $('#addPostcode').val(addpost1);
+        $('#address').val(addtext1);
+        $('#address_detail').val(adddetail1);
+        $('#postcode').val(addpost1);
      });
 
 });

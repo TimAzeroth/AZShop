@@ -1,10 +1,15 @@
 package com.azeroth.project.service;
 
+import com.azeroth.project.domain.AddressDomain;
+import com.azeroth.project.domain.ProductDomain;
 import com.azeroth.project.domain.SalesDomain;
 import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.repository.AddressRepository;
+import com.azeroth.project.repository.ProductRepository;
 import com.azeroth.project.repository.SalesRepository;
 import com.azeroth.project.repository.UserRepository;
 
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,10 @@ public class SalesServiceImpl implements SalesService {
     private SalesRepository salesRepository;
 
     private UserRepository userRepository;
+
+    private ProductRepository productRepository;
+
+    private AddressRepository addressRepository;
 
     // 서비스 연결
     @Autowired
@@ -39,18 +48,10 @@ public class SalesServiceImpl implements SalesService {
     }
 
 
+    // 결제완료
     @Override
     public int insert(SalesDomain salesDomain) {
-        // 현재 로그인한 작성자 정보
-        UserDomain user = Util.getLoggedUser();
-
-        // 위 정보는 session 의 정보,  DB 에서 다시 읽어온다
-        user = userRepository.findByUsername(user.getUsername());
-        salesDomain.setUser(user);
-
-        int cnt = salesRepository.insert(salesDomain);
-
-        return cnt;
+        return salesRepository.insert(salesDomain);
     }
 
 
