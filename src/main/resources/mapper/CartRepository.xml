@@ -12,7 +12,7 @@
     </insert>
 
     <select id="getCart" resultType="com.azeroth.project.domain.CartData">
-        SELECT c.id, c.product_id, c.amount, p.p_img, p.p_name, p.price
+        SELECT c.id, c.product_id, c.amount, p.p_img, p.p_name, p.price, p.stock
         FROM Cart c
         LEFT JOIN Product p
         ON c.product_id = p.id
