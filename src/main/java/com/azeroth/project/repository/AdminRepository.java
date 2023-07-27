@@ -18,7 +18,7 @@ public interface AdminRepository {
     UserDomain findByUser(String username);
 
     // 특정 회원이 구매한 상품 list
-    List<ProductDomain> userBuyProduct(String username);
+    List<userBuyDetail> userBuyProduct(String username);
     // 특정 회원이 구매한 구매 list
     List<SalesDomain> userBuyList(String username);
 

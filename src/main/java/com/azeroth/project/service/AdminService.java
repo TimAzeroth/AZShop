@@ -20,7 +20,7 @@ public interface AdminService {
     UserDomain findByUsername(String username);
 
     // 특정 회원이 구매한 상품 LIST
-    List<ProductDomain> selectBuyByUser(String username);
+    List<userBuyDetail> selectBuyByUser(String username);
 
     // 특정 회원이 작성한 후기 LIST
     List<ReviewDomain> selectAnswerByUser(String username);

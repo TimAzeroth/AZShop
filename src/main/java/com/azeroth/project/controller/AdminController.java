@@ -42,12 +42,17 @@ public class AdminController {
     //selectBuyByUser 특정 회원이 구매한 구매목록
     @GetMapping("/BuyByUser/{username}")
     public String BuyByUser (Model model, @PathVariable String username){
-        System.out.println("입장성공?");
-        System.out.println(username);
-        model.addAttribute("productList", adminService.selectBuyByUser(username));
+
+        model.addAttribute("userBuyList", adminService.selectBuyByUser(username));
+
         return "/admin/BuyByUser";
     }
 
+    @GetMapping("/userDetail/{username}")
+    public String userDetail(Model model, @PathVariable String username){
+        //model.addAttribute("categories", categories);
+        return "/admin/userDetail";
+    }
 
 
     @InitBinder

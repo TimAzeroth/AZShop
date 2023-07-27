@@ -7,31 +7,64 @@
 }
 .userid{
     float: left;
-        border: 1px solid #333;
-    width:20%
+    border: 1px solid #333;
+    height:100%;
+    width:20%;
 }
 .username{
     float: left;
     border: 1px solid #333;
-    width:10%
+    width:10%;
+    height:100%;
+    align: center;
 }
 .useremail{
     float: left;
     border: 1px solid #333;
-    width:30%
+    width:30%;
 }
 .userphon{
     float: left;
     border: 1px solid #333;
-    width:20%
+    width:20%;
 }
 .userstat{
     float: left;
     border: 1px solid #333;
     width:10%
+    margin: auto;
 }
 .userauth{
     float: left;
     border: 1px solid #333;
+    width:10%;
+}
+.pimg{
+    float: left;
+    border: 1px solid #333;
+    width:15%;
+}
+.pname{
+    float: left;
+    border: 1px solid #333;
+    width:15%;
+    height:100%;
+    text-align: center0;
+
+}
+.price{
+    float: left;
+    border: 1px solid #333;
+    width:20%
+}
+.stock{
+    float: left;
+    border: 1px solid #333;
     width:10%
 }
+.orderStock{
+    float: left;
+    border: 1px solid #333;
+    width:10%
+}
+

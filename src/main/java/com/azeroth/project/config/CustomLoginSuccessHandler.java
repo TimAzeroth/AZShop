@@ -31,23 +31,22 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         PrincipalDetails userDetails = (PrincipalDetails)authentication.getPrincipal();
         System.out.println("username: " + userDetails.getUsername());
         System.out.println("password: " + userDetails.getPassword());
-        List<String> roleNames = new ArrayList<>();   // 권한이름들
-        authentication.getAuthorities().forEach(authority -> {
-            roleNames.add(authority.getAuthority());
-        });
-        System.out.println("authorities: " + roleNames);
-        // 로그인 시간을 세션에 저장하기 (※ logout 예제에서 사용)
-        LocalDateTime loginTime = LocalDateTime.now();
-        System.out.println("로그인 시간: " + loginTime);
-        request.getSession().setAttribute("loginTime", loginTime);
+//        if (userDetails.getUser().getU_status().equals("USE")){
+            List<String> roleNames = new ArrayList<>();   // 권한이름들
+            authentication.getAuthorities().forEach(authority -> {
+                roleNames.add(authority.getAuthority());
+            });
+            LocalDateTime loginTime = LocalDateTime.now();
+            request.getSession().setAttribute("loginTime", loginTime);
+            userDetails.getUser().setLogdate(loginTime);
+            userDetails.updateLogDate(userDetails.getUser());
 
-        userDetails.getUser().setLogdate(loginTime);
-        userDetails.updateLogDate(userDetails.getUser());
+            // 로그인 직전 url 로 redirect하기
+//        }else {
+//            return;
+//        }
 
-        // 로그인 직전 url 로 redirect하기
         super.onAuthenticationSuccess(request , response, authentication);
-
-
     }
 
     // request 를 한 client ip 가져오기
