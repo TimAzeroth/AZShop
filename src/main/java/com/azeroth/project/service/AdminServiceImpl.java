@@ -21,7 +21,6 @@ public class AdminServiceImpl implements AdminService {
 
     private AuthorityRepository authorityRepository;    // 박승기 추가
 
-    private SalesChkDomain schk;
 
     @Autowired
     public AdminServiceImpl(SqlSession sqlSession) {
@@ -74,10 +73,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public SalesChkDomain salesCHK (CardDomain card){
-
+        SalesChkDomain schk = new SalesChkDomain();
+        
+        System.out.println("카드정보 : " + card);
         CardDomain payCard = adminRepository.findCard(card);
+        System.out.println("결제카드정보 : " + payCard);
+
         schk.setChkProcess(false);
         schk.setEreMag("정상 처리되었습니다.");
+
 
 
         if(payCard == null) {
