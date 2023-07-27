@@ -14,12 +14,14 @@
                 <button class="btn btn-outline-primary" id="btn_comment" type="button">리뷰작성</button>
             </div>
                 <table class="table table-hover mt-3" id="reviews_table">
-                    <div>
+                    <tr th:each="review : ${reviews}">
+                        <td>
                         <!--내용 배열 -->
                         <p><strong>작성자</strong> <span id="author"></span></p>
                         <p><strong>내용</strong> <span id="reviewContent"></span></p>
                         <p><strong>작성일</strong> <span id="creationDate"></span></p>
-                    </div>
+                        </td>
+                    </tr>
                 </table>
              </div>
         </div>
@@ -48,7 +50,7 @@
                 <div class="addReply">
                     <p id="adminId" name="adminReply">
                     <form action="/reply" method="POST">
-                        <input type="text" name="adminId" th:value="${reply}" sec:authorize="hasAnyRole('ADMIM')">
+                        <input type="text" name="adminReply" th:value="${reply}" sec:authorize="hasAnyRole('ADMIM')">
                         <button class="btn btn-outline-primary" id="btn_reply" type="button" sec:authorize="hasAnyRole('ADMIN')">답변</button>
                     </form>
                     </p>

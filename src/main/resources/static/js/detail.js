@@ -65,4 +65,5 @@ $(function() {
             $("form[name='frmDelete']").submit();
         }
     });
+
 });
