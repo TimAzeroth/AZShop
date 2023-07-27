@@ -36,10 +36,9 @@
 
 
     <insert id="insert" flushCache="true"
-            parameterType="com.azeroth.project.domain.SalesDomain"
-    useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO sales
-            (u_username, p_id, amount, address, address_detail, postcode, deliveryreq)
+            parameterType="com.azeroth.project.domain.SalesDomain" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO
+            sales (u_username, p_id, amount, address, address_detail, postcode, deliveryreq)
         VALUES
            (#{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq})
     </insert>
