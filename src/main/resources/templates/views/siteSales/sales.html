@@ -93,29 +93,30 @@
                         <input id="deliveryreq" type="text" name="deliveryreq" th:value="${deliveryreq}"/>
                     </td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td class="table_left_td3">신용/체크카드 결제</td>-->
+                <tr>
+                    <td class="table_left_td3">신용/체크카드 결제</td>
 
-<!--                    <td id="inputCardNum">-->
+                    <td id="inputCardNum">
+                        <div class="cardnum">
+                            <h6>카드번호</h6>
+                            <input id="c_num" style="width: 150px;" type="text" name="c_num" th:value="${c_num}"/>
+                        </div>
 
-<!--                        <div class="cardnum">-->
-<!--                            <h6>카드번호</h6>-->
-<!--                            <input id="cardnum" style="width: 150px;" type="text" th:value="${cardnum}"/>-->
-<!--                        </div>-->
+                        <div class="cardnum">
+                            <h6>유효 기간</h6>
+                            <input id="c_year" class="period" style="width: 60px;" type="text" name="c_year" th:value="${c_year}"/>
+                            <input id="c_month" class="period" style="width: 60px;" type="text" name="c_month" th:value="${c_month}"/>
+                        </div>
 
-<!--                        <div class="cardnum">-->
-<!--                            <h6>유효 기간</h6>-->
-<!--                            <input id="c_year" class="period" style="width: 60px;" type="text" th:value="${c_year}"/>-->
-<!--                            <input id="c_month" class="period" style="width: 60px;" type="text" th:value="${c_month}"/>-->
-<!--                        </div>-->
+                        <div class="cardnum">
+                            <h6>CVC</h6>
+                            <input id="c_cvc" style="width: 150px;" type="text" name="c_cvc" th:value="${c_cvc}"/>
+                            <input id="balance" style="width: 150px;" type="hidden" name="balance" th:value="${balance}"/>
 
-<!--                        <div class="cardnum">-->
-<!--                            <h6>CVC</h6>-->
-<!--                            <input id="c_cvc" style="width: 150px;" type="text" th:value="${c_cvc}"/>-->
-<!--                        </div>-->
+                        </div>
 
-<!--                    </td>-->
-<!--                </tr>-->
+                    </td>
+                </tr>
             </table>
 
             <div id="salesbtn">

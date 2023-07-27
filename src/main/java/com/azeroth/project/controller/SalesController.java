@@ -1,19 +1,14 @@
 package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.*;
+import com.azeroth.project.repository.AdminRepository;
 import com.azeroth.project.service.*;
 import com.azeroth.project.util.Util;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -34,6 +29,7 @@ public class SalesController {
 
     @Autowired
     private AdminService adminService;
+
 
     @GetMapping("/sales")
     public String sales(String u_username, Model model)
@@ -65,21 +61,19 @@ public class SalesController {
     public String salesOk(
             @ModelAttribute("sales")
             SalesDomain salesDomain,
+            CardDomain card,
             Model model
     ){
-        System.out.println("ㅇ--------------------------------------------------------ㅇ");
         UserDomain user = Util.getLoggedUser();
         salesDomain.setId(user.getId());
 
-        int sales = salesService.insert(salesDomain);
+        System.out.println(card);
 
+        int sales = salesService.insert(salesDomain);
         model.addAttribute("sales", sales);
+//        model.addAttribute("card", adminService.salesCHK(card));
         return "siteSales/salesOk";
     }
-
-
-
-
 
     // 결제완료 알림 페이지
     @GetMapping("/salesComplete")

@@ -15,6 +15,8 @@ $(function(){
     $('#postcode').val(addpost1);
     $('#p_id').val(2);
     $('#amount').val(2);
+    $('#balance').val(3000+3000);
+
 
 
     $("#addressbtn2").click(function() {
