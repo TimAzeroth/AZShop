@@ -126,8 +126,7 @@ CREATE TABLE User
 	logdate datetime,
 	regdate datetime DEFAULT now(),
 	PRIMARY KEY (id),
-	UNIQUE (username),
-	UNIQUE (email)
+	UNIQUE (username)
 );
 
 

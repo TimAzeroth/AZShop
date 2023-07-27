@@ -97,5 +97,12 @@
         WHERE id = #{id}
     </update>
 
+    <!-- 유저 상태 변경 -->
+    <update id="switchStatus" flushCache="true">
+        UPDATE User
+        SET u_status='OUT'
+        WHERE id = #{param1}
+    </update>
+
 
 </mapper>

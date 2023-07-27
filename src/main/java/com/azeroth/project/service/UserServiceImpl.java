@@ -156,6 +156,11 @@ public class UserServiceImpl implements UserService{
         return userRepository.selectById(id);
     }
 
+    @Override
+    public int switchStatus(Long id) {
+        return userRepository.switchStatus(id);
+    }
+
     private void delFile(String originalImage) {
         String saveDirectory = new File(uploadDir).getAbsolutePath();
 
