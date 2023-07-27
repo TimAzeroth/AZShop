@@ -14,6 +14,7 @@ public class CartData {
     private Long amount;
     private Long product_id;
     private Long price;
+    private Long stock;
     private String p_img;
     private String p_name;
 

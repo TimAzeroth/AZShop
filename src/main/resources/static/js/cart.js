@@ -4,4 +4,5 @@ $(function() {
         total += parseInt($(this).text());
     });
     $('#total').text(total);
+    $('#totalinput').val(total);
 });

@@ -30,7 +30,7 @@
         <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.principal.user}">
           <span class="d-flex justify-content-end">
             <div class="ml-auto">
-              <span class="text-dark">[[${user.nickname}]] 님 환영합니다</span>
+              <span class="text-dark"><a class="link-dark" th:href="@{/user/myPage}">[[${user.nickname}]]</a> 님 환영합니다</span>
             </div>
             <div class="ms-2">
               <a class="link-dark" th:href="@{/user/cart}">장바구니([[${#lists.size(cartProducts)}]])</a>
