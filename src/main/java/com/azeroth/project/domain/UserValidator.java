@@ -4,6 +4,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
@@ -21,6 +24,13 @@ public class UserValidator implements Validator {
             errors.rejectValue("username","아이디는 필수입니다.");
         }
 
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]*$");
+        Matcher matcher = pattern.matcher(username);
+        boolean bool = matcher.matches();
+        if(!bool){
+            errors.rejectValue("username","아이디는 영문,숫자 조합으로 정하셔야합니다.");
+        }
+
 
         String password = user.getPassword();
         System.out.println(password);
@@ -36,9 +46,16 @@ public class UserValidator implements Validator {
 
         String email = user.getEmail();
         System.out.println(email);
+        Pattern pattern1 = Pattern.compile("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$");
+        Matcher matcher1 = pattern1.matcher(email);
+        boolean bool1 = matcher1.matches();
         if(email == null || email.trim().isEmpty()){
             errors.rejectValue("email","이메일은 필수입니다.");
         }
+        else if(!bool1){
+            errors.rejectValue("email","올바른 양식의 이메일이 아닙니다.");
+        }
+
 
         String phone = user.getPhone();
         System.out.println(phone);

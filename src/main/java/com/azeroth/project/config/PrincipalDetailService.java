@@ -23,12 +23,13 @@ public class PrincipalDetailService implements UserDetailsService {
         UserDomain user = adminService.findByUsername(username);
         // 해당 username 의 user 가 DB 에 있다면
         // UserDetails 생성해서 리턴
-        if( user != null ){
-//            if(user.getU_status().equals("USE")){
+        if( user != null){
+            if(user.getU_status().equals("USE")){
                 PrincipalDetails userDetails = new PrincipalDetails(user);
                 userDetails.setUserService( adminService );
                 return userDetails;
-//            }
+            }
+
         }
 
         // 해당 username 의 user 가 없다면?

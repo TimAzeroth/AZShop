@@ -44,4 +44,7 @@ public interface UserRepository {
     // user 로그인 시간 등록하기
     int updateLogTime(UserDomain userDomain);
 
+    // user 상태 변경
+    int switchStatus(Long id);
+
 }

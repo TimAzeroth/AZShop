@@ -25,6 +25,8 @@ INSERT INTO Authority(name) VALUES
 ;
 
 
+       
+
 
 
 -- 카테고리 리스트

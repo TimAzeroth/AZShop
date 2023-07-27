@@ -54,7 +54,7 @@ CREATE TABLE Cart
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
 	product_id int NOT NULL,
-	amount int,
+	amount int NOT NULL,
 	regdate datetime DEFAULT now(),
 	PRIMARY KEY (id)
 );
@@ -126,8 +126,7 @@ CREATE TABLE User
 	logdate datetime,
 	regdate datetime DEFAULT now(),
 	PRIMARY KEY (id),
-	UNIQUE (username),
-	UNIQUE (email)
+	UNIQUE (username)
 );
 
 

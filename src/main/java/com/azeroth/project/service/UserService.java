@@ -46,5 +46,7 @@ public interface UserService {
     // 특정 주소 불러오기
     AddressDomain findAddressById(Long id);
 
+    // 상태변경 (user)
+    int switchStatus(Long id);
 
 }

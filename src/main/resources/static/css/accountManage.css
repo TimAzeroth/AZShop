@@ -4,10 +4,8 @@ body {
 }
 
 .container {
-    background-color: #03f6fa;
     border-radius: 5px;
     padding: 20px;
-    color: white;
 }
 
 #container-1 {

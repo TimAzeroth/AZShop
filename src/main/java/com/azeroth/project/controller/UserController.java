@@ -47,7 +47,7 @@ public class UserController {
 
     @PostMapping("/loginError")
     public String loginError(){
-        return "user/login";
+        return "user/loginError";
     }
 
     @RequestMapping("/rejectAuth")
@@ -180,7 +180,7 @@ public class UserController {
                                  Model model
     ){
         UserDomain user = userService.findByUsername(username);
-        int cnt = userService.delete(user.getId());
+        int cnt = userService.switchStatus(user.getId());
         model.addAttribute("result",cnt);
 
         return "user/deleteOk";
