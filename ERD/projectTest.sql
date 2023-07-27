@@ -62,7 +62,14 @@ WHERE user_id = 12;
 INSERT INTO Address (user_id, address_name, address, address_detail, postcode)
 VALUES  (12, '우리집', '서울시 강동구 아리수로 97길 20', '강일리버파크5단지 505동 806호', '50920') ;
 
+SELECT * FROM Cart;
 
+        SELECT c.product_id, c.amount, p.p_img, p.p_name, p.price
+        FROM Cart c
+        LEFT JOIN Product p
+        ON c.product_id = p.id
+        WHERE c.user_id = 6;
+       
 
 
 

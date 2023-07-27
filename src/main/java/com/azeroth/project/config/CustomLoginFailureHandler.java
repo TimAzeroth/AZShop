@@ -8,6 +8,7 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.io.IOException;
@@ -26,7 +27,10 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
         //< set the error message
         //=================================================
         //< incorrect the identify or password
-        if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
+        if (exception instanceof UsernameNotFoundException) {
+            errorMessage = "계정이 없습니다. 회원가입을 진행해주세요.";
+        }
+        else if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
             errorMessage = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해 주십시오.";
         }
         //< account is disabled

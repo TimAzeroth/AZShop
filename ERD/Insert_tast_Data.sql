@@ -24,13 +24,7 @@ INSERT INTO Authority(name) VALUES
 ('ROLE_ADMIN')
 ;
 
-SELECT * FROM Cart;
 
-        SELECT c.product_id, c.amount, p.p_img, p.p_name, p.price
-        FROM Cart c
-        LEFT JOIN Product p
-        ON c.product_id = p.id
-        WHERE c.user_id = 1;
        
 
 
