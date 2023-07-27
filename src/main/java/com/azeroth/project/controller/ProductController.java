@@ -31,6 +31,7 @@ public class ProductController {
     private CartService cartService;
 
 
+
     @GetMapping("/add")
     public void add(Model model) {
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
@@ -112,7 +113,6 @@ public class ProductController {
         if (user != null) {
             cartProducts = cartService.getCart(user.getId());
         }
-        model.addAttribute("cartProducts", cartProducts);
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
         List<CategoryDomain> subCategories = categoryService.findAllSub();
         List<CategoryDomain> categories = categoryService.findAll();
@@ -120,6 +120,7 @@ public class ProductController {
         model.addAttribute("subCategories", subCategories);
         model.addAttribute("categories", categories);
         model.addAttribute("product", productService.findById(id));
+        model.addAttribute("cartProducts", cartProducts);
         return "product/detail";
     }
 

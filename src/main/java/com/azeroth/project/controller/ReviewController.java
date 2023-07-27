@@ -1,62 +1,36 @@
 package com.azeroth.project.controller;
 
-
-import com.azeroth.project.domain.ReviewDomain;
+import com.azeroth.project.domain.QryResult;
+import com.azeroth.project.domain.QryReviewList;
 import com.azeroth.project.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.List;
-
-
-@Controller
+@RestController
 @RequestMapping("/review")
 public class ReviewController {
     @Autowired
-    private ReviewService reviewService;
+    ReviewService reviewService;
 
-    public ReviewController() {
+    public ReviewController () {
         System.out.println(getClass().getName() + "()생성");
     }
-    // 리뷰저장
-    @PostMapping
-    public int createReview(ReviewDomain reviewDomain){
-        return reviewService.saveReview(reviewDomain);
-    }
-    // 리뷰
-    @GetMapping
-    public String reviews(Integer page, Long productId, Model model){
-        List<ReviewDomain> reviews=reviewService.findByProductId(page,productId,model);
-        model.addAttribute("productId" , productId);
-        model.addAttribute("reviews",reviews);
-        return "review/review";
-    }
-    @GetMapping("/list")
-    public void list (){
 
+    @GetMapping("/list")
+    public QryReviewList list(Long product_id) {
+        return reviewService.list(product_id);
     }
-    @PostMapping("/List")
-    public String getReview(Integer page, Long productId, Model model){
-        return "review";
+
+    @PostMapping("/save")
+    public QryResult save(@RequestParam("user_id") Long user_id,
+                          @RequestParam("product_id") Long product_id,
+                          String content) {
+        return reviewService.save(user_id, product_id, content);
     }
 
     @PostMapping("/delete")
-    public String deleteByReviewId(@PathVariable  Long reviewId, Model model){
-        int result = reviewService.deleteByReviewsId(reviewId);
-        model.addAttribute("result", result);
-        return "/deleteOk";
+    public QryResult delete(Long id) {
+        return reviewService.delete(id);
     }
-
-    @PostMapping("/reply")
-    public String replyToReview(@PathVariable  long review, Model model){
-        int result = reviewService.replyToReview(review);
-        model.addAttribute("result", result);
-        return "/review";
-    }
-
-
 
 }

@@ -11,10 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class QryReviewListDomain extends QryResultDomain {
+public class QryReviewList extends QryResult {
 
     @JsonProperty("data")
     List<ReviewDomain> list;
+
+
 }
 
 

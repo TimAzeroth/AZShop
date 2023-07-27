@@ -21,7 +21,7 @@
 
 <body>
 <!--/*인증헤더*/-->
-<th:block th:insert="~{review/header::header}"></th:block>
+<th:block th:insert="~{common/header::header}"></th:block>
 
 <div class="container mt-3" th:with="user=${#authentiaction.getPrincipal().getUser()}">
   <h2>작성</h2>

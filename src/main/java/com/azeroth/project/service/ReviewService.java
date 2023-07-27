@@ -1,20 +1,13 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.ReviewDomain;
-import org.springframework.ui.Model;
-
-import java.util.List;
+import com.azeroth.project.domain.QryResult;
+import com.azeroth.project.domain.QryReviewList;
 
 public interface ReviewService {
 
-    int saveReview(ReviewDomain reviewDomain);
+    QryReviewList list(Long product_id);
 
-    List<ReviewDomain> findByProductId (Integer page, Long productId, Model model);
+    QryResult save(Long user_id, Long product_id, String content);
 
-    int deleteByReviewsId(Long reviewId);
-
-    int replyToReview(long reply); // 어드민 응답
-
-
-
+    QryResult delete(Long id);
 }
