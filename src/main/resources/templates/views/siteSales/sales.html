@@ -3,11 +3,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 
-<!--<script th:unless="${id}">-->
-<!--  alert("로그인이 안되어있습니다.");-->
-<!--  history.back();-->
-<!--</script>-->
-
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -25,6 +20,11 @@
 
 
 <body>
+<script th:inline="javascript">
+    var categories = [[${categories}]];
+</script>
+<th:block th:insert="~{/product/categoryHeader::header}"></th:block>
+
 <div id="salesdiv">
     <h1 class="header1">주문 / 결제</h1>
     <hr>
@@ -114,14 +114,14 @@
                             <input id="balance" style="width: 150px;" type="hidden" name="balance" th:value="${balance}"/>
 
                         </div>
-
                     </td>
                 </tr>
             </table>
 
             <div id="salesbtn">
                 <a class="btn btn-outline-dark" id="backBtn">돌아가기</a>
-                <button type="submit" class="btn btn-outline-dark">결제하기</button>
+                <button id="paybtn" type="submit" class="btn btn-outline-dark">결제하기</button>
+
             </div>
 
         </form>
@@ -132,6 +132,5 @@
 </div>
 
 </body>
-
 
 </html>

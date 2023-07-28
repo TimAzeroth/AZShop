@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,6 +31,12 @@ public class SalesController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private CategoryService categoryService;
+
 
     @GetMapping("/sales")
     public String sales(String u_username, Model model)
@@ -37,6 +44,18 @@ public class SalesController {
         // 세션에 저장된 사용자의 정보
         UserDomain user = Util.getLoggedUser();
         u_username = user.getUsername();
+
+        // 카테고리 헤더 부분 내용
+//        List<CartData> cartlist = new ArrayList<>();
+//        cartlist= cartService.getCart(user.getId());
+//        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+//        List<CategoryDomain> subCategories = categoryService.findAllSub();
+//        List<CategoryDomain> categories = categoryService.findAll();
+//
+//        model.addAttribute("mainCategories", mainCategories);
+//        model.addAttribute("subCategories", subCategories);
+//        model.addAttribute("categories", categories);
+//        model.addAttribute("cartProducts",cartlist);
 
         model.addAttribute("u_username", u_username);
         model.addAttribute("email", user.getEmail());
@@ -69,10 +88,14 @@ public class SalesController {
 
         System.out.println(card);
 
+        if(card == null) {
+            return "siteSales/sales";
+        }
+
         int sales = salesService.insert(salesDomain);
         model.addAttribute("sales", sales);
         System.out.println(adminService.salesCHK(card));
-//        model.addAttribute("card", adminService.salesCHK(card));
+        model.addAttribute("card", adminService.salesCHK(card));
         return "siteSales/salesOk";
     }
 
