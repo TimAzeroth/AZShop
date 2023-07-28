@@ -17,8 +17,6 @@ $(function(){
     $('#amount').val(2);
     $('#balance').val(3000+3000);
 
-
-
     $("#addressbtn2").click(function() {
          $("#addresstable1").hide();
          $("#addresstable2").show();
@@ -59,3 +57,4 @@ $(function(){
      });
 
 });
+
