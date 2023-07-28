@@ -39,10 +39,14 @@ public class SalesController {
 
 
     @GetMapping("/sales")
-    public String sales(UserDomain user, Model model)
+    public String sales(UserDomain user,
+           @RequestParam Integer total,
+           Model model)
     {
         // 세션에 저장된 사용자의 정보
         user = Util.getLoggedUser();
+
+        SalesDomain salesDomain = new SalesDomain();
 
         // 카테고리 헤더 부분 내용
 //        List<CartData> cartlist = new ArrayList<>();
@@ -54,13 +58,20 @@ public class SalesController {
 //        model.addAttribute("mainCategories", mainCategories);
 //        model.addAttribute("subCategories", subCategories);
 //        model.addAttribute("categories", categories);
-//        model.addAttribute("cartProducts",cartlist);
+//        model.addAttribute("cartProducts", cartlist);
 
+        System.out.println( "총 가격" +  total);
 
         model.addAttribute("u_username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("phone", user.getPhone());
         model.addAttribute("nickname", user.getNickname());
+
+        model.addAttribute("total", total);
+
+        model.addAttribute("p_id", 2);
+        model.addAttribute("amount", 2);
+
         model.addAttribute("id", user.getId());
         System.out.println("-------------------------------------------------");
 

@@ -24,11 +24,6 @@ INSERT INTO Authority(name) VALUES
 ('ROLE_ADMIN')
 ;
 
-
-       
-
-
-
 -- 카테고리 리스트
 INSERT INTO Category(maincode,subcode,mainname,subname) VALUES
 (1, 1, '패션의류', '여성의류'),
