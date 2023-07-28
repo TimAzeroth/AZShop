@@ -27,7 +27,7 @@ public class ReviewDomain {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime reviewDate;
 
-    private String reply;      // 관리자 답변
+    private String adminReply;      // 관리자 답변
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

@@ -11,10 +11,10 @@
     </resultMap>
 
     <resultMap id="mapReview" type="com.azeroth.project.domain.ReviewDomain">
-        <result column="r_id" property="id"/>
-        <result column="r_content" property="content"/>
-        <result column="r_product_id" property="product_id"/>
-        <result column="r_reviewdate" property="reviewDate"/>
+        <result column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="product_id" property="product_id"/>
+        <result column="reviewdate" property="reviewDate"/>
         <collection property="user" resultMap="mapUser"/>
     </resultMap>
 
@@ -46,5 +46,12 @@
     <delete id="deleteByProduct" flushCache="true">
         DELETE FROM Review WHERE product_id = #{param1}
     </delete>
+
+    <update id="updateAdminReplyByReviewId" flushCache="true">
+        UPDATE Review
+        SET admin_reply = #{adminReply}, replydate = #{replyDate}
+        WHERE review_id = #{reviewId}
+    </update>
+
 
 </mapper>

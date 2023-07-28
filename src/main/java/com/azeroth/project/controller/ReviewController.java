@@ -2,6 +2,7 @@ package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.QryResult;
 import com.azeroth.project.domain.QryReviewList;
+import com.azeroth.project.domain.ReviewDomain;
 import com.azeroth.project.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,9 @@ public class ReviewController {
     public QryResult delete(Long id) {
         return reviewService.delete(id);
     }
+
+
+
+
 
 }

@@ -90,3 +90,13 @@ SELECT * FROM Category;
         OR UPPER(c.subname) LIKE '%고양이%'
         AND p.main_cate = c.maincode AND p.sub_cate = c.subcode
         ORDER BY p_rank, p_name;
+
+       
+ SELECT * FROM User;
+
+       
+update User set authority_id = 2 where username = 'member' ;
+
+DESCRIBE user;
+
+

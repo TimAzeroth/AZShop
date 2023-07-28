@@ -57,18 +57,18 @@
       <th>관리자 작성일</th>
     </tr>
     </thead>
-    <thbody>
+    <tbody>
       <tr th:each="review : ${list}">
         <td th:if="@{review != null}" th:text="{review.id}"></td>
         <td><a href="@{'/review/list/' + ${review.id}}" th:text="$review.subject}"></a></td>
         <td th:text="${review.user.user_id}"></td>
         <td th:text="${review.content}"></td>
         <td th:text="${#temporals.format(review.reviewdate 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${#review.user.admin_Id}"></td>
-        <td th:text="${#review.content.admin_Id}"></td>
+        <td th:text="${#review.id.admin_Id}"></td>
+        <td th:text="${#review.reply.admin_Id}"></td>
         <td th:text="${#temporals.format(review.replydate 'yyyy-MM-dd HH:mm:ss')}"></td>
       </tr>
-    </thbody>
+    </tbody>
   </table>
   <!--목록  -->
 
