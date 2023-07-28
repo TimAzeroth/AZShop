@@ -108,6 +108,7 @@ CREATE TABLE Sales
 	postcode varchar(10) NOT NULL,
 	deliveryreq varchar(300),
 	tracknum varchar(50),
+	regdate datetime DEFAULT now(),
 	PRIMARY KEY (id)
 );
 

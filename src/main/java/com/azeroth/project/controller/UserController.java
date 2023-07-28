@@ -1,10 +1,8 @@
 package com.azeroth.project.controller;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.CartData;
-import com.azeroth.project.domain.UserDomain;
-import com.azeroth.project.domain.UserValidator;
+import com.azeroth.project.domain.*;
 import com.azeroth.project.service.CartService;
+import com.azeroth.project.service.CategoryService;
 import com.azeroth.project.service.UserService;
 import com.azeroth.project.service.UserServiceImpl;
 import com.azeroth.project.util.U;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,6 +35,9 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public UserController(){
         System.out.println(getClass().getName() + "() 생성");
@@ -225,6 +227,23 @@ public class UserController {
         UserDomain user = U.getLoggedUser();
         List<CartData> cartProducts = cartService.getCart(user.getId());
         model.addAttribute("cartProducts", cartProducts);
+    }
+
+    @GetMapping("/orderList")
+    public void orderList(Integer page, Model model){
+        UserDomain user = Util.getLoggedUser();
+        List<OrderData> orderList = userService.selectFromRow(page, model);
+
+        List<CartData> cartlist = cartService.getCart(user.getId());
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+
+        model.addAttribute("mainCategories", mainCategories);
+        model.addAttribute("subCategories", subCategories);
+        model.addAttribute("categories", categories);
+        model.addAttribute("cartProducts",cartlist);
+        model.addAttribute("list",orderList);
     }
 
 

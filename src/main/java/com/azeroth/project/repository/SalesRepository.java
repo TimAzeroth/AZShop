@@ -1,5 +1,6 @@
 package com.azeroth.project.repository;
 
+import com.azeroth.project.domain.OrderData;
 import com.azeroth.project.domain.ProductDomain;
 import com.azeroth.project.domain.SalesDomain;
 
@@ -16,4 +17,11 @@ public interface SalesRepository {
     // 송장 입력
     int inputSalesNum(SalesDomain sales);
 
+    // username 으로 sales 정보(들) 가져오기
+    List<OrderData> selectSalesByUsername(String username);
+
+    // user의 구매내역 총 갯수 가지고 오기
+    int countAll(String username);
+
+    List<OrderData> selectFromRow(String username, int from, int end);
 }

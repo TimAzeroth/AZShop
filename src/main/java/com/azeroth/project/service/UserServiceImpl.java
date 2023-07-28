@@ -1,17 +1,18 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.AuthorityDomain;
-import com.azeroth.project.domain.CartDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
 import com.azeroth.project.repository.AuthorityRepository;
+import com.azeroth.project.repository.SalesRepository;
 import com.azeroth.project.repository.UserRepository;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
+import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -28,9 +29,16 @@ public class UserServiceImpl implements UserService{
     @Value("${app.upload.path}")
     private String uploadDir;
 
+    @Value("${app.pagination.write_pages}")
+    private int WRITE_PAGES;
+    @Value("${app.pagination.page_rows}")
+    private int PAGE_ROWS;
+
     private UserRepository userRepository;
 
     private AuthorityRepository authorityRepository;
+
+    private SalesRepository salesRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -39,6 +47,7 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(SqlSession sqlSession){
         userRepository = sqlSession.getMapper(UserRepository.class);
         authorityRepository = sqlSession.getMapper(AuthorityRepository.class);
+        salesRepository = sqlSession.getMapper(SalesRepository.class);
     }
 
     @Override
@@ -160,6 +169,57 @@ public class UserServiceImpl implements UserService{
     public int switchStatus(Long id) {
         return userRepository.switchStatus(id);
     }
+
+    @Override
+    public List<OrderData> selectSalesByUsername(String username) {
+        return salesRepository.selectSalesByUsername(username);
+    }
+
+    @Override
+    public List<OrderData> selectFromRow(Integer page, Model model) {
+
+        String username = Util.getLoggedUser().getUsername();
+
+        if(page == null) page = 1;  // 디폴트는 1 page
+        if(page < 1) page = 1;
+
+        HttpSession session = U.getSession();
+        Integer writePages = (Integer)session.getAttribute("writePages");
+        if(writePages == null) writePages = WRITE_PAGES;
+        Integer pageRows = (Integer)session.getAttribute("pageRows");
+        if(pageRows == null) pageRows = PAGE_ROWS;
+
+        session.setAttribute("page", page);
+
+        long cnt = salesRepository.countAll(username);
+        if (cnt == 0) cnt = 1;
+        int totalPage = (int)Math.ceil(cnt / (double)pageRows);
+
+        if(page > totalPage) page = totalPage;
+
+        int fromRow = (page - 1) * pageRows;
+
+        int startPage = (((page - 1) / writePages) * writePages) + 1;
+        int endPage = startPage + writePages -1;
+        if(endPage >= totalPage) endPage = totalPage;
+
+        model.addAttribute("cnt", cnt);
+        model.addAttribute("page", page);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("pageRows", pageRows);
+
+        model.addAttribute("url", U.getRequest().getRequestURI());
+        model.addAttribute("writePages", writePages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        List<OrderData> list = salesRepository.selectFromRow(username, fromRow, pageRows);
+        model.addAttribute("list",list);
+
+        return list;
+    }
+
+
 
     private void delFile(String originalImage) {
         String saveDirectory = new File(uploadDir).getAbsolutePath();
