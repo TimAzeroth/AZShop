@@ -12,6 +12,8 @@ public interface CartRepository {
 
     int deleteCart(Long id);
 
+    int deleteCartByProduct(Long product_id);
+
     // 카트에 담긴 상품 수량 가져오기
     Long getAmount(Long user_id, Long product_id);
 

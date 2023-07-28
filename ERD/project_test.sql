@@ -81,6 +81,7 @@ TRUNCATE Cart_Product;
 SELECT * FROM Product;
 SELECT * FROM Cart_Product;
 SELECT * FROM Category;
+SELECT * FROM Cart;
 
         SELECT p.id, p.p_name, p.main_cate, p.sub_cate, p.p_img, p.detail, p.price, p.stock, p.p_rank, c.mainname, c.subname
         FROM Product p

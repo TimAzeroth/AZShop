@@ -31,8 +31,11 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public int deleteCart(Long id) {
-        return cartRepository.deleteCart(id);
+    public int deleteCart(Long id, Long product_id) {
+        if(id != null) {
+            return cartRepository.deleteCart(id);
+        }
+        return cartRepository.deleteCartByProduct(product_id);
     }
 
     @Override

@@ -66,7 +66,7 @@ public class ProductController {
 
     @PostMapping("/delete")
     public String deleteOk(Long id, String originalImage, Model model) {
-        System.out.println(id);
+        cartService.deleteCart(null, id);
         int result = productService.delete(id, originalImage);
         model.addAttribute("result", result);
         return "product/deleteOk";

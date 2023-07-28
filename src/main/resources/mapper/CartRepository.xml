@@ -24,6 +24,11 @@
         WHERE id = #{param1}
     </delete>
 
+    <delete id="deleteCartByProduct" flushCache="true">
+        DELETE FROM Cart
+        WHERE product_id = #{param1}
+    </delete>
+
     <select id="getAmount" resultType="Long">
         SELECT amount
         FROM Cart
