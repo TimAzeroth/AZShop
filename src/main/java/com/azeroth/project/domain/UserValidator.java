@@ -59,8 +59,13 @@ public class UserValidator implements Validator {
 
         String phone = user.getPhone();
         System.out.println(phone);
+        Pattern pattern3 = Pattern.compile("^[0-9]{11}$");
+        Matcher matcher3 = pattern3.matcher(phone);
+        boolean bool2 = matcher3.matches();
         if(phone == null || phone.trim().isEmpty()){
             errors.rejectValue("phone","연락처는 필수입니다.");
+        } else if(!bool2){
+            errors.rejectValue("phone","연락처는 숫자 11자리 만 가능합니다.");
         }
 
 

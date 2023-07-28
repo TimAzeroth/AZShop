@@ -43,4 +43,25 @@
            (#{u_username}, #{p_id}, #{amount}, #{address}, #{address_detail}, #{postcode}, #{deliveryreq})
     </insert>
 
+    <!-- 유저아이디로 slaes 정보(들) 가져오기 -->
+    <select id="selectSalesByUsername" resultType="com.azeroth.project.domain.OrderData">
+        SELECT s.id,
+            s.u_username,
+            s.p_id,
+            s.amount,
+            s.address,
+            s.address_detail,
+            s.postcode,
+            s.deliveryreq,
+            s.regdate,
+            p.p_img,
+            p.p_name,
+            p.price
+        FROM Sales s
+        LEFT JOIN product p
+        ON s.p_id = p.id
+        WHERE s.u_username = #{param1}
+        ORDER BY s.regdate DESC;
+    </select>
+
 </mapper>

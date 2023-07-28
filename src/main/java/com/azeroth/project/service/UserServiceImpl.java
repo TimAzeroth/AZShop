@@ -1,10 +1,8 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.AuthorityDomain;
-import com.azeroth.project.domain.CartDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
 import com.azeroth.project.repository.AuthorityRepository;
+import com.azeroth.project.repository.SalesRepository;
 import com.azeroth.project.repository.UserRepository;
 import com.azeroth.project.util.Util;
 import org.apache.ibatis.session.SqlSession;
@@ -32,6 +30,8 @@ public class UserServiceImpl implements UserService{
 
     private AuthorityRepository authorityRepository;
 
+    private SalesRepository salesRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(SqlSession sqlSession){
         userRepository = sqlSession.getMapper(UserRepository.class);
         authorityRepository = sqlSession.getMapper(AuthorityRepository.class);
+        salesRepository = sqlSession.getMapper(SalesRepository.class);
     }
 
     @Override
@@ -159,6 +160,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public int switchStatus(Long id) {
         return userRepository.switchStatus(id);
+    }
+
+    @Override
+    public List<OrderData> selectSalesByUsername(String username) {
+        return salesRepository.selectSalesByUsername(username);
     }
 
     private void delFile(String originalImage) {

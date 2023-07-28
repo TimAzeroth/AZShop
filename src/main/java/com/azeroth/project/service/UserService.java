@@ -1,8 +1,6 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.CartDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -48,5 +46,8 @@ public interface UserService {
 
     // 상태변경 (user)
     int switchStatus(Long id);
+
+    // sales 정보(들) username 으로 불러오기
+    List<OrderData>selectSalesByUsername(String username);
 
 }

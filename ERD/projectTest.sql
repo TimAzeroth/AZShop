@@ -70,6 +70,48 @@ SELECT * FROM Cart;
         ON c.product_id = p.id
         WHERE c.user_id = 6;
        
+       
+       
+INSERT INTO Sales (u_username, p_id, amount, address, address_detail, postcode, deliveryreq, tracknum)
+VALUES ('fnrrlfnrrl3', 5, 3, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123456789'),
+	 ('fnrrlfnrrl3', 7, 1, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123845789');
+	
+	
+SELECT
+    u_username,
+    p_id,
+    amount,
+    address,
+    address_detail,
+    postcode,
+    deliveryreq,
+    regdate
+FROM Sales
+WHERE u_username = 'fnrrlfnrrl3';
+
+SELECT c.id, c.product_id, c.amount, p.p_img, p.p_name, p.price, p.stock
+        FROM Cart c
+        LEFT JOIN Product p
+        ON c.product_id = p.id
+        WHERE c.user_id = 'fnrrlfnrrl3';
+        
+SELECT s.id,
+	   s.u_username,
+	   s.p_id,
+	   s.amount,
+	   s.address,
+	   s.address_detail,
+	   s.postcode,
+	   s.deliveryreq,
+	   s.regdate,
+	   p.p_img,
+	   p.p_name,
+	   p.price
+FROM Sales s
+LEFT JOIN product p
+ON s.p_id = p.id
+WHERE s.u_username = 'fnrrlfnrrl3';
+       
 
 
 

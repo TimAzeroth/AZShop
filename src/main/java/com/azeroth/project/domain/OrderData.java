@@ -1,6 +1,5 @@
 package com.azeroth.project.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -17,8 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SalesDomain {
-
+public class OrderData {
     Long id;                    // PK
     String u_username;          // 로그인 id
     Long p_id;                  // 상품 PK id
@@ -32,12 +30,14 @@ public class SalesDomain {
     // 송장번호
     String tracknum;
 
+    String p_img;
+
+    Long price;
+
+    String p_name;
+
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     LocalDateTime regdate;
-
-    UserDomain user;   // 유저(FK)
-
-
 }
