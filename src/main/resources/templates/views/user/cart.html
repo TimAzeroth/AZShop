@@ -46,15 +46,15 @@
                         </a>
                     </div>
                 </td>
-                <td class="col-2 text-muted v-center" th:text="${product.p_name}"></td>
-                <td class="col-2 text-muted v-center" th:text="${product.price}"></td>
-                <td class="col-2 text-muted v-center">
+                <td class="col-2 text-muted td" th:text="${product.p_name}"></td>
+                <td class="col-2 text-muted td" th:text="${product.price}"></td>
+                <td class="col-2 text-muted td">
                     <select th:id="'amountSelect-' + ${product.product_id}" name="amount" class="form-select form-select-sm productAmount">
                         <option th:each="i : ${#numbers.sequence(1, product.stock)}" th:value="${i}" th:text="${i}" th:selected="${i == product.amount}"></option>
                     </select>
                 </td>
-                <td class="col-2 text-muted price v-center" th:text="${product.price * product.amount}"></td>
-                <td class="v-center">
+                <td class="col-2 text-muted price td" th:text="${product.price * product.amount}"></td>
+                <td class="td">
                     <form name="cartdelete" th:action="@{/cart/delete}" method="POST">
                         <input name="id" type="hidden" th:value="${product.id}">
                         <button class="btn btn-danger ml-5" type="submit">X</button>
@@ -63,10 +63,10 @@
             </tr>
             <tr th:if="${not #lists.isEmpty(cartProducts)}">
                 <td colspan="3"></td>
-                <td colspan="1" class="v-center">
+                <td colspan="1" class="td">
                     <p>결제금액:</p>
                 </td>
-                <td colspan="1" class="v-center">
+                <td colspan="1" class="td">
                     <p class="ms-1" id="total"></p>
                 </td>
                 <td colspan="1"></td>
