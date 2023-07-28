@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -50,6 +51,13 @@ public class CartController {
         }
         model.addAttribute("result", result);
         return "cart/addOk";
+    }
+
+    @PostMapping("/cart/update")
+    @ResponseBody
+    public int updateOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount) {
+        UserDomain user = U.getLoggedUser();
+        return cartService.modifyAmount(user.getId(), product_id, amount);
     }
 
     @PostMapping("/cart/delete")
