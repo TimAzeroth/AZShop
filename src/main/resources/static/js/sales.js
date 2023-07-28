@@ -13,9 +13,10 @@ $(function(){
     $('#address').val(addtext1);
     $('#address_detail').val(adddetail1);
     $('#postcode').val(addpost1);
-    $('#p_id').val(2);
-    $('#amount').val(2);
-    $('#balance').val(3000+3000);
+
+    var amount = $("#amount").val();
+
+    $('#balance').val(amount + 3000);
 
     $("#addressbtn2").click(function() {
          $("#addresstable1").hide();
