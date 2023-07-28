@@ -136,4 +136,21 @@
         WHERE
             username = #{username}
     </select>
+    <select id="ProductManagementList" parameterType="com.azeroth.project.domain.ProductManagement">
+        SELECT
+            p.id,
+            p.p_name,
+            p.main_cate,
+            p.sub_cate,
+            p.p_img,
+            p.detail,
+            p.price,
+            p.stock,
+            p.p_rank,
+            c.mainname,
+            c.subname
+        FROM Product p
+        LEFT JOIN Category c ON p.main_cate = c.maincode AND p.sub_cate = c.subcode
+        ORDER BY p.p_rank, p.p_name;
+    </select>
 </mapper>

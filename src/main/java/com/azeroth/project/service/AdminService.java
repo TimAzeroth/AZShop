@@ -34,5 +34,8 @@ public interface AdminService {
     // 결재 chk
     public SalesChkDomain salesCHK (CardDomain card);
 
+    // 상품관리를 위한 List
+    List<ProductManagement> ProductManagementList();
+
     public void updateLogDate(UserDomain userDomain);
 }

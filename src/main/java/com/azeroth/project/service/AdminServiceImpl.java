@@ -99,6 +99,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<ProductManagement> ProductManagementList() {
+        return adminRepository.ProductManagementList();
+    }
+
+    @Override
     public void updateLogDate(UserDomain userDomain) {
         userRepository.updateLogTime(userDomain);
     }

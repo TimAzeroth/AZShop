@@ -64,6 +64,10 @@ public class AdminController {
         return "/admin/userDetail";
     }
 
+    @GetMapping("/productmanagement")
+    public void productManagement(Model model){
+        model.addAttribute("productList", adminService.ProductManagementList());
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

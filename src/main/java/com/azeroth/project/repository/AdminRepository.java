@@ -28,4 +28,7 @@ public interface AdminRepository {
     // 답변이 이루어지지 않은 후기 list
     List<ReviewDomain> NoAnswerReview();
 
+    // 상품관리 리스트용 상품리스트
+    List<ProductManagement> ProductManagementList();
+
 }
