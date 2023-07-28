@@ -54,7 +54,7 @@ public class CartController {
 
     @PostMapping("/cart/delete")
     public String deleteOk(Long id, Model model) {
-        cartService.deleteCart(id);
+        cartService.deleteCart(id, null);
         return "redirect:/user/cart";
     }
 }

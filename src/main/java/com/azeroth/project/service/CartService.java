@@ -10,7 +10,7 @@ public interface CartService {
 
     List<CartData> getCart(Long user_id);
 
-    int deleteCart(Long id);
+    int deleteCart(Long id, Long product_id);
 
     Long getAmount(Long user_id, Long product_id);
 
