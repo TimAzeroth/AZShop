@@ -68,11 +68,14 @@ public class SalesController {
         salesDomain.setId(user.getId());
 
         System.out.println(card);
+        SalesChkDomain shk = adminService.salesCHK(card);
 
-        int sales = salesService.insert(salesDomain);
-        model.addAttribute("sales", sales);
-        System.out.println(adminService.salesCHK(card));
-//        model.addAttribute("card", adminService.salesCHK(card));
+        if(shk.getChkProcess()){
+            int sales = salesService.insert(salesDomain);
+            model.addAttribute("sales", sales);
+            model.addAttribute("card", adminService.salesCHK(card));
+        }
+
         return "siteSales/salesOk";
     }
 

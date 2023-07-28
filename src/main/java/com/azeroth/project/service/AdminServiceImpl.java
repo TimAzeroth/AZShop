@@ -86,9 +86,11 @@ public class AdminServiceImpl implements AdminService {
 
         if(payCard == null) {
             schk.setEreMag("잘못된 카드정보 입니다.");
+            return schk;
         }
         if(payCard.getBalance() < card.getBalance()){
             schk.setEreMag("잔액이 부족합니다.");
+            return schk;
         }
 
         if (schk.getEreMag().equals("정상 처리되었습니다.")){

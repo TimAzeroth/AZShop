@@ -50,6 +50,16 @@ public class AdminController {
 
     @GetMapping("/userDetail/{username}")
     public String userDetail(Model model, @PathVariable String username){
+
+        UserDomain user = adminService.findByUsername(username);
+
+        model.addAttribute("profileimg",user.getProfileimg());
+        model.addAttribute("nickname",user.getNickname());
+        model.addAttribute("email",user.getEmail());
+        model.addAttribute("u_status",user.getU_status());
+        model.addAttribute("phone",user.getPhone());
+//        model.addAttribute("userInfo",user);
+
         //model.addAttribute("categories", categories);
         return "/admin/userDetail";
     }

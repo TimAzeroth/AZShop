@@ -14,4 +14,9 @@ public class SalesChkDomain {
     // 카드확인 메세지
     String ereMag;
 
+    public boolean getChkProcess(){
+        return this.chkProcess;
+    }
+
+
 }
