@@ -20,4 +20,8 @@ public interface SalesRepository {
     // username 으로 sales 정보(들) 가져오기
     List<OrderData> selectSalesByUsername(String username);
 
+    // user의 구매내역 총 갯수 가지고 오기
+    int countAll(String username);
+
+    List<OrderData> selectFromRow(String username, int from, int end);
 }

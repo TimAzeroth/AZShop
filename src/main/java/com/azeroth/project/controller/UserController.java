@@ -230,9 +230,9 @@ public class UserController {
     }
 
     @GetMapping("/orderList")
-    public void orderList(Model model){
+    public void orderList(Integer page, Model model){
         UserDomain user = Util.getLoggedUser();
-        List<OrderData> orderList = userService.selectSalesByUsername(user.getUsername());
+        List<OrderData> orderList = userService.selectFromRow(page, model);
 
         List<CartData> cartlist = cartService.getCart(user.getId());
         List<CategoryDomain> mainCategories = categoryService.findAllMain();
