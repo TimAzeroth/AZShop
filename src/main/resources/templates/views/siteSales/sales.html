@@ -18,12 +18,11 @@
     <title>Sales</title>
 </head>
 
-
 <body>
-<script th:inline="javascript">
-    var categories = [[${categories}]];
-</script>
-<th:block th:insert="~{/product/categoryHeader::header}"></th:block>
+<!--<script th:inline="javascript">-->
+<!--    var categories = [[${categories}]];-->
+<!--</script>-->
+<!--<th:block th:insert="~{/product/categoryHeader::header}"></th:block>-->
 
 <div id="salesdiv">
     <h1 class="header1">주문 / 결제</h1>
@@ -68,7 +67,7 @@
         </div>
 
         <h2 class="header2">결제 정보</h2>
-        <form th:action="@{/siteSales/sales}" method="POST">
+        <form id="salesCp" th:action="@{/siteSales/sales}" method="POST">
             <input type="hidden" id="u_username" name="u_username" th:value="${u_username}"/>
             <input type="hidden" id="p_id" name="p_id" th:value="${p_id}"/>
             <input type="hidden" id="address" name="address" th:value="${address}"/>
@@ -99,20 +98,19 @@
                     <td id="inputCardNum">
                         <div class="cardnum">
                             <h6>카드번호</h6>
-                            <input id="c_num" style="width: 150px;" type="text" name="c_num" th:value="${c_num}"/>
+                            <input id="c_num" style="width: 150px;" type="text" name="c_num" th:value="${c_num}" required/>
                         </div>
 
                         <div class="cardnum">
                             <h6>유효 기간</h6>
-                            <input id="c_year" class="period" style="width: 60px;" type="text" name="c_year" th:value="${c_year}"/>
-                            <input id="c_month" class="period" style="width: 60px;" type="text" name="c_month" th:value="${c_month}"/>
+                            <input id="c_year" class="period" style="width: 60px;" type="text" name="c_year" th:value="${c_year}" required/>
+                            <input id="c_month" class="period" style="width: 60px;" type="text" name="c_month" th:value="${c_month}" required/>
                         </div>
 
                         <div class="cardnum">
                             <h6>CVC</h6>
-                            <input id="c_cvc" style="width: 150px;" type="text" name="c_cvc" th:value="${c_cvc}"/>
+                            <input id="c_cvc" style="width: 150px;" type="text" name="c_cvc" th:value="${c_cvc}" required/>
                             <input id="balance" style="width: 150px;" type="hidden" name="balance" th:value="${balance}"/>
-
                         </div>
                     </td>
                 </tr>
@@ -130,7 +128,6 @@
     </div>
 
 </div>
-
 </body>
 
 </html>

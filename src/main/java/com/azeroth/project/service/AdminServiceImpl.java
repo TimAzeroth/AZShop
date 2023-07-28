@@ -82,16 +82,13 @@ public class AdminServiceImpl implements AdminService {
         schk.setChkProcess(false);
         schk.setEreMag("정상 처리되었습니다.");
 
-
-
         if(payCard == null) {
             schk.setEreMag("잘못된 카드정보 입니다.");
-        }
-        if(payCard.getBalance() < card.getBalance()){
+            return schk;
+        } else if(payCard.getBalance() < card.getBalance()){
             schk.setEreMag("잔액이 부족합니다.");
-        }
-
-        if (schk.getEreMag().equals("정상 처리되었습니다.")){
+            return schk;
+        }else if (schk.getEreMag().equals("정상 처리되었습니다.")){
             Long balance = card.getBalance();
             Long payment = payCard.getBalance();
             payCard.setBalance(balance-payment);
