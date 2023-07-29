@@ -7,6 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}">
     <script th:src="@{/js/admin.js}"></script>
+    <script th:src="@{/js/categoryHeader.js}"></script>
+    <script th:inline="javascript">
+        var categories = [[${categories}]];
+    </script>
     <title>AZShop</title>
 </head>
 <body>
@@ -31,7 +35,7 @@
             <div th:if="${BuyDetail.product_img}" class="pimg">
                 <img th:src="@{'/upload/' + ${BuyDetail.product_img}}" style="width:100%" class="img img-responsive full-width img-thumbnail">
             </div>
-            <div class="pname" th:text="${BuyDetail.product_name}"></div>\
+            <div class="pname" th:text="${BuyDetail.product_name}"></div>
             <div class="userid" th:text="${BuyDetail.user_account}"></div>
             <div class="username" th:text="${BuyDetail.user_name}"></div>
             <div class="price" th:text="${BuyDetail.product_price}"></div>

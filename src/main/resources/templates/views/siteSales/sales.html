@@ -50,10 +50,12 @@
         </table>
 
         <h2 class="header2">배송지 정보</h2>
-        <div id="addressImp" th:each="post, i : ${add}">
 
-               <a th:id="'addressbtn'+${i.count}" class="btn btn-outline-dark" th:text="${post.address_name}">집 명칭</a>
+        <div class="addressImp" th:each="post, i : ${add}">
+            <a th:id="'addressbtn'+${i.count}" class="btn btn-outline-dark" th:text="${post.address_name}">집 명칭</a>
+        </div>
 
+        <div class="addressImpDetail" th:each="post, i : ${add}">
             <table class="addressImpTb" th:id="'addresstable' + ${i.count}">
                 <tr>
                     <td class="table_left_td2">배송주소</td>
@@ -65,6 +67,7 @@
                 </tr>
             </table>
         </div>
+    </div>
 
         <h2 class="header2">결제 정보</h2>
         <form id="salesCp" th:action="@{/siteSales/sales}" method="POST">

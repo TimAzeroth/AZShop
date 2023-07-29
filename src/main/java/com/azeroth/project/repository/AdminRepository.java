@@ -23,12 +23,14 @@ public interface AdminRepository {
     List<SalesDomain> userBuyList(String username);
 
     // 특정 회원이 작성한 후기 list
-    List<ReviewDomain> writeReviewByUser(String username);
+    List<adminReview> writeReviewByUser(String username);
 
     // 답변이 이루어지지 않은 후기 list
     List<ReviewDomain> NoAnswerReview();
 
     // 상품관리 리스트용 상품리스트
     List<ProductManagement> ProductManagementList();
+
+    int AnswerReview (Long id, String reply);
 
 }

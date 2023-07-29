@@ -44,20 +44,6 @@
 
 
     <select id="userBuyProduct" parameterType="java.util.ArrayList">
-<!--        select-->
-<!--            p.p_name "p_name",-->
-<!--            p.main_cate "main_cate",-->
-<!--            p.sub_cate "sub_cate",-->
-<!--            p.p_img "p_img",-->
-<!--            p.detail "detail",-->
-<!--            p.price "price",-->
-<!--            p.stock "stock"-->
-<!--        from-->
-<!--            sales s, product p-->
-<!--        where-->
-<!--            s.p_id  = p.id-->
-<!--            and s.u_username = #{username}-->
-
         SELECT
             p.id 'product_id',
             p.p_img 'product_img',
@@ -83,11 +69,23 @@
             r.content "content",
             r.reviewdate "reviewdate",
             r.reply "reply",
-            r.replydate "replydate"
+            r.replydate "replydate",
+            u.username "username",
+            p.p_name "p_name",
+            p.p_img "p_img",
+            p.detail "detail",
+            p.price "price",
+            p.stock "stock",
+            p.p_rank "p_rank",
+            c.mainname "mainname",
+            c.subname "subname"
         from
-            review r, user u
+            review r, user u, product p, category c
         where
             r.user_id = u.id
+            and r.product_id = p.id
+            and p.main_cate = c.maincode
+            and p.sub_cate = c.subcode
             and u.username = #{username}
     </select>
     <select id="NoAnswerReview" parameterType="java.util.ArrayList">
@@ -153,4 +151,10 @@
         LEFT JOIN Category c ON p.main_cate = c.maincode AND p.sub_cate = c.subcode
         ORDER BY p.p_rank, p.p_name;
     </select>
+
+    <update id="AnswerReview" flushCache="true">
+        UPDATE review
+            SET reply = #{reply}
+        WHERE id = #{id}
+    </update>
 </mapper>
