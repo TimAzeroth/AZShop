@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/siteSales")
@@ -39,6 +40,7 @@ public class SalesController {
     @GetMapping("/sales")
     public String sales(UserDomain user,
                         @RequestParam Integer total,
+                        @RequestParam() Map<CartDomain, ProductDomain> cartData,
                         Model model) {
         // 세션에 저장된 사용자의 정보
         user = Util.getLoggedUser();
@@ -54,6 +56,8 @@ public class SalesController {
 //        model.addAttribute("subCategories", subCategories);
 //        model.addAttribute("categories", categories);
 //        model.addAttribute("cartProducts", cartlist);
+
+        System.out.println("가져온 값 : " + cartData);
 
         model.addAttribute("total", total);
 
