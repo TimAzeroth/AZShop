@@ -31,4 +31,5 @@ public interface AdminRepository {
     // 상품관리 리스트용 상품리스트
     List<ProductManagement> ProductManagementList();
 
+
 }
