@@ -98,10 +98,11 @@ INSERT INTO Product (p_name, main_cate, sub_cate, p_img, detail, price, stock) V
 
 -- 사용자 등록
 insert into User(authority_id, username, password, nickname, email,	profileimg, u_status, phone ) VALUES
-(1, 'user2', '1234', '사용자2', 'user2@gmail.com', 'face01.png', 'USE', '01023451234'),
-(1, 'user3', '1234', '사용자3', 'user3@gmail.com', 'face01.png', 'USE', '01034561234'),
-(1, 'user4', '1234', '사용자4', 'user4@gmail.com', 'face01.png', 'USE', '01045671234'),
-(2, 'admin1', '1234', '사용자4', 'admin1@gmail.com', 'face01.png', 'USE', '01057891234')
+(1, 'user1', '$2a$10$oV/SymaBv9679f.OTgGbXeRU0bJapYOUkgUxH.XU7ImhIHeUCz3Tq', '사용자2', 'user2@gmail.com', 'face01.png', 'USE', '01023451234'),
+(1, 'user2', '$2a$10$oV/SymaBv9679f.OTgGbXeRU0bJapYOUkgUxH.XU7ImhIHeUCz3Tq', '사용자2', 'user2@gmail.com', 'face01.png', 'USE', '01023451234'),
+(1, 'user3', '$2a$10$oV/SymaBv9679f.OTgGbXeRU0bJapYOUkgUxH.XU7ImhIHeUCz3Tq', '사용자3', 'user3@gmail.com', 'face01.png', 'USE', '01034561234'),
+(1, 'user4', '$2a$10$oV/SymaBv9679f.OTgGbXeRU0bJapYOUkgUxH.XU7ImhIHeUCz3Tq', '사용자4', 'user4@gmail.com', 'face01.png', 'USE', '01045671234'),
+(2, 'admin1', '$2a$10$oV/SymaBv9679f.OTgGbXeRU0bJapYOUkgUxH.XU7ImhIHeUCz3Tq', '사용자4', 'admin1@gmail.com', 'face01.png', 'USE', '01057891234')
 ;
 
 -- 4명의 사용자 주소 목록 

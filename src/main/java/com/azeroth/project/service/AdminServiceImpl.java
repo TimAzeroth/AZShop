@@ -56,8 +56,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<ReviewDomain> selectAnswerByUser(String username) {
-        return null;
+    public List<adminReview> selectAnswerByUser(String username) {
+        return adminRepository.writeReviewByUser(username);
     }
 
     @Override
@@ -122,5 +122,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateLogDate(UserDomain userDomain) {
         userRepository.updateLogTime(userDomain);
+    }
+
+    @Override
+    public int answerReview(Long id, String reply) {
+        return adminRepository.AnswerReview(id, reply);
     }
 }

@@ -23,7 +23,7 @@ public interface AdminService {
     List<userBuyDetail> selectBuyByUser(String username);
 
     // 특정 회원이 작성한 후기 LIST
-    List<ReviewDomain> selectAnswerByUser(String username);
+    List<adminReview> selectAnswerByUser(String username);
 
     // 답변 미 작성 된 후기 LIST ( 답변을 달 수 있도록 처리)
     List<ReviewDomain> selectNoAnswerReview();
@@ -37,5 +37,9 @@ public interface AdminService {
     // 상품관리를 위한 List
     List<ProductManagement> ProductManagementList();
 
-    public void updateLogDate(UserDomain userDomain);
+    // 로그인 발생시 로그인 일자 update
+    void updateLogDate(UserDomain userDomain);
+
+    // 답변작성시 update
+    int answerReview(Long id, String reply);
 }

@@ -1,7 +1,10 @@
 package com.azeroth.project.util;
 
 import com.azeroth.project.config.PrincipalDetails;
+import com.azeroth.project.domain.CartData;
+import com.azeroth.project.domain.CategoryDomain;
 import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.service.AdminService;
 import com.azeroth.project.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,8 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
+
 
     // 현재 request 구하기
     public static HttpServletRequest getRequest() {
@@ -65,6 +71,8 @@ public class Util {
             throw new RuntimeException(e);
         }
     }
+
+
 
 
 }
