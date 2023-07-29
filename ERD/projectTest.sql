@@ -133,13 +133,6 @@ SELECT s.id,
         WHERE s.u_username = 'fnrrlfnrrl3'
         ORDER BY s.regdate DESC
         Limit 0,5;
-       
-insert into Card (c_num, c_year, c_month, c_cvc, balance)
-VALUES ('1234567891011', '30', '11', '123', 1000000000);
-
-DELETE FROM Card WHERE id=5;
-
-SELECT * FROM card;
 
 
 

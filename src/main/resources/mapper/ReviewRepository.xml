@@ -11,10 +11,10 @@
     </resultMap>
 
     <resultMap id="mapReview" type="com.azeroth.project.domain.ReviewDomain">
-        <result column="id" property="id"/>
-        <result column="content" property="content"/>
-        <result column="product_id" property="product_id"/>
-        <result column="reviewdate" property="reviewDate"/>
+        <result column="r_id" property="id"/>
+        <result column="r_content" property="content"/>
+        <result column="r_product_id" property="product_id"/>
+        <result column="r_reviewdate" property="reviewDate"/>
         <collection property="user" resultMap="mapUser"/>
     </resultMap>
 
@@ -26,9 +26,8 @@
         r.reviewdate "r_reviewdate",
         u.id "u_id",
         u.username "u_username"
-        FROM Review r, User u
-        WHERE r.user_id = u.id
-        AND r.product_id = #{param1}
+        FROM Review r JOIN User u ON r.user_id = u.id
+        WHERE r.product_id = #{param1}
         ORDER BY r.id DESC
     </select>
 

@@ -138,6 +138,7 @@ insert into Review (user_id , product_id,  content, reply) values
 (3, 4, '유저3의 댓글내용입니다4', '답변내용입니다4')
 ;
 
+
 -- 판매등록. 송장번호 입력완료
 insert into Sales(u_username, p_id, amount,address,address_detail,postcode,deliveryreq,tracknum) values
 ('user1', 12, 5,'서울시 종로구 테헤란로 56길', '234-5번지', '12345', '빠른배달부탁드립니다', '123456789101112'),

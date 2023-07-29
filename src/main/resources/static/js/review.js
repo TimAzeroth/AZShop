@@ -1,7 +1,4 @@
 
-
-
-
 $(function() {
     // 현재 글의 id 값
     const id = $("input[name='id']").val().trim();
@@ -74,12 +71,15 @@ function buildComment(result) {
         let username = review.user.username;
         let user_id = review.user.id;
 
-
         // 삭제버튼 여부
         const delBtn = (logged_id != user_id) ? '' : `
             <a class="btn btn-danger" data-reviewdel-id="${id}">삭제</a>
         `;
-
+        // 어드민응단 버튼
+       const adminReplyBtn = (logged_id != 'ADMIN') ? '' : `
+           <button id="btn_reply_${id}" class="btn btn-secondary">Reply</button>
+           <input id="adminReplyInput_${id}" type="text" style="display:none;" placeholder="여기에 답변을 입력하십시오..." />
+       `;
         const row = `
                     <tr>
                         <td>
@@ -88,6 +88,7 @@ function buildComment(result) {
                         <td><span>${username}</span></td>
                         <td><span><small class="text-secondary">${reviewdate}</small></span></td>
                         <td style="width: 10%">${delBtn}</td>
+                        <td style="width: 10%">${adminReplyBtn}</td>
                     </tr>
         `;
 
@@ -97,6 +98,7 @@ function buildComment(result) {
 
     $("#review_list").html(out.join("\n"));
 }
+
 
 function addDelete() {
     // 현재 상품글
@@ -112,7 +114,7 @@ function addDelete() {
             url: "/review/delete",
             type: "POST",
             cache: false,
-            data: JSON,stringify:({"id": review_id}),
+            data: JSON.stringify({"id": review_id}),
             contentType: "application/json; charset=utf-8",
             success: function(data, status, xhr) {
                 if(status == "success"){
@@ -129,6 +131,7 @@ function addDelete() {
 
     });
   }
+
  function updateAdminReplyReviewID(review_id ,adminReplyText) {
         // AJAX 또는 양식 제출을 사용하여 관리 응답을 서버에 제출하는 논리 구현
         // AJAX 요청에 대해 jQuery 또는 fetch API와 같은 라이브러리를 사용할 수 있습니다
@@ -154,18 +157,23 @@ function addDelete() {
 
     }
 
-
-
  function addReply() {
      $('[id^=btn_reply_]').click(function() {
          const review_id = this.id.split('_')[2]; // 버튼 ID에서 review_id를 가져옵니다
+         const $adminReplyInput = $('#adminReplyInput_' +review_id); // jQuery 개체 캐시
          $('#adminReplyInput_' + review_id).show(); // 관리자리뷰 버튼 보이기
 
          //Enter 키를 누를 때 회신을 제출할 입력 필드에 이벤트 수신기 추가
          $('#adminReplyInput_' + review_id).keypress(function(e) {
              if (e.which == 13) {
+                 e.preventDefault();    // 기본 동작 방지
                  const adminReplyText = $(this).val();
                  updateAdminReplyReviewID(review_id, adminReplyText);
+
+                 // 제출에 성공한 후 입력 필드를 지우고 다시 숨깁니다
+                 // 참고: 'updateAdminReplyReviewID' 함수가 약속을 반환하는 경우 '.then()' 블록 안으로 이동합니다
+                  $(this).val('');
+                  $(this).hide();
              }
          });
      });
