@@ -72,29 +72,45 @@ public class AdminServiceImpl implements AdminService {
         return authorityRepository.findByUser(user);    // 박승기 수정
     }
 
+
     public SalesChkDomain salesCHK (CardDomain card){
         SalesChkDomain schk = new SalesChkDomain();
-        
+
         System.out.println("카드정보 : " + card);
         CardDomain payCard = adminRepository.findCard(card);
         System.out.println("결제카드정보 : " + payCard);
 
-        schk.setChkProcess(false);
-        schk.setEreMag("정상 처리되었습니다.");
+        System.out.println(card.getC_num());
+        System.out.println(payCard.getC_num());
 
-        if(payCard == null) {
+        if (payCard != null) {
+            if (payCard.getBalance() < card.getBalance()){
+                schk.setEreMag("잔액이 부족합니다.");
+                System.out.println(schk);
+                return schk;
+            } else if (schk.getChkProcess() == true){
+                schk.setEreMag("정상 처리 되었습니다.");
+                Long balance = card.getBalance();
+                System.out.println("결제할려는 가격 : " + balance);
+
+                Long payment = payCard.getBalance();
+                System.out.println("카드에 남아있는 금액 : " + payment);
+
+                Long fin = payment-balance;
+
+                System.out.println(fin);
+
+                payCard.setBalance(fin);
+                System.out.println(schk);
+                adminRepository.updateCard(payCard);
+                schk.setChkProcess(true);
+            }
+        } else {
+            schk.setChkProcess(false);
             schk.setEreMag("잘못된 카드정보 입니다.");
-            return schk;
-        } else if(payCard.getBalance() < card.getBalance()){
-            schk.setEreMag("잔액이 부족합니다.");
-            return schk;
-        }else if (schk.getEreMag().equals("정상 처리되었습니다.")){
-            Long balance = card.getBalance();
-            Long payment = payCard.getBalance();
-            payCard.setBalance(balance-payment);
-            adminRepository.updateCard(payCard);
-            schk.setChkProcess(true);
         }
+        System.out.println(schk);
+
         return schk;
     }
 

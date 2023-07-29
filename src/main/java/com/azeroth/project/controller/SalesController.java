@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
 import java.util.List;
 
 @Controller
@@ -37,16 +36,12 @@ public class SalesController {
     @Autowired
     private CategoryService categoryService;
 
-
     @GetMapping("/sales")
     public String sales(UserDomain user,
-           @RequestParam Integer total,
-           Model model)
-    {
+                        @RequestParam Integer total,
+                        Model model) {
         // 세션에 저장된 사용자의 정보
         user = Util.getLoggedUser();
-
-        SalesDomain salesDomain = new SalesDomain();
 
         // 카테고리 헤더 부분 내용
 //        List<CartData> cartlist = new ArrayList<>();
@@ -60,25 +55,20 @@ public class SalesController {
 //        model.addAttribute("categories", categories);
 //        model.addAttribute("cartProducts", cartlist);
 
-        System.out.println( "총 가격" +  total);
+        model.addAttribute("total", total);
 
         model.addAttribute("u_username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("phone", user.getPhone());
         model.addAttribute("nickname", user.getNickname());
 
-        model.addAttribute("total", total);
-
-        model.addAttribute("p_id", 2);
-        model.addAttribute("amount", 2);
-
         model.addAttribute("id", user.getId());
         System.out.println("-------------------------------------------------");
 
-        System.out.println( addressService.addfind(user.getId()));
+        System.out.println(addressService.addfind(user.getId()));
 
-        List<AddressDomain> add =  addressService.addfind(user.getId());
-        if (add != null ){
+        List<AddressDomain> add = addressService.addfind(user.getId());
+        if (add != null) {
             model.addAttribute("add", add);
         }
 
@@ -92,16 +82,16 @@ public class SalesController {
             SalesDomain salesDomain,
             CardDomain card,
             Model model
-    ){
+    ) {
         UserDomain user = Util.getLoggedUser();
         salesDomain.setId(user.getId());
-        SalesChkDomain schk = new SalesChkDomain();
+        SalesChkDomain schk = adminService.salesCHK(card);
         System.out.println("카드정보 : " + card);
+        model.addAttribute("card", schk);
 
         if (schk.getChkProcess()) {
             int sales = salesService.insert(salesDomain);
             model.addAttribute("sales", sales);
-            model.addAttribute("card", adminService.salesCHK(card));
         }
 
         return "siteSales/salesOk";
@@ -109,7 +99,7 @@ public class SalesController {
 
     // 결제완료 알림 페이지
     @GetMapping("/salesComplete")
-    public String salesComplete(){
+    public String salesComplete() {
         return "/siteSales/salesComplete";
     }
 
