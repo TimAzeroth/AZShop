@@ -8,14 +8,14 @@ $(function(){
 
 
 
-        if (!emailPattern.test(emailInput.value)) {
+        if (!emailPattern.test(emailInput.val())) {
           msg.innerText = "이메일 형식이 맞지 않습니다. 올바른 형식의 이메일을 적어주세요.";
           msg.style.color = "red";
           Button.setAttribute('disabled', 'disabled');
           return false;
         } else {
           msg.innerText = "";
-          Button.removeAttribute('disabled')
+          Button.removeAttribute('disabled');
           return true;
         }
 
@@ -26,4 +26,4 @@ $(function(){
       // Attach the validateEmail function to the email input's onchange event
       document.getElementById('email').addEventListener('change', validateEmail);
 
-}
+})

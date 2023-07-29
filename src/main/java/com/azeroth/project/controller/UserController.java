@@ -46,7 +46,6 @@ public class UserController {
     @GetMapping("/login")
     public void login(){}
 
-
     @PostMapping("/loginError")
     public String loginError(){
         return "user/loginError";
@@ -245,6 +244,7 @@ public class UserController {
         model.addAttribute("cartProducts",cartlist);
         model.addAttribute("list",orderList);
     }
+
 
 
     @InitBinder
