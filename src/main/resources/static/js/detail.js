@@ -6,10 +6,12 @@ $(function() {
     const error = document.getElementById('error');
     const countInput = document.getElementById('countInput');
     const amount = document.getElementById('amount');
+    const amountBuy = document.getElementById('amountBuy');
     const total = document.getElementById('total');
 
     let count = 1;
     amount.value = count;
+    amountBuy.value = count;
     total.value = singlePrice;
 
     // 로그인을 안 하고 장바구니 또는 구매를 클릭하면 로그인 페이지로 이동
@@ -30,6 +32,7 @@ $(function() {
       count++;
       countInput.value = count;
       amount.value = count;
+      amountBuy.value = count;
       total.value = count*singlePrice;
       if(count > stock) {
           error.classList.remove("d-none");
@@ -45,6 +48,7 @@ $(function() {
       count--;
       countInput.value = count;
       amount.value = count;
+      amountBuy.value = count;
       total.value = count*singlePrice;
       if((count == stock || count < stock)) {
           error.classList.add("d-none");
