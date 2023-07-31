@@ -21,7 +21,8 @@
 
     <script th:inline="javascript">
         var categories = [[${categories}]];
-        var stock = [[${product.stock}]]
+        var stock = [[${product.stock}]];
+        var singlePrice = [[${product.price}]];
     </script>
     <th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
     <form name="frmDelete" th:action="@{/product/delete}" method="post">
@@ -65,7 +66,10 @@
                         <input id="amount" type="hidden" name="amount">
                         <button id="cartbutton" type="button" class="btn btn-primary">장바구니 담기</button>
                     </form>
-                    <form id="buyform" name="buyform">
+                    <form id="buyform" name="buyform" th:action="@{/siteSales/sales}" method="POST">
+                        <input type="hidden" th:value="${product}" name="product">
+                        <input id="total" type="hidden" name="total">
+                        <input id="amountBuy" type="hidden" name="amount">
                         <button id="buybutton" type="button" class="btn btn-primary">구매하기</button>
                     </form>
                     <a type="button" class="btn btn-secondary" th:href="@{'/product/update/' + ${product.id}}" sec:authorize="hasRole('ADMIN')">상품 수정</a>

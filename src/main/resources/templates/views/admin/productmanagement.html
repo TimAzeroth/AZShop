@@ -25,7 +25,7 @@
       <div class="sub_cate">서브카테</div>
       <div class="price">단가</div>
       <div class="stock">재고량</div>
-      <div class="rank">메인노출</div>
+      <div class="rank">메인노출순서</div>
     </div>
     <div class="contitle" th:each="productList : ${productList}">
       <div th:unless="${productList.p_img}" class="pimg">
@@ -40,7 +40,7 @@
       <div class="sub_cate" th:text="${productList.subname}">서브카테</div>
       <div class="price" th:text="${productList.price}">단가</div>
       <div class="stock" th:text="${productList.stock}">재고량</div>
-      <div class="rank"><input type="number" id="p_rank"/></div>
+      <div class="rank"><input type="number" class="p_rank" th:value="${productList.p_rank}"/><input type="hidden" class="product_id" th:value="${productList.id}"/></div>
     </div>
 
   </div>

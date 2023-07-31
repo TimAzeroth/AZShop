@@ -18,6 +18,7 @@
 </head>
 <body>
 <th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
+
   <form class="completeSalesAlert">
     <h1 id="completeMessage">결제가 완료되었습니다.</h1>
     <div id="checkImg">
@@ -25,25 +26,25 @@
     </div>
 
     <table>
+      <tr th:each="SalesInfo : ${SalesInfo}">
+        <td  class="table_left_td4">상품명</td>
+        <td th:text="${SalesInfo.p_name}"></td>
+      </tr>
       <tr>
         <td class="table_left_td4">결제금액</td>
-        <td th:text="${amount}"></td>
+        <td th:text="${SalesInfo.total}"></td>
       </tr>
       <tr>
         <td  class="table_left_td4">배송지</td>
-        <td th:text="${address}"></td>
+        <td>
+          <span th:text="${SalesInfo.address}"></span>
+          <span th:text="${SalesInfo.address_detail}"></span>
+          <span th:text="${SalesInfo.postcode}"></span>
+        </td>
       </tr>
       <tr>
         <td  class="table_left_td4">요청사항</td>
-        <td th:text="${deliveryreq}"></td>
-      </tr>
-      <tr>
-        <td  class="table_left_td4">주문번호</td>
-        <td th:text="${tracknum}"></td>
-      </tr>
-      <tr>
-        <td  class="table_left_td4">상품정보</td>
-        <td th:text="${postcode}"></td>
+        <td th:text="${SalesInfo.deliveryreq}"></td>
       </tr>
     </table>
 

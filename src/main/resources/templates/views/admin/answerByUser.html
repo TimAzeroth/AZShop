@@ -54,9 +54,10 @@
           <td class="col-2" th:text="${anserList.p_name}"></td>
           <td class="col-4" th:text="${anserList.content}"></td>
           <td class="col-4" th:if="${anserList.reply}==''">
-            <input id="hiddenId" type="hidden" th:value="${anserList.id}"/>
-            <input id="hiddenUsername" type="hidden" th:value="${anserList.username}"/>
-            <input id="anserReply" type="text" placeholder="답변입력"/><button id="answerBtn">답변입력</button>
+            <input class="hiddenId" type="hidden" th:value="${anserList.id}"/>
+            <input class="hiddenUsername" type="hidden" th:value="${anserList.username}"/>
+            <input class="anserReply" type="text" placeholder="답변입력"/>
+            <button class="answerBtn">답변입력</button>
           </td>
           <td class="col-4" th:if="${anserList.reply}!=''" th:text="${anserList.reply}"></td>
           <td class="col-2" th:text="${anserList.reviewdate}"></td>

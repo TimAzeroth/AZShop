@@ -1,15 +1,50 @@
 $(function() {
     // 상품관리 페이지에서 노출순서 변경
-    $('#p_rank').change(function(){
-//        alert("A");
+    $('.p_rank').change(function(){
+
+        var postData = {
+            "Product_id" : this.nextSibling.value,
+            "p_rank" : this.value
+        }
+        $.ajax({
+                    type: 'POST',
+                    url : '/admin/changPrank',
+                    data: postData,
+                    success: function(data, status, xhr) {
+
+                        location.reload();
+                        return;
+                    },
+                    error: function() {
+                        alert("순서변경에 실패하였습니다.");
+                        return;
+                    }
+                });
     });
     // 답변목록에서 답변입력가능
-    $('#answerBtn').click(function(){
+    $('.answerBtn').click(function(){
+//    <input class="hiddenId" type="hidden" th:value="${anserList.id}"/>
+//    <input class="hiddenUsername" type="hidden" th:value="${anserList.username}"/>
+//    <input class="anserReply" type="text" placeholder="답변입력"/>
+//    <button class="answerBtn">답변입력</button>
+
+
+        let anserReply = this.previousSibling.previousSibling;
+        let hiddenUsername = this.previousSibling.previousSibling.previousSibling.previousSibling;
+        let hiddenId = this.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling;
+
+
         var postData = {
-            "id" : $('#hiddenId').val(),
-            "reply" : $('#anserReply').val(),
-            "username" : $('#hiddenUsername').val(),
+            "id" : hiddenId.value,
+            "reply" : anserReply.value,
+            "username" :  hiddenUsername.value
         }
+
+//        alert("id : "+ hiddenId.value);
+//        alert("reply : "+ anserReply.value);
+//        alert("username : "+ hiddenUsername.value);
+
+
 
         $.ajax({
                     type: 'POST',
@@ -29,7 +64,7 @@ $(function() {
 
     });
     $('.btn-primary').click(function(){
-        location.href="";
+        location.reload();
     });
 });
 //function recallReview (answerList) {

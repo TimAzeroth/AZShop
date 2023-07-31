@@ -1,5 +1,6 @@
 $(function(){
     $("#backBtn").click(function() {
+//        alert($('#balance').val());
       history.back();
     });
 
@@ -18,7 +19,7 @@ $(function(){
 
 
     var total = $("#total").val();
-    $('#balance').val(parseInt(total) + 3000);
+//    $('#balance').val(parseInt(total) + 3000);
 
     $("#addressbtn2").click(function() {
          $("#addresstable1").hide();
