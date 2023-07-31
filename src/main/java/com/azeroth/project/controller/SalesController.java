@@ -60,7 +60,7 @@ public class SalesController {
         model.addAttribute("id", user.getId());
         model.addAttribute("shoppingList", shoppingList);
 
-
+        // 상단 카테고리 메뉴에 들어갈 정보
         ArrayList cateData = cateLoad();
         model.addAttribute("mainCategories", cateData.get(0));
         model.addAttribute("subCategories", cateData.get(1));
