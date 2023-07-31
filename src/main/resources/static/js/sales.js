@@ -18,6 +18,17 @@ $(function(){
     $('#amount').val(1);
 
 
+    var year = $('c_year').val();
+    var month =  $('c_month').val();
+
+    var cardLimit = /\d{2}$/;
+
+if (year == cardLimit || month == cardLimit) {
+    alert("년도와 월을 제대로 입력하세요");
+}
+
+
+
     var total = $("#total").val();
 //    $('#balance').val(parseInt(total) + 3000);
 
