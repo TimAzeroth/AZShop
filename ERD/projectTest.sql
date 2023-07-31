@@ -94,6 +94,9 @@ SELECT c.id, c.product_id, c.amount, p.p_img, p.p_name, p.price, p.stock
         LEFT JOIN Product p
         ON c.product_id = p.id
         WHERE c.user_id = 'fnrrlfnrrl3';
+       
+       UPDATE `user`  SET authority_id = 2
+       WHERE username = 'fnrrlfnrrl3';
         
 SELECT s.id,
 	   s.u_username,
