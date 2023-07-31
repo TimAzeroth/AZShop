@@ -13,7 +13,9 @@
 </head>
 <body>
 <script th:inline="javascript">
-    var categories = [[${categories}]]
+    var categories = [[${categories}]];
+    var selectedSubCategory = [[${product.sub_cate}]];
+    var selectedMainCategory = [[${product.main_cate}]];
 </script>
 <div class="container mt-3">
     <h2 th:text="${product.p_name} + ' - 상품 수정'"></h2>
@@ -29,7 +31,7 @@
             <label class="mr-sm-2" for="main_cate">대분류</label>
             <select class="form-control" name="main_cate" id="main_cate" size="1" onchange="updateSubCategories()">
                 <option>선택하세요</option>
-                <option th:each="mainCategory : ${mainCategories}" th:text="${mainCategory.mainname}" th:value="${mainCategory.maincode}"></option>
+                <option th:each="mainCategory : ${mainCategories}" th:text="${mainCategory.mainname}" th:value="${mainCategory.maincode}" th:selected="${product.main_cate == mainCategory.maincode}"></option>
             </select>
             <span class="text-danger" th:if="${error_main_cate}" th:utext="${error_main_cate}"></span>
         </div>
@@ -73,4 +75,5 @@
     </form>
 </div>
 </body>
+<script th:src="@{/js/updateCategory.js}"></script>
 </html>
