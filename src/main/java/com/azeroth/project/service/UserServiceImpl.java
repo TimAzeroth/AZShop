@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
 
     @Value("${app.pagination.write_pages}")
     private int WRITE_PAGES;
-    @Value("${app.pagination.page_rows}")
+    @Value("${app.pagination.page_row}")
     private int PAGE_ROWS;
 
     private UserRepository userRepository;

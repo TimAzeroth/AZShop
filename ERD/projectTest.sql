@@ -73,8 +73,8 @@ SELECT * FROM Cart;
        
        
 INSERT INTO Sales (u_username, p_id, amount, address, address_detail, postcode, deliveryreq, tracknum)
-VALUES ('fnrrlfnrrl3', 15, 3, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123456789'),
-	 ('fnrrlfnrrl3', 18, 1, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123845789');
+VALUES ('fnrrlfnrrl3', 9, 2, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123456789'),
+	 ('fnrrlfnrrl3', 3, 1, '강동구 아리수로 97길 20', '505동 806호', '05209', '문앞에놔주세요', '123845789');
 	
 	
 SELECT
@@ -136,6 +136,11 @@ SELECT s.id,
         WHERE s.u_username = 'fnrrlfnrrl3'
         ORDER BY s.regdate DESC
         Limit 0,5;
+       
+       UPDATE USER SET u_status = 'SLEEP' WHERE username = 'master';
+
+DELETE FROM azerothdb.`user`
+WHERE username='gusdl0718';
 
 
 
