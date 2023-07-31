@@ -42,6 +42,7 @@ public class SalesController {
     @GetMapping("/sales")
     public String sales(UserDomain user,
                         @RequestParam Integer total,
+                        @RequestParam() Map<CartDomain, ProductDomain> cartData,
                         Model model) {
         // 세션에 저장된 사용자의 정보
         user = Util.getLoggedUser();
@@ -50,6 +51,16 @@ public class SalesController {
         if (add != null) {
             model.addAttribute("add", add);
         }
+//        System.out.println("===========================================================================");
+//        List<CartData> shoppingList = (List<CartData>) cartData.get("cartData");
+//        System.out.println("add : " +add);
+//        System.out.println("가져온 값 : " + cartData);
+//        System.out.println("가져온 값.get('cartData') : " + cartData.get("cartData"));
+//        System.out.println("cartProducts : "+ shoppingList);
+//        System.out.println("가져온 값(파싱) : " + shoppingList);
+
+
+//        System.out.println("===========================================================================");
 
         model.addAttribute("total", total);
 
@@ -120,6 +131,7 @@ public class SalesController {
         for (int i=0; i <sinfo.size(); i++){
             total_p = i;
             total_b += sinfo.get(i).getTotal();
+            cartService.deleteCart(sinfo.get(i).getId(), null);
         }
         total_b += 3000;
         String tname = sinfo.get(0).getP_name();

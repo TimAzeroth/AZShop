@@ -11,10 +11,7 @@ import com.azeroth.project.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +23,8 @@ public class CartController {
     @Autowired
     ProductService productService;
 
-    @PostMapping("/cart/add")
-    public String addOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model) {
+    @PostMapping("/cart/add/{addcode}")
+    public String addOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model, @PathVariable int addcode) {
         UserDomain user = U.getLoggedUser();
         ProductDomain productDomain = productService.findById(product_id);
         int result = 0;
@@ -50,7 +47,12 @@ public class CartController {
             result = cartService.addCart(cart);
         }
         model.addAttribute("result", result);
-        return "cart/addOk";
+        if (addcode == 1) {
+            return "cart/addOk";
+        }
+        else {
+            return "cart/addOk_1";
+        }
     }
 
     @PostMapping("/cart/update")
