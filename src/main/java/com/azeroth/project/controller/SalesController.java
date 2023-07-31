@@ -2,6 +2,7 @@ package com.azeroth.project.controller;
 
 import com.azeroth.project.domain.*;
 import com.azeroth.project.service.*;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,20 +46,21 @@ public class SalesController {
                         Model model) {
         // 세션에 저장된 사용자의 정보
         user = Util.getLoggedUser();
+        List<CartData> shoppingList = cartService.getCart(user.getId());
+        List<AddressDomain> add = addressService.addfind(user.getId());
+        if (add != null) {
+            model.addAttribute("add", add);
+        }
+//        System.out.println("===========================================================================");
+//        List<CartData> shoppingList = (List<CartData>) cartData.get("cartData");
+//        System.out.println("add : " +add);
+//        System.out.println("가져온 값 : " + cartData);
+//        System.out.println("가져온 값.get('cartData') : " + cartData.get("cartData"));
+//        System.out.println("cartProducts : "+ shoppingList);
+//        System.out.println("가져온 값(파싱) : " + shoppingList);
 
-        // 카테고리 헤더 부분 내용
-//        List<CartData> cartlist = new ArrayList<>();
-//        cartlist= cartService.getCart(user.getId());
-//        List<CategoryDomain> mainCategories = categoryService.findAllMain();
-//        List<CategoryDomain> subCategories = categoryService.findAllSub();
-//        List<CategoryDomain> categories = categoryService.findAll();
-//
-//        model.addAttribute("mainCategories", mainCategories);
-//        model.addAttribute("subCategories", subCategories);
-//        model.addAttribute("categories", categories);
-//        model.addAttribute("cartProducts", cartlist);
 
-        System.out.println("가져온 값 : " + cartData);
+//        System.out.println("===========================================================================");
 
         model.addAttribute("total", total);
 
@@ -65,17 +68,15 @@ public class SalesController {
         model.addAttribute("email", user.getEmail());
         model.addAttribute("phone", user.getPhone());
         model.addAttribute("nickname", user.getNickname());
-
         model.addAttribute("id", user.getId());
-        System.out.println("-------------------------------------------------");
+        model.addAttribute("shoppingList", shoppingList);
 
-        System.out.println(addressService.addfind(user.getId()));
 
-        List<AddressDomain> add = addressService.addfind(user.getId());
-        if (add != null) {
-            model.addAttribute("add", add);
-        }
-
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
         System.out.println("실행 확인용");
         return "siteSales/sales";
     }
@@ -88,24 +89,83 @@ public class SalesController {
             Model model
     ) {
         UserDomain user = Util.getLoggedUser();
-        salesDomain.setId(user.getId());
+
+        System.out.println(card);
+
         SalesChkDomain schk = adminService.salesCHK(card);
-        System.out.println("카드정보 : " + card);
-        model.addAttribute("card", schk);
+        List<CartData> shoppingList = cartService.getCart(user.getId());
+
+        model.addAttribute("salesChk", schk.getEreMag());
+
 
         if (schk.getChkProcess()) {
-            int sales = salesService.insert(salesDomain);
-            model.addAttribute("sales", sales);
+            int t = 0;
+            for (int i=0; i < shoppingList.size() ; i++ ){
+                CartData cd = shoppingList.get(i);
+                salesDomain.setId(cd.getId());
+                salesDomain.setP_id(cd.getProduct_id());
+                salesDomain.setAmount(cd.getAmount());
+                t += salesService.insert(salesDomain);
+            }
+            model.addAttribute("sales", t);
         }
-
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+        model.addAttribute("username", user.getUsername());
         return "siteSales/salesOk";
     }
 
     // 결제완료 알림 페이지
-    @GetMapping("/salesComplete")
-    public String salesComplete() {
+    @GetMapping("/salesComplete/{username}")
+    public String salesComplete(Model model, @PathVariable String username) {
+        UserDomain user = Util.getLoggedUser();
+        List<CartData> shoppingList = cartService.getCart(user.getId());
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.println(shoppingList.size());
+        List<SalesInfo> sinfo = salesService.loadSalesed(username, shoppingList.size());
+        int total_b = 0;
+        int total_p = 0;
+        for (int i=0; i <sinfo.size(); i++){
+            total_p = i;
+            total_b += sinfo.get(i).getTotal();
+        }
+        String tname = sinfo.get(0).getP_name();
+
+
+
+        sinfo.get(0).setP_name(tname +" 외" + total_p +"건");
+        sinfo.get(0).setTotal((long) total_b);
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+        model.addAttribute("SalesInfo",sinfo.get(0));
         return "/siteSales/salesComplete";
     }
 
+
+    // 상단 카테고리바 추가
+    public ArrayList cateLoad(){
+        ArrayList<Object> cateData = new ArrayList<>();
+        UserDomain loginUser = U.getLoggedUser();
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (loginUser != null) {
+            cartProducts = cartService.getCart(loginUser.getId());
+        }
+        cateData.add(mainCategories);
+        cateData.add(subCategories);
+        cateData.add(categories);
+        cateData.add(cartProducts);
+
+        return cateData;
+
+    }
 
 }

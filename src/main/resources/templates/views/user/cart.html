@@ -6,6 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}">
     <script th:src="@{/js/categoryHeader.js}"></script>
+    <script th:inline="javascript">
+    var categories = [[${categories}]];
+  </script>
     <title>AZShop - 장바구니</title>
 </head>
 <body>
@@ -80,7 +83,7 @@
                     <form th:action="@{/siteSales/sales}" method="GET">
                         <!-- @RequestParam 으로 total이랑 cartData를 sales 컨트롤러에서 받으시면 됩니다! -->
                         <input id="totalinput" type="hidden" name="total" />
-                        <input id="cartData" type="hidden" name="cartData" />
+                        <input id="cartData" type="hidden" name="cartData" th:value="${cartProducts}" />
                         <button type="submit" class="btn btn-primary">결제하기</button>
                     </form>
                 </div>

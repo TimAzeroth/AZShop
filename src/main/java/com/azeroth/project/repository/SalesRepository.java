@@ -3,6 +3,7 @@ package com.azeroth.project.repository;
 import com.azeroth.project.domain.OrderData;
 import com.azeroth.project.domain.ProductDomain;
 import com.azeroth.project.domain.SalesDomain;
+import com.azeroth.project.domain.SalesInfo;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface SalesRepository {
     int countAll(String username);
 
     List<OrderData> selectFromRow(String username, int from, int end);
+
+    List<SalesInfo> selectByLastSales(String u_username, int rimit);
 }

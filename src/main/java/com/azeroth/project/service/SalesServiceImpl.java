@@ -1,9 +1,6 @@
 package com.azeroth.project.service;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.ProductDomain;
-import com.azeroth.project.domain.SalesDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
 import com.azeroth.project.repository.AddressRepository;
 import com.azeroth.project.repository.ProductRepository;
 import com.azeroth.project.repository.SalesRepository;
@@ -54,7 +51,10 @@ public class SalesServiceImpl implements SalesService {
         return salesRepository.insert(salesDomain);
     }
 
-
+    @Override
+    public List<SalesInfo> loadSalesed(String username, int rimit) {
+        return salesRepository.selectByLastSales(username, rimit);
+    }
 
 
 }

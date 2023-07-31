@@ -157,4 +157,10 @@
             SET reply = #{reply}
         WHERE id = #{id}
     </update>
+
+    <update id="pRankUpdate" flushCache="true">
+        UPDATE product
+            SET p_rank = #{prank}
+        WHERE id = #{product_id}
+    </update>
 </mapper>

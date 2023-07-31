@@ -99,7 +99,10 @@ public class AdminController {
 
     @GetMapping("/answerByUser/{username}")
     public String answerByUser(Model model, @PathVariable String username){
-        model.addAttribute("anserList", adminService.selectAnswerByUser(username));
+        List<adminReview> adminReviews = adminService.selectAnswerByUser(username);
+        model.addAttribute("anserList", adminReviews);
+
+
         ArrayList cateData = cateLoad();
         model.addAttribute("mainCategories", cateData.get(0));
         model.addAttribute("subCategories", cateData.get(1));
@@ -131,7 +134,13 @@ public class AdminController {
         model.addAttribute("cartProducts", cateData.get(3));
         return "/admin/usercart";
     }
-    
+
+    @PostMapping("/changPrank")
+    @ResponseBody
+    public void changPrank(@RequestParam("Product_id") Long Product_id,
+                           @RequestParam("p_rank") Long prank){
+        adminService.pRankUpdate(Product_id, prank);
+    }
     
     // 상단 카테고리바 추가
     public ArrayList cateLoad(){

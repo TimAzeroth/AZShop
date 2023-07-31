@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<input type="hidden" id="salesChk" th:value="${salesChk}"/>
+<input type="hidden" id="username" th:value="${username}">
+
+
 <script th:unless="${sales > 0}">
-    alert("구매 실패");
+    alert($('#salesChk').val());
     history.back();
   </script>
 
 <script th:if="${sales > 0}" th:inline="javascript">
     alert("구매 성공");
-    location.href = "/";
-  </script>
+    location.href = "/siteSales/salesComplete/"+ $('#username').val();
+</script>
+
 
 </html>
