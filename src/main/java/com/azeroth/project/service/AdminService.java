@@ -42,4 +42,6 @@ public interface AdminService {
 
     // 답변작성시 update
     int answerReview(Long id, String reply);
+
+    int pRankUpdate(Long product_id, Long prank);
 }

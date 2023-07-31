@@ -90,5 +90,23 @@
         ORDER BY s.regdate DESC
         Limit #{param2}, #{param3};
     </select>
-
+    <select id="selectByLastSales" resultType="com.azeroth.project.domain.SalesInfo">
+        SELECT
+            s.id,
+            s.u_username,
+            s.p_id,
+            s.amount,
+            s.address,
+            s.address_detail,
+            s.postcode,
+            s.deliveryreq,
+            s.tracknum,
+            s.regdate,
+            p.price * s.amount 'total',
+            p.p_name
+        fROM sales s, product p
+        where s.p_id = p.id
+            and u_username = #{param1}
+        ORDER BY id DESC LIMIT #{param2}
+    </select>
 </mapper>

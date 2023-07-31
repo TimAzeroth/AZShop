@@ -33,4 +33,7 @@ public interface AdminRepository {
 
     int AnswerReview (Long id, String reply);
 
+    // 상품 순위 변경
+    int pRankUpdate(Long product_id, Long prank);
+
 }
