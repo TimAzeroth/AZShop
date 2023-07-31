@@ -56,7 +56,7 @@ public class CartController {
         model.addAttribute("subCategories", cateData.get(1));
         model.addAttribute("categories", cateData.get(2));
         model.addAttribute("cartProducts", cateData.get(3));
-
+        return "cart/addOk";
         if (addcode == 1) {
             return "cart/addOk";
         }
