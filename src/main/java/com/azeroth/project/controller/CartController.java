@@ -27,8 +27,8 @@ public class CartController {
     @Autowired
     CategoryService categoryService;
 
-    @PostMapping("/cart/add")
-    public String addOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model) {
+    @PostMapping("/cart/add/{addcode}")
+    public String addOk(@RequestParam("product_id") Long product_id, @RequestParam("amount") Long amount, CartDomain cart, Model model, @PathVariable int addcode) {
         UserDomain user = U.getLoggedUser();
         ProductDomain productDomain = productService.findById(product_id);
         int result = 0;
@@ -56,7 +56,13 @@ public class CartController {
         model.addAttribute("subCategories", cateData.get(1));
         model.addAttribute("categories", cateData.get(2));
         model.addAttribute("cartProducts", cateData.get(3));
-        return "cart/addOk";
+
+        if (addcode == 1) {
+            return "cart/addOk";
+        }
+        else {
+            return "cart/addOk_1";
+        }
     }
 
     @PostMapping("/cart/update")
