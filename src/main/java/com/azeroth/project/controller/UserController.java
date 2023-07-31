@@ -44,7 +44,13 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public void login(){}
+    public void login(Model model){
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+    }
 
     @PostMapping("/loginError")
     public String loginError(){
@@ -58,7 +64,13 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public void register(){}
+    public void register(Model model){
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+    }
 
     @PostMapping("/register")
     public  String registerOk(
@@ -90,7 +102,13 @@ public class UserController {
     }
 
     @GetMapping("/findPassword")
-    public void findPassword(){}
+    public void findPassword(Model model){
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+    }
 
     @PostMapping("/findPassword")
     public String findPassword(UserDomain userDomain,
@@ -123,6 +141,11 @@ public class UserController {
         UserDomain user = userService.findById(id);
         String name = user.getUsername();
         model.addAttribute("username", name);
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
         return "/user/changePassword";
     }
 
@@ -153,6 +176,11 @@ public class UserController {
     ){
         user = Util.getLoggedUser();
         user = userService.findByUsername(user.getUsername());
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
 
         model.addAttribute("profileimg",user.getProfileimg());
         model.addAttribute("nickname",user.getNickname());
@@ -167,6 +195,11 @@ public class UserController {
     ){
         user = Util.getLoggedUser();
         user = userService.findById(user.getId());
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
 
         model.addAttribute("profileimg",user.getProfileimg());
         model.addAttribute("nickname",user.getNickname());
@@ -193,6 +226,11 @@ public class UserController {
     ){
       user = Util.getLoggedUser();
       user = userService.findByUsername(user.getUsername());
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
 
       model.addAttribute("profileimg",user.getProfileimg());
       model.addAttribute("phone",user.getPhone());
@@ -223,9 +261,11 @@ public class UserController {
 
     @GetMapping("/cart")
     public void viewCart(Model model) {
-        UserDomain user = U.getLoggedUser();
-        List<CartData> cartProducts = cartService.getCart(user.getId());
-        model.addAttribute("cartProducts", cartProducts);
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
     }
 
     @GetMapping("/orderList")
@@ -246,6 +286,24 @@ public class UserController {
     }
 
 
+    public ArrayList cateLoad(){
+        ArrayList<Object> cateData = new ArrayList<>();
+        UserDomain loginUser = U.getLoggedUser();
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (loginUser != null) {
+            cartProducts = cartService.getCart(loginUser.getId());
+        }
+        cateData.add(mainCategories);
+        cateData.add(subCategories);
+        cateData.add(categories);
+        cateData.add(cartProducts);
+
+        return cateData;
+
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder){

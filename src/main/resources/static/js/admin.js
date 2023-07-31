@@ -30,7 +30,7 @@ $(function() {
     });
     $('.btn-primary').click(function(){
         location.href="";
-    }
+    });
 });
 //function recallReview (answerList) {
 //    const out = [];
