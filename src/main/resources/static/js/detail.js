@@ -6,6 +6,7 @@ $(function() {
     const error = document.getElementById('error');
     const countInput = document.getElementById('countInput');
     const amount = document.getElementById('amount');
+    const amount_b = document.getElementById('amount_b');
     const amountBuy = document.getElementById('amountBuy');
     const total = document.getElementById('total');
 

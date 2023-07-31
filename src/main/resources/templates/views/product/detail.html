@@ -61,14 +61,14 @@
                 </div>
                 <div class="d-none mb-0" id="error"><p class="text-danger">주문 가능한 수량을 넘었습니다.</p></div>
                 <div class="col-sm-8 text-muted font-weight-light mt-3">
-                    <form id="cartform" name="cartform" th:action="@{/cart/add}" method="POST">
+                    <form id="cartform" name="cartform" th:action="@{/cart/add/1}" method="POST">
                         <input type="hidden" th:value="${product.id}" name="product_id">
                         <input id="amount" type="hidden" name="amount">
                         <button id="cartbutton" type="button" class="btn btn-primary">장바구니 담기</button>
                     </form>
-                    <form id="buyform" name="buyform" th:action="@{/siteSales/sales}" method="POST">
-                        <input type="hidden" th:value="${product}" name="product">
+                    <form id="buyform" name="buyform" th:action="@{/cart/add/2}" method="POST">
                         <input id="total" type="hidden" name="total">
+                        <input type="hidden" th:value="${product.id}" name="product_id">
                         <input id="amountBuy" type="hidden" name="amount">
                         <button id="buybutton" type="button" class="btn btn-primary">구매하기</button>
                     </form>

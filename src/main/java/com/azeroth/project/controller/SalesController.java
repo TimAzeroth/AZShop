@@ -131,10 +131,9 @@ public class SalesController {
         for (int i=0; i <sinfo.size(); i++){
             total_p = i;
             total_b += sinfo.get(i).getTotal();
+            cartService.deleteCart(sinfo.get(i).getId(), null);
         }
         String tname = sinfo.get(0).getP_name();
-
-
 
         sinfo.get(0).setP_name(tname +" 외" + total_p +"건");
         sinfo.get(0).setTotal((long) total_b);
