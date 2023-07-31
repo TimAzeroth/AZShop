@@ -18,6 +18,8 @@ DELETE FROM Sales;
 ALTER TABLE Sales AUTO_INCREMENT = 1;
 
 
+alter table Sales add regdate datetime;
+
 -- 권한테이블 
 INSERT INTO Authority(name) VALUES
 ('ROLE_MEMBER'),
