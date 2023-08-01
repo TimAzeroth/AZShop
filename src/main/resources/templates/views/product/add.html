@@ -6,14 +6,17 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <title>AZShop - 상품등록</title>
+
     <script th:src="@{/js/categoryAdd.js}"></script>
     <script th:src="@{/js/summernote.js}"></script>
+    <script th:src="@{/js/categoryHeader.js}"></script>
+    <script th:inline="javascript">
+        var categories = [[${categories}]];
+    </script>
+    <title>AZShop</title>
 </head>
 <body>
-<script th:inline="javascript">
-    var categories = [[${categories}]]
-</script>
+<th:block th:insert="~{product/categoryHeader.html::header}"></th:block>
 <div class="container mt-3">
     <h2>상품등록</h2>
     <form th:action="@{/product/add}" method="POST" enctype="multipart/form-data">

@@ -1,6 +1,5 @@
 $(function(){
     $("#backBtn").click(function() {
-//        alert($('#balance').val());
       history.back();
     });
 
@@ -16,10 +15,6 @@ $(function(){
     $('#postcode').val(addpost1);
     $('#p_id').val(1);
     $('#amount').val(1);
-
-
-    var total = $("#total").val();
-//    $('#balance').val(parseInt(total) + 3000);
 
     $("#addressbtn2").click(function() {
          $("#addresstable1").hide();
@@ -60,5 +55,14 @@ $(function(){
         $('#postcode').val(addpost1);
      });
 
+    var total = $("#total").val();
+//    $('#balance').val(parseInt(total) + 3000);
+
 });
 
+ function monthFunction() {
+        var month = $('#c_month').val();
+        if (month.length < 2) {
+            $('#c_month').val(month.padStart(2, '0'));
+        }
+    }

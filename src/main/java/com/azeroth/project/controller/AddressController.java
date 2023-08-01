@@ -1,9 +1,10 @@
 package com.azeroth.project.controller;
 
-import com.azeroth.project.domain.AddressDomain;
-import com.azeroth.project.domain.CartDomain;
-import com.azeroth.project.domain.UserDomain;
+import com.azeroth.project.domain.*;
+import com.azeroth.project.service.CartService;
+import com.azeroth.project.service.CategoryService;
 import com.azeroth.project.service.UserService;
+import com.azeroth.project.util.U;
 import com.azeroth.project.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +22,10 @@ public class AddressController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
 
     public AddressController(){}
 
@@ -33,10 +39,22 @@ public class AddressController {
         List<AddressDomain> list = userService.findAddressByUserId(user.getId());
 
         model.addAttribute("list",list);
+
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
     }
 
     @GetMapping("/changeAddress")
-    public void changeAddress(){}
+    public void changeAddress(Model model){
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
+    }
 
     @PostMapping("/changeAddress")
     public String changeAddress1(AddressDomain addressDomain,
@@ -69,6 +87,24 @@ public class AddressController {
         System.out.println(cnt);
 
         return "/user/deleteAddressOk";
+    }
+
+    public ArrayList cateLoad(){
+        ArrayList<Object> cateData = new ArrayList<>();
+        UserDomain loginUser = U.getLoggedUser();
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (loginUser != null) {
+            cartProducts = cartService.getCart(loginUser.getId());
+        }
+        cateData.add(mainCategories);
+        cateData.add(subCategories);
+        cateData.add(categories);
+        cateData.add(cartProducts);
+
+        return cateData;
     }
 
 }
