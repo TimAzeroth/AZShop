@@ -127,8 +127,8 @@
 
                             <div class="cardnum">
                                 <h6>유효 기간</h6>
-                                <input id="c_year" class="period" style="width: 60px;" type="text" name="c_year" th:value="${c_year}" placeholder="년" required/>
-                                <input id="c_month" class="period" style="width: 60px;" type="text" name="c_month" th:value="${c_month}" onchange="monthFunction()" placeholder="월"  required/>
+                                <input id="c_year" class="period" style="width: 60px;" type="text" name="c_year" th:value="${c_year}" placeholder="년" maxlength="2" required/>
+                                <input id="c_month" class="period" style="width: 60px;" type="text" name="c_month" th:value="${c_month}" onchange="monthFunction()" placeholder="월" maxlength="2" required/>
                             </div>
 
                             <div class="cardnum">
