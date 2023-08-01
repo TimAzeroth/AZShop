@@ -32,6 +32,9 @@
         <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.principal.user}">
           <span class="d-flex justify-content-end">
             <div class="ml-auto">
+              <span class="text-dark"><a class="link-dark" th:href="@{/admin/searchuser}" sec:authorize="hasRole('ADMIN')">관리자</a></span>
+            </div>
+            <div class="ms-2">
               <span class="text-dark"><a class="link-dark" th:href="@{/user/myPage}">[[${user.nickname}]]</a> 님 환영합니다</span>
             </div>
             <div class="ms-2">
