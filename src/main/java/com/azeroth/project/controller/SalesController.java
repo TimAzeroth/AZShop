@@ -131,6 +131,7 @@ public class SalesController {
         for (int i=0; i <sinfo.size(); i++){
             total_p = i;
             total_b += sinfo.get(i).getTotal();
+            cartService.deleteCart(sinfo.get(i).getId(), null);
         }
         total_b += 3000;
         String tname = sinfo.get(0).getP_name();
