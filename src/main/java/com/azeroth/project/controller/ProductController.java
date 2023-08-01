@@ -34,12 +34,11 @@ public class ProductController {
 
     @GetMapping("/add")
     public void add(Model model) {
-        List<CategoryDomain> mainCategories = categoryService.findAllMain();
-        List<CategoryDomain> subCategories = categoryService.findAllSub();
-        List<CategoryDomain> categories = categoryService.findAll();
-        model.addAttribute("mainCategories", mainCategories);
-        model.addAttribute("subCategories", subCategories);
-        model.addAttribute("categories", categories);
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
     }
 
     @PostMapping("/add")
@@ -81,6 +80,11 @@ public class ProductController {
         model.addAttribute("mainCategories", mainCategories);
         model.addAttribute("subCategories", subCategories);
         model.addAttribute("categories", categories);
+        ArrayList cateData = cateLoad();
+        model.addAttribute("mainCategories", cateData.get(0));
+        model.addAttribute("subCategories", cateData.get(1));
+        model.addAttribute("categories", cateData.get(2));
+        model.addAttribute("cartProducts", cateData.get(3));
         return "product/update";
     }
 
@@ -142,6 +146,25 @@ public class ProductController {
         model.addAttribute("categories", categories);
         model.addAttribute("searchedValue", searchedValue);
         return "product/search";
+    }
+
+    public ArrayList cateLoad(){
+        ArrayList<Object> cateData = new ArrayList<>();
+        UserDomain loginUser = U.getLoggedUser();
+        List<CategoryDomain> mainCategories = categoryService.findAllMain();
+        List<CategoryDomain> subCategories = categoryService.findAllSub();
+        List<CategoryDomain> categories = categoryService.findAll();
+        List<CartData> cartProducts = new ArrayList<>();
+        if (loginUser != null) {
+            cartProducts = cartService.getCart(loginUser.getId());
+        }
+        cateData.add(mainCategories);
+        cateData.add(subCategories);
+        cateData.add(categories);
+        cateData.add(cartProducts);
+
+        return cateData;
+
     }
 
     @InitBinder

@@ -64,8 +64,18 @@ $(function() {
 
     });
     $('.btn-primary').click(function(){
-        location.reload();
+        history.back();
     });
+    $('.moveProduct').click(function(){
+        location.href = '/admin/productmanagement';
+    });
+    $('.moveUser').click(function(){
+            location.href = '/admin/searchuser';
+    });
+    $('.moveProductAdd').click(function(){
+            location.href = '/product/add';
+    });
+
 });
 //function recallReview (answerList) {
 //    const out = [];
