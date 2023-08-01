@@ -71,7 +71,7 @@ public class SalesController {
         model.addAttribute("id", user.getId());
         model.addAttribute("shoppingList", shoppingList);
 
-
+        // 상단 카테고리 메뉴에 들어갈 정보
         ArrayList cateData = cateLoad();
         model.addAttribute("mainCategories", cateData.get(0));
         model.addAttribute("subCategories", cateData.get(1));
@@ -97,7 +97,7 @@ public class SalesController {
 
         model.addAttribute("salesChk", schk.getEreMag());
 
-
+        // 장바구니 목록에 상품들 가져오는 코드
         if (schk.getChkProcess()) {
             int t = 0;
             for (int i=0; i < shoppingList.size() ; i++ ){
@@ -131,11 +131,16 @@ public class SalesController {
         for (int i=0; i <sinfo.size(); i++){
             total_p = i;
             total_b += sinfo.get(i).getTotal();
-            cartService.deleteCart(sinfo.get(i).getId(), null);
         }
+        total_b += 3000;
         String tname = sinfo.get(0).getP_name();
 
-        sinfo.get(0).setP_name(tname +" 외" + total_p +"건");
+        if(total_p == 0) {
+            sinfo.get(0).setP_name(tname);
+        } else {
+            sinfo.get(0).setP_name(tname +" 외" + total_p +"건");
+        }
+
         sinfo.get(0).setTotal((long) total_b);
         ArrayList cateData = cateLoad();
         model.addAttribute("mainCategories", cateData.get(0));
