@@ -9,10 +9,7 @@ import com.azeroth.project.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +53,6 @@ public class CartController {
         model.addAttribute("subCategories", cateData.get(1));
         model.addAttribute("categories", cateData.get(2));
         model.addAttribute("cartProducts", cateData.get(3));
-        return "cart/addOk";
         if (addcode == 1) {
             return "cart/addOk";
         }
